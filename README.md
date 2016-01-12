@@ -6,6 +6,10 @@
 # 2016-01-10 reframe blog refer to N-blog
   * finish chapter 1
 
+# 2016-01-12
+  * finish all chapter
+  * config git to commit
+
 
 
            
