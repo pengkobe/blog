@@ -58,7 +58,7 @@ app.use(session({
   })
 }));
 
-// 处理文件为.md页面
+// 处理文件后缀为.md页面
 app.engine('md', function(path, options, fn){  
   fs.readFile(path, 'utf8', function(err, str){  
     if (err) return fn(err);  

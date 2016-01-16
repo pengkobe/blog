@@ -1,5 +1,6 @@
 var mongodb = require('./db'),
     marked = require('marked');
+var ObjectID = require('mongodb').ObjectID;
 
 function Post(name, head, title, tags, post) {
   this.name = name;
@@ -102,7 +103,7 @@ Post.getTen = function(name, page, callback) {
 };
 
 //获取一篇文章
-Post.getOne = function(name, day, title, callback) {
+Post.getOne = function(_id, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -116,9 +117,7 @@ Post.getOne = function(name, day, title, callback) {
       }
       //根据用户名、发表日期及文章名进行查询
       collection.findOne({
-        "name": name,
-        "time.day": day,
-        "title": title
+        "_id": new ObjectID(_id)
       }, function (err, doc) {
         if (err) {
           mongodb.close();
@@ -127,9 +126,7 @@ Post.getOne = function(name, day, title, callback) {
         if (doc) {
           //每访问 1 次，pv 值增加 1
           collection.update({
-            "name": name,
-            "time.day": day,
-            "title": title
+            "_id": new ObjectID(_id)
           }, {
             $inc: {"pv": 1}
           }, function (err) {
