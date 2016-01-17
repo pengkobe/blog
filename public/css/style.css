@@ -23,3 +23,22 @@ article a:hover{color:#333;text-decoration:underline;}
 .search{border:0;width:6em;text-align:center;font-size:1em;margin:0.5em 0;}
 .l_head{float:left;margin-left:-4em;box-shadow:0px 1px 4px #888;}
 .r_head{float:right;margin-top:-2.5em;box-shadow:0px 1px 4px #888;width:25px;}
+
+/*self define*/
+.website-info {
+  margin-top: 25px;
+  padding-bottom: 10px;
+  color: #aaa;
+  text-align: right;
+  border-top: 1px solid #666;
+  padding-top: 10px;
+  font-size: 14px;
+}
+.website-info a {
+  color: #888;
+  text-decoration: none;
+}
+.website-info a:hover {
+  color: #ccc;
+  text-decoration: underline;
+}
