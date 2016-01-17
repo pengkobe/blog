@@ -1,12 +1,24 @@
 var mongodb = require('./db'),
-    marked = require('marked');
-var ObjectID = require('mongodb').ObjectID;
+    marked = require('marked'),
+    ObjectID = require('mongodb').ObjectID;
 
-function Post(name, head, title, tags, post) {
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false
+});
+
+function Post(name, head, title, tags, isprivate,post) {
   this.name = name;
   this.head = head;
   this.title = title;
   this.tags = tags;
+  this.isprivate = isprivate;
   this.post = post;
 }
 
@@ -33,7 +45,7 @@ Post.prototype.save = function(callback) {
       tags: this.tags,
       post: this.post,
       comments: [],
-      reprint_info: {},
+      isprivate: this.isprivate,
       pv: 0
   };
   //打开数据库
@@ -62,7 +74,7 @@ Post.prototype.save = function(callback) {
 };
 
 //一次获取十篇文章
-Post.getTen = function(name, page, callback) {
+Post.getTen = function(name, page,haslogin, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -78,8 +90,13 @@ Post.getTen = function(name, page, callback) {
       if (name) {
         query.name = name;
       }
+
+      if(!haslogin){
+          query.isprivate = 0;
+      }
       //使用 count 返回特定查询的文档数 total
       collection.count(query, function (err, total) {
+         console.log('t:'+haslogin);
         //根据 query 对象查询，并跳过前 (page-1)*10 个结果，返回之后的 10 个结果
         collection.find(query, {
           skip: (page - 1)*10,
@@ -233,8 +250,12 @@ Post.remove = function(_id, callback) {
 };
 
 //返回所有文章存档信息
-Post.getArchive = function(callback) {
+Post.getArchive = function(haslogin,callback) {
   //打开数据库
+  var query={};
+  if(!haslogin){
+    query.isprivate = 0;
+  }
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
@@ -246,7 +267,7 @@ Post.getArchive = function(callback) {
         return callback(err);
       }
       //返回只包含 name、time、title 属性的文档组成的存档数组
-      collection.find({}, {
+      collection.find(query, {
         "name": 1,
         "time": 1,
         "title": 1

@@ -23,10 +23,14 @@ var upload = multer({ storage: storage });
 app.get('/', function (req, res) {
   //判断是否是第一页，并把请求的页数转换成 number 类型
   var page = req.query.p ? parseInt(req.query.p) : 1;
+  var haslogin = req.session.user? 1 :0;
+
   //查询并返回第 page 页的 10 篇文章
-  Post.getTen(null, page, function (err, posts, total) {
+  Post.getTen(null, page, haslogin,function (err, posts, total) {
+    console.log('posts:'+posts);
     if (err) {
       posts = [];
+      console.log(error);
     } 
     res.render('index', {
       title: '主页',
@@ -132,9 +136,10 @@ app.get('/post', function (req, res) {
 
 app.post('/post', checkLogin);
 app.post('/post', function (req, res) {
+  console.log(req.body);
   var currentUser = req.session.user,
       tags = [req.body.tag1, req.body.tag2, req.body.tag3],
-      post = new Post(currentUser.name, currentUser.head, req.body.title, tags, req.body.post);
+      post = new Post(currentUser.name, currentUser.head, req.body.title, tags,(req.body.isprivate? 1:0), req.body.post);
   post.save(function (err) {
     if (err) {
       req.flash('error', err); 
@@ -169,7 +174,8 @@ app.post('/upload', function (req, res) {
 });
 
 app.get('/archive', function (req, res) {
-  Post.getArchive(function (err, posts) {
+  var haslogin = req.session.user? 1 :0;
+  Post.getArchive(haslogin,function (err, posts) {
     if (err) {
       req.flash('error', err); 
       return res.redirect('/');
@@ -300,7 +306,11 @@ app.get('/remove/:_id', function (req, res) {
   });
 });
 
+app.get('/about', function (req, res) {
+    res.render('about');
+});
 
+// 404
 app.use(function (req, res) {
   res.render("404");
 });

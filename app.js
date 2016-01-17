@@ -20,6 +20,7 @@ marked.setOptions({
   smartLists: true,
   smartypants: false
 });
+
 var routes = require('./server/routes/index');
 var settings = require('./server/settings');
 // 支持flash
@@ -33,7 +34,7 @@ app.set('view engine', 'ejs');
 app.use(flash());
 
 
-app.use(favicon(path.join(__dirname, '/src/img/favicon.ico')));
+app.use(favicon(path.join(__dirname, '/public/img/favicon.ico')));
 app.use(logger('dev'));
 app.use(logger({stream: accessLog}));
 app.use(bodyParser.json());
@@ -49,11 +50,6 @@ app.use(session({
   key: settings.db,//cookie name
   cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
   store: new MongoStore({
-   /* 这段已过时
-   	db: settings.db,
-    host: settings.host,
-    port: settings.port
-    */
     url: settings.dbUrl
   })
 }));
@@ -101,6 +97,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
