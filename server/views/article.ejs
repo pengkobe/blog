@@ -1,8 +1,8 @@
 <%- include header %>
 <p>
   <% if (user) { %>
-    <span><a class="edit" href="/edit/<%= post.name %>/<%= post.time.day %>/<%= post.title %>">编辑</a></span>
-    <span><a class="edit" href="/remove/<%= post.name %>/<%= post.time.day %>/<%= post.title %>">删除</a></span>
+    <span><a class="edit" href="/edit/<%= post._id %>">编辑</a></span>
+    <span><a class="edit" href="/remove/<%= post._id %>">删除</a></span>
   <% } %>
   <% var flag = 1 %>
   <% if (user && (user.name != post.name)) { %>
@@ -37,14 +37,25 @@
 </p>
 <p><%- post.post %></p>
 <p class="info">
-  阅读：<%= post.pv %> | 
-  评论：<%= post.comments.length %> | 
-  转载：
-  <% if (post.reprint_info.reprint_to) { %>
-    <%= post.reprint_info.reprint_to.length %>
-  <% } else { %>
-    <%= 0 %>
-  <% } %>
+  阅读：<%= post.pv %> 
 </p>
-<%- include comment %>
+
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="<%= post._id %>" 
+  data-title="<%= post.title %>" data-url="www.kobepeng.com/p/<%= post._id %>"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kobepeng"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
 <%- include footer %>
