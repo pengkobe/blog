@@ -3,7 +3,9 @@
   <% if (user) { %>
     <span><a class="edit" href="/edit/<%= post._id %>">编辑</a></span>
     <span><a class="edit" href="/remove/<%= post._id %>">删除</a></span>
-    <span>私有:<%= post.isprivate %></span>
+    <% if(post.isprivate){%>
+    <span class="privatetag">私有</span>
+    <%}%>
   <% } %>
 </p>
 <p class="info">
@@ -14,11 +16,10 @@
       <a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
     <% } %>
   <% }) %>
+  | 阅读：<%= post.pv %> 
 </p>
 <p><%- post.post %></p>
-<p class="info">
-  阅读：<%= post.pv %> 
-</p>
+
 
 <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="<%= post._id %>" 
