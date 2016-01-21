@@ -255,6 +255,7 @@ app.get('/p/:_id', function (req, res) {
     }
     res.render('article', {
       title: post.title,
+      posttitle: post.title,
       post: post,
       user: req.session.user,
       success: req.flash('success').toString(),
@@ -308,7 +309,12 @@ app.get('/remove/:_id', function (req, res) {
 
 
 app.get('/about', function (req, res) {
-    res.render('about'); 
+    res.render('about', {
+      title: '关于我',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
 });
 
 // 404

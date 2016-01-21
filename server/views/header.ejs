@@ -9,6 +9,13 @@
 
 <header>
 <h1><%= title %></h1>
+<span class="searchform">
+	<form id="searchartical" action="/search" method="GET">
+        <input class="searchinput" name="keyword" value="" placeholder="文章">
+        <a class="searchbutton" name="submit"  href="JavaScript:" title="搜索！"onclick="document.getElementById('searchartical').submit();return false" >搜
+        </a>
+	</form>
+</span>
 </header>
 
 <nav>
@@ -22,7 +29,7 @@
   <span><a title="发表" href="/post">post</a></span>
   <span><a title="登出" href="/logout">logout</a></span>
 <% }  %>
-<span><form action="/search" method="GET"><input type="text" name="keyword" placeholder="SEARCH" class="search" /></form></span>
+
 </nav>
 
 <article>

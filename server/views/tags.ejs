@@ -1,7 +1,9 @@
 <%- include header %>
-<p>
+<div id="tagscloud">
 <% posts.forEach(function (tag, index) { %>
   <a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
 <% }) %>
-</p>
+</div>
+
 <%- include footer %>
+
