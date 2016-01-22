@@ -50,6 +50,17 @@ body{
   background-color: #f5f5d5;
 }
 
+.success-notice{
+  position: fixed;
+  color: white;
+  background: green;
+  text-align: center;
+  opacity: .8;
+  padding: 8px 60px;
+  width: 10%;
+  animation: dispear 5s forwards;
+}
+
 article {
     font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 18px;
@@ -199,6 +210,20 @@ article a:hover{
     box-shadow: 0 0 10px rgba(65,105,225,.9), inset 0 0 5px rgba(65,105,225,.4);
     }
 }
+
+@keyframes dispear {  
+    0% {
+    opacity: 1;
+    } 
+    99% {
+     opacity: 0;
+    }
+    100%{
+      display: none;
+    }
+}
+
+
 
 
 

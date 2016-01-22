@@ -31,12 +31,17 @@
 <% }  %>
 
 </nav>
-
-<article>
-
 <% if (success) { %>
-  <div><%= success %></div>
+  <div class="success-notice"><%= success %></div>
+  <script type="text/javascript"> setTimeout(function(){
+    document.getElementsByClassName('success-notice').style.display="none";
+  },4500)
+  </script>
 <% } %>
+
 <% if (error) { %>
   <div><%= error %> </div>
 <% } %>
+<article>
+
+

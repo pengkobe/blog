@@ -11,7 +11,7 @@ var multer  = require('multer');
 // 文件名是基于www,why?
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../src/img/')
+    cb(null, '../public/img/')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now())
