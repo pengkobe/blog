@@ -7,17 +7,16 @@ var crypto = require('crypto'),
 
 // 多文件上传
 var multer  = require('multer');
-
-// 文件名是基于www,why?
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/img/')
+    cb(null, '../public/img');
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    //file.fieldname
+    cb(null, file.originalname);
   }
-})
-
+});
+ 
 var upload = multer({ storage: storage });
 
 app.get('/', function (req, res) {
@@ -168,7 +167,7 @@ app.get('/upload', function (req, res) {
 });
 
 app.post('/upload', checkLogin);
-app.post('/upload', function (req, res) {
+app.post('/upload', upload.array('photos', 12),function (req, res) {
   req.flash('success', '文件上传成功!');
   res.redirect('/upload');
 });
