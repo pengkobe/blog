@@ -96,7 +96,6 @@ Post.getTen = function(name, page,haslogin, callback) {
       }
       //使用 count 返回特定查询的文档数 total
       collection.count(query, function (err, total) {
-         
         //根据 query 对象查询，并跳过前 (page-1)*10 个结果，返回之后的 10 个结果
         collection.find(query, {
           skip: (page - 1)*10,
@@ -110,7 +109,13 @@ Post.getTen = function(name, page,haslogin, callback) {
           }
           //解析 markdown 为 html
           docs.forEach(function (doc) {
-            doc.post = marked(doc.post);
+            var index=0;
+            index = doc.post.indexOf("<!-- more -->");
+            if(index !== -1){
+               doc.post = marked(doc.post.slice(0,index)) +'<a class="seemore" href="/p/'+doc._id+'">查看更多...</a>';
+            }else{
+               doc.post = marked(doc.post);
+            }
           });  
           callback(null, docs, total);
         });

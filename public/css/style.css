@@ -73,6 +73,10 @@ article {
     line-height: 150%;
     border: 1px solid LightGrey;
 }
+.seemore{
+  font-size: 14px;
+  color: #4a75b5;
+}
 
 /* ## 作为文章的标题 */
 H1 {
@@ -119,14 +123,19 @@ nav a:hover{
 }
 
 article a{
-  color:#2a6496;
+  color:#555;
   text-decoration:none;
 }
 
 article a:hover{
-  color:#333;
   text-decoration:underline;
 }
+
+.index-title{
+  padding: 8px;
+  border: dashed 1px #d9d9d9; 
+}
+
 
 .info{
 	margin-bottom: 20px;
