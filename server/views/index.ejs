@@ -8,13 +8,11 @@
       <% if (tag) { %>
         <a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
       <% } %>
-    <% }) %>
-  </p>
-  <p><%- post.post %></p>
-  <p class="info">
+    <% }) %>  | 
     阅读：<%= post.pv %> | 
     评论：<%= post.comments.length %>
   </p>
+  <p><%- post.post %></p>
 <% }) %>
 <%- include paging %>
 <%- include footer %>

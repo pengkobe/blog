@@ -283,7 +283,9 @@ app.get('/edit/:_id', function (req, res) {
 
 app.post('/edit/:_id', checkLogin);
 app.post('/edit/:_id', function (req, res) {
-  Post.update(req.params._id, req.body.post, function (err) {
+  var body = req.body;
+  var tags = [body.tag1, body.tag2, body.tag3];
+  Post.update(req.params._id, body.title, tags,body.post, function (err) {
     var url = encodeURI('/p/' + req.params._id);
     if (err) {
       req.flash('error', err); 

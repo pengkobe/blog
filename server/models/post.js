@@ -192,7 +192,7 @@ Post.edit = function(_id, callback) {
 };
 
 //更新一篇文章及其相关信息
-Post.update = function(_id, post, callback) {
+Post.update = function(_id, title,tags,post, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -208,7 +208,7 @@ Post.update = function(_id, post, callback) {
       collection.update({
         "_id": new ObjectID(_id)
       }, {
-        $set: {post: post}
+        $set: {title:title,tags:tags,post: post}
       }, function (err) {
         mongodb.close();
         if (err) {
