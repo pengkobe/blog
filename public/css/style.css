@@ -98,6 +98,9 @@ H3 {
     line-height: 150%;
     color: #666666;
 }
+code {
+  font-size: 14px;
+}
 
 nav{
   float:left;
