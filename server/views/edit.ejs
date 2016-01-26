@@ -6,6 +6,10 @@
   <input type="text" name="tag1" value="<%= post.tags[0] %>" />
   <input type="text" name="tag2" value="<%= post.tags[1] %>" />
   <input type="text" name="tag3" value="<%= post.tags[2] %>" /><br />
+  发布时间：<br />
+  <input type="date" name="date"  value="<%= post.createtime.day %>"/>
+  <input type="time" name="time"  value="<%= post.createtime.time %>"/>
+  <br />
   正文：<br />
   <textarea name="post" rows="20" cols="100"><%= post.post %></textarea><br />
   <input type="submit" value="保存修改" />

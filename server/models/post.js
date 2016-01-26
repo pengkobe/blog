@@ -13,34 +13,45 @@ marked.setOptions({
   smartypants: false
 });
 
-function Post(name, head, title, tags, isprivate,post) {
+function Post(name, head, title, tags, isprivate,post,createtime) {
   this.name = name;
   this.head = head;
   this.title = title;
   this.tags = tags;
   this.isprivate = isprivate;
   this.post = post;
+
+  this.createtime = createtime;
 }
 
 module.exports = Post;
 
 //存储一篇文章及其相关信息
 Post.prototype.save = function(callback) {
-  var date = new Date();
+  var datenow = new Date();
+
+  var createDate = new Date(this.createtime);
+  var fullyear = createDate.getFullYear();
+  var month =  createDate.getMonth() +1;
+  var day =  createDate.getDate();
+  var hour =  createDate.getHours();
+  var minute =  createDate.getMinutes();
   //存储各种时间格式，方便以后扩展
-  var time = {
-      date: date,
-      year : date.getFullYear(),
-      month : date.getFullYear() + "-" + (date.getMonth() + 1),
-      day : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
-      minute : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
-      date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+  var createtime = {
+      date: createDate,
+      time:  (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute),
+      year : fullyear,
+      month : fullyear + "-" + month,
+      day : fullyear+ "-" + (month< 10 ? '0' + month: month) + "-" + (day< 10 ? '0' + day : day),
+      minute : fullyear + "-" + month+ "-" + day + " " + 
+      (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute)
   }
   //要存入数据库的文档
   var post = {
       name: this.name,
       head: this.head,
-      time: time,
+      createtime: createtime,
+      lastupdatetime: datenow,
       title:this.title,
       tags: this.tags,
       post: this.post,
@@ -101,7 +112,7 @@ Post.getTen = function(name, page,haslogin, callback) {
           skip: (page - 1)*10,
           limit: 10
         }).sort({
-          time: -1
+          createtime: -1
         }).toArray(function (err, docs) {
           mongodb.close();
           if (err) {
@@ -197,7 +208,22 @@ Post.edit = function(_id, callback) {
 };
 
 //更新一篇文章及其相关信息
-Post.update = function(_id, title,tags,post, callback) {
+Post.update = function(_id, title,tags,post, createDate,callback) {
+  var createDate = new Date(createDate);
+  var fullyear = createDate.getFullYear();
+  var month =  createDate.getMonth() +1;
+  var day =  createDate.getDate();
+  var hour =  createDate.getHours();
+  var minute =  createDate.getMinutes();
+  var createtime = {
+      date: createDate,
+      time:  (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute),
+      year : fullyear,
+      month : fullyear + "-" + month,
+      day : fullyear+ "-" + (month< 10 ? '0' + month: month) + "-" + (day< 10 ? '0' + day : day),
+      minute : fullyear + "-" + month+ "-" + day + " " + 
+      (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute)
+  }
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -213,7 +239,7 @@ Post.update = function(_id, title,tags,post, callback) {
       collection.update({
         "_id": new ObjectID(_id)
       }, {
-        $set: {title:title,tags:tags,post: post}
+        $set: {title:title,tags:tags,post: post,createtime:createtime}
       }, function (err) {
         mongodb.close();
         if (err) {
@@ -274,10 +300,10 @@ Post.getArchive = function(haslogin,callback) {
       //返回只包含 name、time、title 属性的文档组成的存档数组
       collection.find(query, {
         "name": 1,
-        "time": 1,
+        "createtime": 1,
         "title": 1
       }).sort({
-        time: -1
+        createtime: -1
       }).toArray(function (err, docs) {
         mongodb.close();
         if (err) {
@@ -326,15 +352,15 @@ Post.getTag = function(tag, callback) {
         return callback(err);
       }
       //查询所有 tags 数组内包含 tag 的文档
-      //并返回只含有 name、time、title 组成的数组
+      //并返回只含有 name、createtime、title 组成的数组
       collection.find({
         "tags": tag
       }, {
         "name": 1,
-        "time": 1,
+        "createtime": 1,
         "title": 1
       }).sort({
-        time: -1
+        createtime: -1
       }).toArray(function (err, docs) {
         mongodb.close();
         if (err) {
@@ -362,10 +388,10 @@ Post.search = function(keyword, callback) {
         "title": pattern
       }, {
         "name": 1,
-        "time": 1,
+        "createtime": 1,
         "title": 1
       }).sort({
-        time: -1
+        createtime: -1
       }).toArray(function (err, docs) {
         mongodb.close();
         if (err) {

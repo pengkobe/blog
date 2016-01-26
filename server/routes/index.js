@@ -135,17 +135,19 @@ app.get('/post', function (req, res) {
 
 app.post('/post', checkLogin);
 app.post('/post', function (req, res) {
-  console.log(req.body);
   var currentUser = req.session.user,
+      createtime = req.body.date + " " + req.body.time,
       tags = [req.body.tag1, req.body.tag2, req.body.tag3],
-      post = new Post(currentUser.name, currentUser.head, req.body.title, tags,(req.body.isprivate? 1:0), req.body.post);
+      post = new Post(currentUser.name, currentUser.head, 
+        req.body.title, tags,(req.body.isprivate? 1:0), req.body.post,createtime);
   post.save(function (err) {
     if (err) {
       req.flash('error', err); 
       return res.redirect('/');
     }
     req.flash('success', '发布成功!');
-    res.redirect('/');//发表成功跳转到主页
+    // 发表成功跳转到主页
+    res.redirect('/');
   });
 });
 
@@ -153,7 +155,8 @@ app.get('/logout', checkLogin);
 app.get('/logout', function (req, res) {
   req.session.user = null;
   req.flash('success', '登出成功!');
-  res.redirect('/');//登出成功后跳转到主页
+  // 登出成功后跳转到主页
+  res.redirect('/');
 });
 
 app.get('/upload', checkLogin);
@@ -284,8 +287,9 @@ app.get('/edit/:_id', function (req, res) {
 app.post('/edit/:_id', checkLogin);
 app.post('/edit/:_id', function (req, res) {
   var body = req.body;
+  var createDate = req.body.date + " " + req.body.time;
   var tags = [body.tag1, body.tag2, body.tag3];
-  Post.update(req.params._id, body.title, tags,body.post, function (err) {
+  Post.update(req.params._id, body.title, tags,body.post, createDate,function (err) {
     var url = encodeURI('/p/' + req.params._id);
     if (err) {
       req.flash('error', err); 
