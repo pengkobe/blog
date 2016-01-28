@@ -1,5 +1,5 @@
 /* inspired by http://yihui.name/cn/ */
-*{padding:0;margin:0;}
+*{margin:0;}
 
 .edit{
   margin:3px;
@@ -76,6 +76,8 @@ article {
 .seemore{
   font-size: 14px;
   color: #4a75b5;
+  display: block;
+  margin-bottom: 40px;
 }
 
 /* ## 作为文章的标题 */
