@@ -168,8 +168,8 @@ Post.getOne = function(_id, callback) {
               return callback(err);
             }
           });
-          //解析 markdown 为 html
-          doc.post = marked(doc.post);
+          //移除<!-- more --> && 解析 markdown 为 html 
+          doc.post = marked(doc.post.replace("<!-- more -->",""));
           doc.comments.forEach(function (comment) {
             comment.content = marked(comment.content);
           });
