@@ -9,11 +9,9 @@ var isMobile = require('mobileDetect');
 // 模板引擎
 var tplEngine = require('tplEngine');
 
-
 var weiboName = "@kobepeng1";
 var duoshuoName = "";
 var disqusName = "";
-
 
 var log = function(msg){
     console && console.log && console.log(msg);
