@@ -31,7 +31,7 @@ var operation={
         }
         if(isMobile.any()) {
             $(".weibo").remove();
-       },
+       }
     },
     // 回到顶部
     toTop: function(){
