@@ -55,105 +55,6 @@ var operation = {
             });
         });
     },
-    welcome: function(){
-        var self = this, visitor;
-
-        function getNamefailed(){
-            var histories = {}, userinfo = {};
-            try{ histories = JSON.parse($.cookie("visitor_history")); }catch(e){}
-            for(var key in histories){
-                userinfo = {
-                    name: key,
-                    avatar: histories[key]
-                }
-            }
-            if(userinfo.name && userinfo.avatar){
-                var htmlStr = makeHtml(userinfo.name, userinfo.avatar);
-                self.alertMsg(htmlStr);
-            }
-        }
-
-        function makeHtml(name, avatar){
-            return "<img class='alert-avatar' src='" + avatar + "'>" + name + ", 欢迎回来~";
-        }
-
-        if(visitor = $.cookie("visitor")) {
-            visitor = visitor.split("|");
-            if(visitor && visitor[0] && visitor[1]){
-                // var htmlStr = makeHtml(visitor[0], visitor[1]);
-                // self.alertMsg(htmlStr);
-                return;
-            }
-        }
-
-        $.removeCookie("visitor");
-        duoshuoName && $.ajax({
-          url: "http://" + duoshuoName +".duoshuo.com/api/threads/listPosts.jsonp?thread_key=/&require=visitor",
-          dataType: "jsonp",
-          timeout: 5000,
-          success: function(data){
-            if(!(data && data.visitor && data.visitor.name && data.visitor.avatar_url)) {
-                getNamefailed();
-                return;
-            }
-            var name = data.visitor.name;
-            var avatar = data.visitor.avatar_url;
-            if(/大额大额/.test(name)){
-                name = "亲爱的";
-            }
-            var htmlStr = makeHtml(name, avatar);
-            self.alertMsg(htmlStr);
-
-            // 目前登录人缓存半天
-            $.cookie("visitor", name + "|" + avatar, {
-                expires: 0.25,
-                path: "/"
-            });
-
-            // 缓存历史登录者
-            var histories = $.cookie("visitor_history");
-            try{
-                histories = JSON.parse(histories);
-            }catch(e){
-                histories = {};
-            }
-            histories[name] = avatar;
-            try{
-                $.cookie("visitor_history", JSON.stringify(histories), {
-                    expires: 100,
-                    path: "/"
-                });
-            }catch(e){}
-          },
-          error: function(){
-            getNamefailed();
-          }
-        });
-    },
-    insertWeibo: function(){
-        var htmlStr = '<iframe width="330" height="350" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=330&height=350&fansRow=1&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=1812166904&verifier=73dc4ca5&dpc=1"></iframe>';
-        if(/\/entry\//.test(window.location.href) && !isMobile.any()
-            && ($(window).width() > 992) && !$(".share_self").size()){
-            $(window).on("load", function(){
-                $(".rightbar-frame").css("background", "none").append(htmlStr);
-            });
-        }
-        if(isMobile.any()) {
-            $(".rightbar-frame").remove()
-        }
-    },
-    alertMsg: function(msg){
-        if(!msg) return;
-        var $msg = $(".alertInfo").size() ? $(".alertInfo") : $("<div class='alertInfo'></div>").appendTo($("body"));
-        $msg = $($msg);
-        $msg.html(msg).css("right", "-9999").animate({
-            right: 20
-        }, 800);
-        clearTimeout(window._alert_timer);
-        window._alert_timer = setTimeout(function(){
-            $msg.animate({right: -9999}, 800);
-        }, 3000);
-    },
     tips: function(){
         var htmlStr = [
             '<div class="arrow-tips">',
@@ -445,28 +346,6 @@ var operation = {
                 x();
             }
     },
-    // 回到顶部
-    toTop: function(){
-        var $toTop = $(".gotop");
-
-        $(window).on("scroll", function(){
-            if($(window).scrollTop() >= $(window).height()){
-                $toTop.css("display", "block").fadeIn();
-            } else {
-                $toTop.fadeOut();
-            }
-        });
-
-        $toTop.on("click", function(evt){
-            var $obj = $("body");
-            $obj.animate({
-                scrollTop: 0
-            }, 240);
-
-            evt.preventDefault();
-        });
-    },
-
     // 字体修改
     fontChange: function(){
         $(".font-type").on("click", function(){

@@ -247,7 +247,6 @@ article a:hover{
 
 .tools-wrapper {
   position: fixed;
-  _display: none;
   right: 15px;
   bottom: 35px;
   z-index: 9;
@@ -288,9 +287,42 @@ article a:hover{
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
+/* 弹出框 */
+.alertInfo {
+  position: fixed;
+  right: -9999px;
+  top: 20px;
+  z-index: 10;
+  background-color: #fafafa;
+  padding: 12px 18px;
+  border-radius: 2px;
+  box-shadow: 0 0 4px #ccc, 0 0 1px #fff;
+  color: #888;
+}
+.alertInfo .alert-avatar {
+  height: 40px;
+  width: 40px;
+  vertical-align: middle;
+  border-radius: 100%;
+  margin-right: 5px;
+}
 
-
-
-
-
-
+/* 微博样式设置 */
+.weibo{
+   position:absolute;
+   top:120px;
+   right:0px;
+   width:220px;
+   height:350px;
+   background:#333
+}
+.close-weibo{
+  margin-left: 8px; 
+  width:15px;
+  height:15px;
+  background:#111;
+  float:right;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
