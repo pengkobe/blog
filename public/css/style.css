@@ -136,7 +136,7 @@ nav a:hover{
 }
 
 article a{
-  color:#555;
+  color:#00f;
   text-decoration:none;
 }
 
@@ -314,15 +314,26 @@ article a:hover{
    right:0px;
    width:220px;
    height:350px;
-   background:#333
+   background:#333;
+   box-shadow:1px 0 15px rgba(0,0,0,.2);
 }
 .close-weibo{
   margin-left: 8px; 
   width:15px;
   height:15px;
+  /*文字垂直居中*/
+  line-height: 15px;
+  overflow: hidden;
   background:#111;
   float:right;
   cursor: pointer;
   text-align: center;
   color: white;
+}
+
+.submit{
+  background: green;
+  width: 80px;
+  height: 30px;
+  cursor: pointer;
 }
