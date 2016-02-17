@@ -2,6 +2,29 @@
 
 *{margin:0;}
 
+/* 滚动条长宽 */
+::-webkit-scrollbar {
+    width: 3px;
+    height: 5px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #111;
+    border-radius: 1px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #aaa;
+    -webkit-box-shadow: inset 0 0 6px #333;
+}
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: #555;
+    }
+
 .edit{
   margin:3px;
   padding:5px 15px;
@@ -90,6 +113,11 @@ H1 {
     width: 98%;
     line-height: 150%;
     color: #666666;
+}
+
+/* 首页文章列表标题 */
+h2 a{
+  color: #556677 !important;
 }
 
 /* ### 作为段落的标题 */
@@ -311,7 +339,7 @@ article a:hover{
 .weibo{
    position:absolute;
    top:120px;
-   right:0px;
+   right:5px;
    width:220px;
    height:350px;
    background:#333;
@@ -330,6 +358,7 @@ article a:hover{
   text-align: center;
   color: white;
 }
+
 
 .submit{
   background: green;
