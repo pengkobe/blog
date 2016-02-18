@@ -41,7 +41,8 @@
   padding:.5em 1em;color:#f00;font-weight:bold;
 }
 .nextpage a{
-  float:right;text-decoration:none;
+  float:right;
+  text-decoration:none;
   color:#f00;
   font-weight:bold;
 }
@@ -118,6 +119,7 @@ H1 {
 /* 首页文章列表标题 */
 h2 a{
   color: #556677 !important;
+  font-family: Michroma,'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;
 }
 
 /* ### 作为段落的标题 */
