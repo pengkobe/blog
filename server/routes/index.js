@@ -287,9 +287,10 @@ app.get('/edit/:_id', function (req, res) {
 app.post('/edit/:_id', checkLogin);
 app.post('/edit/:_id', function (req, res) {
   var body = req.body;
-  var createDate = req.body.date + " " + req.body.time;
+  var createDate = body.date + " " + body.time;
   var tags = [body.tag1, body.tag2, body.tag3];
-  Post.update(req.params._id, body.title, tags,body.post, createDate,function (err) {
+  var isprivate = body.isprivate? 1:0;
+  Post.update(req.params._id, body.title, tags,body.post, createDate,isprivate,function (err) {
     var url = encodeURI('/p/' + req.params._id);
     if (err) {
       req.flash('error', err); 

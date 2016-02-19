@@ -6,7 +6,11 @@
     <li><h3><%= post.createtime.year %></h3></li>
   <% lastYear=post.createtime.year } %>
   <li><time><%= post.createtime.day %></time></li>
-  <li><a href="/p/<%= post._id %>"><%= post.title %></a></li>
+  <li><a href="/p/<%= post._id %>"><%= post.title %></a>
+   <% if(post.isprivate){%>
+   		<em tabindex="0" class="privatetag">私</em>
+   <%}%>
+  </li>
 <% }) %>
 </ul>
 <%- include footer %>

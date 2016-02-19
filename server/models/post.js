@@ -208,7 +208,7 @@ Post.edit = function(_id, callback) {
 };
 
 //更新一篇文章及其相关信息
-Post.update = function(_id, title,tags,post, createDate,callback) {
+Post.update = function(_id, title,tags,post, createDate,isprivate,callback) {
   var createDate = new Date(createDate);
   var fullyear = createDate.getFullYear();
   var month =  createDate.getMonth() +1;
@@ -239,7 +239,7 @@ Post.update = function(_id, title,tags,post, createDate,callback) {
       collection.update({
         "_id": new ObjectID(_id)
       }, {
-        $set: {title:title,tags:tags,post: post,createtime:createtime}
+        $set: {title:title,tags:tags,post: post,createtime:createtime,isprivate:isprivate}
       }, function (err) {
         mongodb.close();
         if (err) {
@@ -301,7 +301,8 @@ Post.getArchive = function(haslogin,callback) {
       collection.find(query, {
         "name": 1,
         "createtime": 1,
-        "title": 1
+        "title": 1,
+        "isprivate": 1,
       }).sort({
         createtime: -1
       }).toArray(function (err, docs) {

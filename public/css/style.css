@@ -198,8 +198,9 @@ article a:hover{
 
 .privatetag{
 	margin:3px;padding:2px 5px;border-radius:3px;
-	background-color:#ee0000;
-	color:#ddd;font-size:13px;
+  border: 1px solid #e00;
+	color:#e00;
+  font-size:13px;
 }
 
 .website-info {

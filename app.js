@@ -23,7 +23,7 @@ marked.setOptions({
 
 var routes = require('./server/routes/index');
 var settings = require('./server/settings');
-// 支持flash
+
 var flash = require('connect-flash');
 
 var app = express();

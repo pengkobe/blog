@@ -12,7 +12,10 @@
   <br />
   正文：<br />
   <textarea name="post" rows="20" cols="100"><%= post.post %></textarea><br />
-  <input type="checkbox" name="isprivate" />私有(暂未启用)<br />
+  <div class="ui toggle checkbox">
+    <input type="checkbox" name="isprivate">
+    <label>私有</label>
+  </div><br />
   <input class="submit" type="submit" value="保存修改" />
 </form>
 <%- include footer %>
