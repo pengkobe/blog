@@ -360,7 +360,6 @@ article a:hover{
   color: white;
 }
 
-
 .submit{
   background: green;
   color: white;
@@ -369,3 +368,34 @@ article a:hover{
   cursor: pointer;
   margin-top: 10px;
 }
+/* 悬挂链接 */
+.ui.breadcrumb {
+  position: absolute;
+  left: 50%;
+  top:0px;
+  transform: translate(-50%, 0%); 
+}
+.ui.breadcrumb .section{
+  display:inline-block;
+  transform: skew(-20deg);
+  padding: 5px;
+  font-size: 0.8em;
+  color: #000;
+  opacity: .8;
+  cursor:pointer;
+  text-decoration: none;
+}
+.ui.breadcrumb .section:hover{
+  box-shadow: 2px 2px 4px #000;
+  transition: box-shadow 1s;
+}
+.lab-link{
+   background: #33FF99;
+}
+.thought-link{
+   background: #6699CC;
+}
+.movie-link{
+   background: #ccc;
+}
+

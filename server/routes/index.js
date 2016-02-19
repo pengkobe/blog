@@ -322,6 +322,33 @@ app.get('/about', function (req, res) {
     });
 });
 
+app.get('/labroom', function (req, res) {
+    res.render('labroom', {
+      title: '实验室',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
+});
+
+app.get('/thoughts', function (req, res) {
+    res.render('thoughts', {
+      title: '随想录',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
+});
+
+app.get('/movie-comments', function (req, res) {
+    res.render('movie-comments', {
+      title: '我的影评',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
+});
+
 // 404
 app.use(function (req, res) {
   res.render("404");
