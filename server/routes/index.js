@@ -3,6 +3,7 @@ var app = express.Router();
 
 var crypto = require('crypto'),
     User = require('../models/user.js'),
+    Task = require('../models/task.js'),
     Post = require('../models/post.js');
 
 // 多文件上传
@@ -26,7 +27,6 @@ app.get('/', function (req, res) {
 
   //查询并返回第 page 页的 10 篇文章
   Post.getTen(null, page, haslogin,function (err, posts, total) {
-    console.log('posts:'+posts);
     if (err) {
       posts = [];
       console.log(error);
@@ -349,6 +349,96 @@ app.get('/movie-comments', function (req, res) {
       error: req.flash('error').toString()
     });
 });
+
+app.get('/tasks', function (req, res) {
+   var haslogin = req.session.user? 1 :0;
+   Task.getAll(haslogin,function (err, tasks) {
+    if (err) {
+      req.flash('error', err); 
+      return res.redirect('/');
+    }
+    res.render('tasks', {
+      title: '任务',
+      tasks:tasks,
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+   });
+  });
+});
+
+app.post('/task/new', checkLogin);
+app.post('/task/new', function (req, res) {
+  var currentUser = req.session.user,
+      createtime = new Date();
+  var info={
+    title:req.body.title,
+    createTime:createtime,
+    lastUpdate:createtime,
+    finished:false,
+    isPrivate:req.body.isPrivate? 1 : 0,
+    finishTime:{}
+  };
+  var task = new Task(info);
+  task.save(function (err) {
+    if (err) {
+      req.flash('error', err); 
+      return res.redirect('/');
+    }
+    req.flash('success', '发布成功!');
+    res.redirect('/tasks');
+  });
+});
+
+app.get('/task/:_id/delete', checkLogin);
+app.get('/task/:_id/delete', function (req, res) {
+    Task.remove(req.params._id, function (err) {
+      if (err) {
+        req.flash('error', err); 
+        return res.redirect('back');
+      }
+      req.flash('success', '删除成功!');
+      res.redirect('/tasks');
+    });
+});
+
+app.post('/task/:_id/edit', checkLogin);
+app.post('/task/:_id/edit', function (req, res) {
+  var title = req.body.title;
+    Task.update(req.params._id, title,function (err) {
+      if (err) {
+        req.flash('error', err); 
+        return res.redirect('back');
+      }
+      req.flash('success', '更新完成!');
+      res.redirect('/tasks');
+    });
+});
+
+app.get('/task/:_id/finish', checkLogin);
+app.get('/task/:_id/finish', function (req, res) {
+    Task.finish(req.params._id, function (err) {
+      if (err) {
+        req.flash('error', err); 
+        return res.redirect('back');
+      }
+      req.flash('success', '已修改为完成!');
+      res.redirect('/tasks');
+    });
+});
+
+app.get('/task/:_id/recover', checkLogin);
+app.get('/task/:_id/recover', function (req, res) {
+    Task.recover(req.params._id, function (err) {
+      if (err) {
+        req.flash('error', err); 
+        return res.redirect('back');
+      }
+      req.flash('success', '已恢复!');
+      res.redirect('/tasks');
+    });
+});
+
 
 // 404
 app.use(function (req, res) {

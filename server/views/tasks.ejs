@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title><%= title %></title>
+  <link href="/public/css/tasks.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+  <div class="main box">
+      <div class="box">
+  <% if (user) { %>
+      <div class="box post">
+        <h3>新增</h3>
+        <form action="/task/new" method="post" id="post_new">
+          <p><input type="text" name="title" class="long_txt" /></p>
+          <p><input type="checkbox" name="isPrivate" />私有</p>
+          <p><input type="submit" class="submit" value="添加" /></p>
+        </form>
+      </div>
+  <% } %>
+
+      <div class="box tasks">
+        <ul>
+          <% for (var i = 0, len = tasks.length; i < len; i++) {
+            var task = tasks[i];
+            var status = task.finished ? 'class="finished"' : '';
+          %>
+            <li <%- status %>>
+              <% if (!task.finished) { %>
+                <h4><span class="unfinish-title"> <%= task.title %> </span>
+                <% if (task.isPrivate) { %>
+                  <em tabindex="0" class="privatetag">私</em>
+                <% }%>
+                </h4>
+                <span class="time">创建:<%= task.createTime.minute %> </span>
+                &nbsp;
+                <a href="/task/<%- task._id%>/finish">完成</a>&nbsp;
+              <% } else { %>
+               <h4><del><%= task.title %></del> 
+               <% if (task.isPrivate) { %>
+                  <em tabindex="0" class="privatetag">私</em>
+                <% }%>
+                </h4>
+                 <span class="time">创建:<%= task.createTime.minute %> </span>
+                &nbsp;
+                 <span class="time">完成:<%= task.finishTime.minute %> </span>
+                &nbsp;
+                <a href="/task/<%- task._id%>/recover">恢复</a>&nbsp;
+              <% } %>
+              <a name="edit" id="<%- task._id%>" title="<%- task.title%>" 
+              href="#">修改</a>&nbsp;
+              <a href="/task/<%- task._id%>/delete" onclick="return confirm('删除以后不能恢复的，确定？')">删除</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  弹出修改层 -->
+<div class="popuplayer" style="display:none">
+  <form action="/" method="post" id="edit_title_form">
+      <input type="text" name="title" id="editInput" />
+      <input type="submit" class="submit" value="保存" />
+      <input type="button" id="cancelEdit" value="取消" />
+  </form>
+</div>
+
+<script type="text/javascript">
+  document.getElementsByClassName("page")[0].onclick=function(e){
+    if(e.srcElement.name == 'edit'){
+        var id = e.srcElement.id;
+        var title = e.srcElement.title;
+        document.getElementsByClassName("popuplayer")[0].style.display="block";
+        document.getElementById("editInput").value=title;
+        document.getElementById("edit_title_form").action='task/'+id+'/edit';
+    }
+      //debugger;
+  }
+
+  document.getElementById("cancelEdit").onclick=function(e){
+        document.getElementsByClassName("popuplayer")[0].style.display="none";
+  }
+
+</script>
+
+</body>
+</html>
