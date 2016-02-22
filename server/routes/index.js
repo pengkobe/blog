@@ -25,15 +25,21 @@ app.get('/', function (req, res) {
   var page = req.query.p ? parseInt(req.query.p) : 1;
   var haslogin = req.session.user? 1 :0;
 
-  //查询并返回第 page 页的 10 篇文章
+  //查询并返回第 page 页的 5 篇文章
   Post.getTen(null, page, haslogin,function (err, posts, total) {
     if (err) {
       posts = [];
       console.log(error);
     } 
+    var totalpage = parseInt(total/5);
+    if(total % 5 !==0){
+      totalpage=totalpage+1;
+    }
     res.render('index', {
       title: '主页',
       posts: posts,
+      total:total,
+      totalpage:totalpage,
       page: page,
       isFirstPage: (page - 1) == 0,
       isLastPage: ((page - 1) * 5 + posts.length) == total,
@@ -449,6 +455,7 @@ function checkLogin(req, res, next) {
   if (!req.session.user) {
     req.flash('error', '未登录!'); 
     res.redirect('/login');
+    return;
   }
   next();
 }
@@ -457,6 +464,7 @@ function checkNotLogin(req, res, next) {
   if (req.session.user) {
     req.flash('error', '已登录!'); 
     res.redirect('back');//返回之前的页面
+    return;
   }
   next();
 }

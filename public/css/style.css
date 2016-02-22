@@ -403,4 +403,74 @@ article a:hover{
    background: white;
 }
 
+/*分页nav*/
+.pagination-right {
+  text-align: right;
+}
+.pagination {
+  margin: 10px 0;
+  font-size:14px;
+}
+.pagination ul {
+  /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+  display: inline-block;
+  margin-bottom: 0;
+  margin-left: 0;
+  float:right;
+}
+.pagination ul li {
+  display: inline;
+}
+.pagination ul li .pagination-first{
+  border-left-width: 1px;
+}
+.pagination ul > li:first-child > a, .pagination ul > li:first-child > span {
+  border-bottom-left-radius: 4px;
+  border-left-width: 1px;
+  border-top-left-radius: 4px;
+}
+.pagination ul > li:last-child > a, .pagination ul > li:last-child > span {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.pagination ul li a, .pagination ul li span {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #f5f5f5;
+  border-color: #DDDDDD;
+  border-image: none;
+  border-style: solid;
+  border-width: 1px 1px 1px 0;
+  float: left;
+  line-height: 20px;
+  padding: 4px 10px;
+  text-decoration: none;
+}
+.pageJump{ float:left;
+  float: left;
+  line-height: 30px;
+  text-decoration: none;
+  color:#999;
+}
+.pageJump input{ 
+  height:12px; 
+  line-height:12px;
+  width:24px; 
+  text-align:center; 
+  padding:6px 4px; 
+  border:#ddd 1px solid;
+}
+#Paginator a{
+  color: #556677
+}
+.now_page{
+  background-color:#fff !important;
+  cursor:text;
+  color: blue !important;
+}
+
+
+
 

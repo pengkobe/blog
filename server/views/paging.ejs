@@ -1,10 +1,38 @@
 <br />
-<div>
-  <% if (!isFirstPage) { %>
-    <span class="prepage"><a title="上一页" href="?p=<%= page-1 %>">上一页</a></span>
-  <% } %>
 
-  <% if (!isLastPage) { %>
-    <span class="nextpage"><a title="下一页" href="?p=<%= page+1 %>">下一页</a></span>
-  <% } %>
+<div id="Paginator"  class="pagination pagination-right clearfix" style="float:right;">
+<ul>
+	<li><div class="pageJump" style="margin-right:-12px;">共<%= totalpage %>页</div></li>
+</ul>
+
+<ul id="pageButton">
+	<% if (!isFirstPage) { %>
+		<li><a class="prev" title="上一页" href="?p=<%= page-1 %>">«</a></li>
+		<li><a href="?p=1">1</a></li>
+	<%}%>
+
+	<% if (2 < page) { %>
+		<li><span>•••</span></li>
+	<%}%>
+
+	<% if (2 < page) { %>
+		<li><a href="?p=<%= page-1 %>"><%=page-1%></a></li>
+	<%}%>
+
+		<li><a class="now_page"><%=page%></a></li>
+
+	<% if (page < totalpage-1) { %>
+		<li><a href="?p=<%= page+1 %>"><%=page+1%></a></li>
+	<%}%>
+		
+	<% if (page < totalpage-2) { %>
+		<li><span>•••</span></li>
+	<%}%>
+
+	 <% if (!isLastPage) { %>
+			<li><a href="?p=<%=totalpage%>"><%=totalpage%></a></li>
+			<li><a class="next"  title="下一页"  href="?p=<%= page+1 %>">»</a></li>
+	<%}%>
+</ul>
 </div>
+
