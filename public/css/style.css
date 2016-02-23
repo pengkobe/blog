@@ -402,6 +402,26 @@ article a:hover{
 .task-link{
    background: white;
 }
+/* 换肤链接 */
+.changebackground{
+   position: absolute;
+   right: 0%;
+   top:0px;
+}
+.changebackground .white{
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 1px solid #aaa;
+  display: inline-block;
+}
+.changebackground .yellow{
+  width: 20px;
+  height: 20px;
+  background: #f5f5d5;
+  border: 1px solid #aaa;
+  display: inline-block;
+}
 
 /*分页nav*/
 .pagination-right {

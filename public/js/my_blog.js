@@ -24,6 +24,8 @@ var operation={
 	init:function(){
 		this.insertWeibo();
         this.toTop();
+        // 暂未启用$.cookie
+        //this.welcome();
 	},
 	insertWeibo: function(){
         var htmlStr = '<iframe width="220" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=200&height=350&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2656201077&verifier=1b82284c&dpc=1"></iframe>';
@@ -98,8 +100,8 @@ var operation={
         if(visitor = $.cookie("visitor")) {
             visitor = visitor.split("|");
             if(visitor && visitor[0] && visitor[1]){
-                // var htmlStr = makeHtml(visitor[0], visitor[1]);
-                // self.alertMsg(htmlStr);
+                 var htmlStr = makeHtml(visitor[0], visitor[1]);
+                 self.alertMsg(htmlStr);
                 return;
             }
         }
@@ -145,14 +147,53 @@ var operation={
             getNamefailed();
           }
         });
+    },
+    cookieHelper:{
+         SetCookie:function(name, value) {
+            var argv = arguments;
+            var argc = arguments.length;
+            var expires = (2 < argc) ? argv[2] : null;
+            var path = (3 < argc) ? argv[3] : null;
+            var domain = (4 < argc) ? argv[4] : null;
+            var secure = (5 < argc) ? argv[5] : false;
+            document.cookie = name + "=" + escape(value) + ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) + ((path == null) ? "" : ("; path=" + path)) + ((domain == null) ? "" : ("; domain=" + domain)) + ((secure == true) ? "; secure" : "");
+        },
+        GetCookie: function(Name) {
+            var search = Name + "=";
+            var returnvalue = "";
+            if (document.cookie.length > 0) {
+                offset = document.cookie.indexOf(search);
+                if (offset != -1) {
+                    offset += search.length;
+                    end = document.cookie.indexOf(";", offset);
+                    if (end == -1)
+                        end = document.cookie.length;
+                    returnvalue = unescape(document.cookie.substring(offset, end));
+                }
+            }
+            return returnvalue;
+        }
     }
 }
 
-// 等图片资源加载完成后
-$(window).on("load", function(){
+
+$(function(){
     operation.init();
     $(".close-weibo").on('click',function(){
         $(this).parent().hide();
+    });
+    // 设置皮肤
+    var skin = operation.cookieHelper.GetCookie('skin');
+    if(skin=="white"){
+        document.body.style.background="white";
+    }
+    $(".white").on('click',function(){
+        document.body.style.background="white";
+        operation.cookieHelper.SetCookie('skin','white');
+    });
+    $(".yellow").on('click',function(){
+        document.body.style.background="#f5f5d5";
+        operation.cookieHelper.SetCookie('skin','yellow');
     });
 });
 
