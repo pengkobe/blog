@@ -96,18 +96,37 @@ a:hover { color:#FF3300; }
 .time{
     font-size: 12px;
 }
+.submit{
+  background: green;
+  color: white;
+  width: 60px;
+  height: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
 .page { width:700px; margin:10px auto; background:#FFF; padding:10px 20px; border:1px solid #CCC; border-radius:5px; }
     .main {  }
         .main_content { }
 
-            .box h3 { padding-bottom:5px; margin-bottom:10px; font-weight:400; color:green; font-size:28px;}
-             .unfinish-title{ font-weight: bold;}
+            .box h3 { font-weight:400; color:green; font-size:28px;}
+            .title-day {font-size: 22px;color: blue}
+            .title-li {
+                margin-bottom: 0px !important;
+                padding-bottom: 0px !important;
+                border-bottom: solid 2px #777 !important;
+                margin-top: 20px;
+            }
+            .unfinish-title{ font-weight: bold;}
             .tasks {}
-                .tasks ul li { list-style-type:none; margin-bottom:10px; padding-bottom:10px; border-bottom:1px dotted #CCC; }
+                .tasks ul li { list-style-type:none; margin-bottom:10px;  border-bottom:1px dotted #CCC; }
                 .tasks ul li.finished { color:#666; }
                 .tasks ul li a { color:#666;font-size: 12px }
-                .tasks ul li del { padding-left:25px; background:url(../img/finished.jpg) no-repeat left center; }
+                .tasks ul li del { 
+                    opacity: .5;
+                    padding-left:25px; 
+                    background:url(../img/finished.jpg) no-repeat left center;
+                }
 
             .post {border: 1px solid #ccc;padding: 15px;  }
                 .post p { margin-bottom:10px; }

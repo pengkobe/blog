@@ -21,11 +21,17 @@
   <% } %>
 
       <div class="box tasks">
+       <% var lastDate = '0'; %>
         <ul>
           <% for (var i = 0, len = tasks.length; i < len; i++) {
             var task = tasks[i];
             var status = task.finished ? 'class="finished"' : '';
           %>
+
+          <% if (lastDate !== task.createTime.day) { %>
+            <li class="title-li"><span class="title-day"><%= task.createTime.day %></span></li>
+          <% lastDate=task.createTime.day; } %>
+
             <li <%- status %>>
               <% if (!task.finished) { %>
                 <h4><span class="unfinish-title"> <%= task.title %> </span>

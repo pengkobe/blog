@@ -68,8 +68,8 @@ Task.getAll = function(haslogin,callback) {
         return callback(err);
       }
       collection.find(query).sort({
-        finished:1,
-        lastUpdate: -1
+        lastUpdate: -1,
+        finished:1
       }).toArray(function (err, docs) {
        mongodb.close();
        if (err) {
