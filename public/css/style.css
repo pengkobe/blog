@@ -98,11 +98,16 @@ article {
     line-height: 150%;
     border: 1px solid LightGrey;
 }
+
 .seemore{
   font-size: 14px;
   color: #4a75b5;
   display: block;
   margin-bottom: 40px;
+}
+.copyright-article{
+  background: #ddd;
+  font-size: 12px;
 }
 
 /* ## 作为文章的标题 */
