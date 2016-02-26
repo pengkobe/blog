@@ -350,8 +350,7 @@ article a:hover{
    right:5px;
    width:220px;
    height:350px;
-   background:#333;
-   box-shadow:1px 0 15px rgba(0,0,0,.2);
+   box-shadow:1px 0 15px rgba(0,0,0,.3);
 }
 .close-weibo{
   margin-left: 8px; 

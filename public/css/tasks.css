@@ -104,8 +104,46 @@ a:hover { color:#FF3300; }
   cursor: pointer;
   margin-top: 10px;
 }
+.edit-save{
+  background: green;
+  color: white;
+  width: 60px;
+  height: 25px;
+  cursor: pointer;
+  margin: 10px;
+  margin-left: 15px;
+}
+#cancelEdit{
+  background: gray;
+  color: white;
+  width: 60px;
+  height: 25px;
+  cursor: pointer;
+}
 
-.page { width:700px; margin:10px auto; background:#FFF; padding:10px 20px; border:1px solid #CCC; border-radius:5px; }
+.popuplayer{
+    position:absolute;
+    width:480px; 
+    height:440px; left:50%; 
+    top:50%; margin-left:-240px; 
+    margin-top:-220px; 
+    height:auto; z-index:100;
+    background-color:#fff; display:none;
+}
+#editInput{
+    width: 450px;
+    margin: 15px;
+    height: 35px;
+}
+#BgDiv{
+    background-color:#e3e3e3; position:absolute; 
+    z-index:99; left:0; top:0; display:none; 
+    width:100%; height:1000px;opacity:0.7;
+    filter: alpha(opacity=70);-moz-opacity: 0.7;
+}
+
+.page { width:700px; margin:10px auto; background:#FFF; padding:10px 20px; 
+    border:1px solid #CCC; border-radius:5px; }
     .main {  }
         .main_content { }
 
@@ -119,7 +157,12 @@ a:hover { color:#FF3300; }
             }
             .unfinish-title{ font-weight: bold;}
             .tasks {}
-                .tasks ul li { list-style-type:none; margin-bottom:10px;  border-bottom:1px dotted #CCC; }
+                .tasks ul li { 
+                    list-style-type:none; 
+                    margin-bottom:10px; 
+                    border-bottom:1px dashed green; 
+                    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+                }
                 .tasks ul li.finished { color:#666; }
                 .tasks ul li a { color:#666;font-size: 12px }
                 .tasks ul li del { 

@@ -66,27 +66,31 @@
 </div>
 
 <!--  弹出修改层 -->
-<div class="popuplayer" style="display:none">
+<div class="popuplayer">
   <form action="/" method="post" id="edit_title_form">
       <input type="text" name="title" id="editInput" />
-      <input type="submit" class="submit" value="保存" />
+      </br>
+      <input type="submit" class="edit-save" value="保存" />
       <input type="button" id="cancelEdit" value="取消" />
   </form>
 </div>
+<div id="BgDiv"></div>
 
 <script type="text/javascript">
   document.getElementsByClassName("page")[0].onclick=function(e){
     if(e.srcElement.name == 'edit'){
         var id = e.srcElement.id;
         var title = e.srcElement.title;
-        document.getElementsByClassName("popuplayer")[0].style.display="block";
-        document.getElementById("editInput").value=title;
         document.getElementById("edit_title_form").action='task/'+id+'/edit';
+        document.getElementById("editInput").value=title;
+        document.getElementById("BgDiv").style.display="block";
+        document.getElementById("BgDiv").style.height=document.body.clientHeight;
+        document.getElementsByClassName("popuplayer")[0].style.display="block";
     }
-      //debugger;
   }
 
   document.getElementById("cancelEdit").onclick=function(e){
+        document.getElementById("BgDiv").style.display="none";
         document.getElementsByClassName("popuplayer")[0].style.display="none";
   }
 
