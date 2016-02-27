@@ -67,16 +67,18 @@ Task.getAll = function(haslogin,callback) {
         mongodb.close();
         return callback(err);
       }
-      collection.find(query).sort({
-        lastUpdate: -1,
-        finished:1
-      }).toArray(function (err, docs) {
-       mongodb.close();
-       if (err) {
-         return callback(err);
-       }
-       callback(null, docs);
-     });
+    collection.count(query, function (err, total) {
+        collection.find(query).sort({
+          createTime: -1,
+          finished:1
+        }).toArray(function (err, docs) {
+         mongodb.close();
+         if (err) {
+           return callback(err);
+         }
+         callback(null, docs,total);
+       });
+      });
     });
   });
 };
@@ -184,6 +186,49 @@ Task.remove = function(_id, callback) {
         callback(null);
       });
 
+    });
+  });
+};
+
+//一次获取5篇文章
+Task.getFiveDay = function(lastdate,haslogin, callback) {
+  var nowdate = new Date();
+  nowdate.setTime(lastdate.getTime()); 
+  nowdate.setDate(nowdate.getDate()+5);
+  console.log(nowdate);
+  console.log(lastdate);
+  //打开数据库
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);
+    }
+    //读取 posts 集合
+    db.collection('tasks', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      }
+      var query = {};
+      if(!haslogin){
+          query.isPrivate = 0;
+      }
+      
+      if(lastdate){
+        //query.createTime={};
+        query["createTime.date"] = {"$gt":lastdate,"$lte":nowdate};
+      }
+
+      collection.count(query, function (err, total) {
+        collection.find(query).sort({
+          createTime: -1
+        }).toArray(function (err, docs) {
+          mongodb.close();
+          if (err) {
+            return callback(err);
+          }
+          callback(null, docs, total);
+        });
+      });
     });
   });
 };

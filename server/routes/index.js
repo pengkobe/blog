@@ -358,18 +358,40 @@ app.get('/movie-comments', function (req, res) {
 
 app.get('/tasks', function (req, res) {
    var haslogin = req.session.user? 1 :0;
-   Task.getAll(haslogin,function (err, tasks) {
+   var date = new Date();
+   date.setDate(date.getDate()-5);
+   Task.getFiveDay(date,haslogin,function (err, tasks,total) {
     if (err) {
       req.flash('error', err); 
+      console.log(err);
       return res.redirect('/');
+    }
+    var totalpage = parseInt(total/5);
+    if(total % 5 !==0){
+      totalpage=totalpage+1;
     }
     res.render('tasks', {
       title: '任务',
+      totalpage:totalpage,
       tasks:tasks,
       user: req.session.user,
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
    });
+  });
+});
+
+app.post('/tasks/five', function (req, res) {
+   var haslogin = req.session.user? 1 :0;
+   var lastdate = req.body.lastdate ? new Date(req.body.lastdate) : new Date('2016/01/01');
+
+   Task.getFiveDay(lastdate, haslogin,function (err, tasks, total) {
+    if (err) {
+      tasks = [];
+      console.log(error);
+    } 
+    
+    res.json(tasks);
   });
 });
 

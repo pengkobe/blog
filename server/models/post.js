@@ -84,7 +84,7 @@ Post.prototype.save = function(callback) {
   });
 };
 
-//一次获取十篇文章
+//一次获取5篇文章
 Post.getTen = function(name, page,haslogin, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
