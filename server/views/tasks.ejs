@@ -76,6 +76,12 @@
 </div>
 <div id="BgDiv"></div>
 
+<!--显示加载中 -->
+<div id="loading_div" style="position:fixed;bottom:0px;height:20px;display:none;
+background:#ccc;width:100%;text-align:center">
+	<img src="../../public/img/loading.gif"/>
+</div>
+
 <script type="text/javascript">
 	  var finishedload = false;
 	  var lockloading=false;
@@ -149,9 +155,11 @@
 				// 锁住后不再请求
 				if(!lockloading){
 					 lockloading=true;
+					 document.getElementById('loading_div').style.display="block";
 					 // 2s后解锁
 					 setTimeout(function(){
 					 	lockloading=false;
+					 	document.getElementById('loading_div').style.display="none";
 					 	console.log('lock released!');
 					 },2000);
 				         //设置请求（没有真正打开，true：表示异步 
