@@ -9,16 +9,16 @@
 <div class="page">
   <div class="main box">
       <div class="box">
-  <% if (user) { %>
-      <div class="box post">
-        <h3>新增</h3>
-        <form action="/task/new" method="post" id="post_new">
-          <p><input type="text" name="title" class="long_txt" /></p>
-          <p><input type="checkbox" name="isPrivate" />私有</p>
-          <p><input type="submit" class="submit" value="添加" /></p>
-        </form>
-      </div>
-  <% } %>
+		  <% if (user) { %>
+		      <div class="box post">
+		        <h3>新增</h3>
+		        <form action="/task/new" method="post" id="post_new">
+		          <p><input type="text" name="title" class="long_txt" /></p>
+		          <p><input type="checkbox" name="isPrivate" />私有</p>
+		          <p><input type="submit" class="submit" value="添加" /></p>
+		        </form>
+		      </div>
+		  <% } %>
 
       <div class="box tasks">
         <ul id="task_ul">
@@ -86,6 +86,7 @@ background:#ccc;width:100%;text-align:center">
 	  var finishedload = false;
 	  var lockloading=false;
 	  var lastdate = new Date();
+
 	  lastdate.setDate(lastdate.getDate()-10);
 
 	  document.getElementsByClassName("page")[0].onclick=function(e){
@@ -117,7 +118,7 @@ background:#ccc;width:100%;text-align:center">
 	    return scrollTop; 
 	} 
 
-	//获取当前可是范围的高度 
+	//获取当前可视范围的高度 
 	function getClientHeight() { 
 	    var clientHeight = 0; 
 	    if (document.body.clientHeight && document.documentElement.clientHeight) { 
@@ -149,7 +150,7 @@ background:#ccc;width:100%;text-align:center">
 	  	 if (xmlHttpReq == null) { 
 	     	 xmlHttpReq=getAjaxReq();
 	  	 }
-	  	 if (getScrollTop() + getClientHeight() == (getScrollHeight())) { 
+	  	 if (getScrollTop() + getClientHeight() == getScrollHeight()) { 
 	  	 //加载完成后不再请求
 			if(!finishedload){
 				// 锁住后不再请求
@@ -188,6 +189,12 @@ background:#ccc;width:100%;text-align:center">
 	       console.log(data);
 	       if(data.length == 0){
 	       		finishedload=true;
+	       		document.getElementById('loading_div').style.display="block";
+	       		document.getElementById('loading_div').innerHTML='已全部加载完成.';
+				// 2s后解锁
+				setTimeout(function(){
+					document.getElementById('loading_div').style.display="none";
+				},2000);
 	       		console.log('finishedload');
 	       		return;
 	       }
@@ -196,7 +203,6 @@ background:#ccc;width:100%;text-align:center">
 	       		lastdate.setDate(lastdate.getDate()-5);
 	       }
 	    }
-
 	    //显示请求过程
 	    // var newnode = document.createElement("a"); 
 	    // newnode.setAttribute("href", "#"); 

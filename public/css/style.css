@@ -496,6 +496,12 @@ article a:hover{
   color: blue !important;
 }
 
+/*links page*/
+.links-img{
+  width: 45px;
+  height: 45px;
+  vertical-align: middle;
+}
 
 
 
