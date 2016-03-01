@@ -176,6 +176,25 @@ a:hover { color:#FF3300; }
                 .post .submit { line-height:normal; -padding:0; }
 
 
+/*简单的响应式样式*/
+@media screen and (max-width: 600px) { 
+  .page {
+    width: 90%;
+  }
+  .popuplayer{
+		width: 90%;
+		left: 5%;
+		margin-left: 0px;
+  }
+  #editInput{
+  	width: 90%;
+  }
+  input{
+  	margin-right: 5px;
+  }
+}   
+
+
 
 
 
