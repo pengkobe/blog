@@ -1,3 +1,6 @@
+// 全局变量
+var duoshuoName = "";
+
 // 移动设备侦测
 var isMobile = {
     Android: function() {
@@ -22,10 +25,10 @@ var isMobile = {
 
 var operation={
 	init:function(){
-		this.insertWeibo();
+         if(title=='主页'){ 
+		  this.insertWeibo();
+         }
         this.toTop();
-        // 暂未启用$.cookie
-        //this.welcome();
 	},
 	insertWeibo: function(){
         var htmlStr = '<iframe width="220" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=200&height=350&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2656201077&verifier=1b82284c&dpc=1"></iframe>';
@@ -77,7 +80,6 @@ var operation={
     // 显示欢迎信息[多说]
     welcome: function(){
         var self = this, visitor;
-
         function getNamefailed(){
             var histories = {}, userinfo = {};
             try{ histories = JSON.parse($.cookie("visitor_history")); }catch(e){}
@@ -94,12 +96,13 @@ var operation={
         }
 
         function makeHtml(name, avatar){
-            return "<img class='alert-avatar' src='" + avatar + "'>" + name + ", 欢迎回来~";
+            return    "热烈欢迎:"+"<img class='alert-avatar' src='" + avatar + "'>"+ name;
         }
 
         if(visitor = $.cookie("visitor")) {
             visitor = visitor.split("|");
             if(visitor && visitor[0] && visitor[1]){
+                 // 避免每次刷新都显示欢迎信息
                  var htmlStr = makeHtml(visitor[0], visitor[1]);
                  self.alertMsg(htmlStr);
                 return;
@@ -179,6 +182,18 @@ var operation={
 
 $(function(){
     operation.init();
+ 
+    // 显示欢迎消息
+    duoshuoName = $(".ds-thread").attr("data-name");
+    window.duoshuoQuery = {short_name: duoshuoName};
+    if(window.duoshuoQuery.short_name){
+        $.getScript((document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js', function(){
+            operation.welcome();
+        });
+    } else {
+        operation.welcome();
+    }
+
     $(".close-weibo").on('click',function(){
         $(this).parent().hide();
     });

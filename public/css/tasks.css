@@ -171,7 +171,7 @@ a:hover { color:#FF3300; }
                     background:url(../img/finished.jpg) no-repeat left center;
                 }
 
-            .post {border: 1px solid #ccc;padding: 15px;  }
+            .post {border: 3px dotted green;padding: 15px;  }
                 .post p { margin-bottom:10px; }
                 .post .submit { line-height:normal; -padding:0; }
 

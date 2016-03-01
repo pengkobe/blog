@@ -591,8 +591,8 @@ $(function(){
 });
 
 $(window).on("load", function(){
-
-    duoshuoName = $(".ds-thread").attr("data-name");
+    duoshuoName = $(".ds-visitor-name").html();
+  //  duoshuoName = $(".ds-thread").attr("data-name");
     window.duoshuoQuery = {short_name: duoshuoName};
     if(window.duoshuoQuery.short_name){
         $.getScript((document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js', function(){

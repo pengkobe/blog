@@ -92,7 +92,7 @@ body{
 article {
     font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 18px;
-    margin: 5% 20% 5% 20%;
+    margin: 3% 20% 5% 20%;
     padding: 2% 5% 5% 5%;
     width: 50%;
     line-height: 150%;
@@ -145,6 +145,7 @@ H4{
 
 code {
   font-size: 14px;
+  font-family: cursive;
 }
 
 nav{
@@ -154,7 +155,7 @@ nav{
   text-transform:uppercase;
   width:9em;
   text-align:left;
-  margin-top:5%;
+  margin-top:3%;
 }
 
 nav a{
@@ -251,8 +252,8 @@ article a:hover{
   top:0px;
   left:153px;
   width:25px;
-  height: 28px;
-  line-height:28px;
+  height: 30px;
+  line-height:30px;
   text-align:center;
   color:#666;
   border:1px solid #AAA;
@@ -329,11 +330,11 @@ article a:hover{
   right: -9999px;
   top: 20px;
   z-index: 10;
-  background-color: #fafafa;
+  background-color: #f5f5d5;
   padding: 12px 18px;
   border-radius: 2px;
   box-shadow: 0 0 4px #ccc, 0 0 1px #fff;
-  color: #888;
+  color: #777;
 }
 .alertInfo .alert-avatar {
   height: 40px;
