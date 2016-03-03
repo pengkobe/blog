@@ -184,6 +184,7 @@ a:hover { color:#FF3300; }
   .popuplayer{
 		width: 90%;
 		left: 5%;
+		margin-top: 320px;
 		margin-left: 0px;
   }
   #editInput{
@@ -191,6 +192,9 @@ a:hover { color:#FF3300; }
   }
   input{
   	margin-right: 5px;
+  }
+  .unfinish-title{
+    width: 100%;
   }
 }   
 

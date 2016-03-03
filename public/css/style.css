@@ -2,9 +2,7 @@
 
 /* 全局样式 */
 *{margin:0;}
-body{
-  background-color: #f5f5d5;
-}
+body{background-color: #f5f5d5;}
 
 em:after{
   content: "\"";
@@ -139,7 +137,8 @@ H1 {
 /* 首页文章列表标题 */
 h2 a{
   color: #556677 !important;
-  font-family: Michroma,'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;
+  /*font-family: Michroma,'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;*/
+  font-family: Palatino, Garamond, Times, Georgia, serif;
 }
 
 /* ### 作为段落的标题 */
