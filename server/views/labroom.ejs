@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= title %></title>
+    <title><%= title%></title>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    <!-- Bootstrap CSS 
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">-->
+    <style type="text/css">
+    .chart{
+      width: 450px;
+      height: 300px;
+    }
+    </style>
   </head>
   <body>
-    <h1>实验室建设中!</h1>
-    
+    <h1>建设中...</h1>
+    <div id="barChart" class="chart"> </div>
+    <div id="dashChart" class="chart"> </div>
+    <div id="scatterChart" class="chart"> </div>
 
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+    <script src="//cdn.bootcss.com/raphael/2.1.4/raphael-min.js"></script>
+    <script src="/public/js/plugins/rapphael-charts/bar-chart.js"></script>
+    <script src="/public/js/plugins/rapphael-charts/dash-chart.js"></script>
+    <script src="/public/js/plugins/rapphael-charts/scatter-chart.js"></script>
+
+     <script src="/public/js/labroom.js"></script>
+   <!-- <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>-->
   </body>
 </html>

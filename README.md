@@ -1,4 +1,4 @@
--- this file is used record develop process
+==this file is used record develop process==
 
 ###  2016-01-06 webpack test success!
    * project directory refer to [html5-boilerplate](https://github.com/h5bp/html5-boilerplate)
@@ -10,13 +10,19 @@
   * finish all chapter
   * config git to commit
 
+ ### 2016-02-21
+  * start to build tasks page
+
+ ### 2016-03-02
+  * start to build labroom
+
+
 ### ToDo
-* 实现后台输入发布时间
+* movie comments page
+* thoughts record page
 * 手写一个日期控件
-* 新建一个展示小插件的页面
 * 知识点集锦页面
 * 页面根据天气变化效果
 * 图片放置至七牛
-* 可以增加一个影评显示页
            
 

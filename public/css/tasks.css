@@ -134,6 +134,8 @@ a:hover { color:#FF3300; }
     width: 450px;
     margin: 15px;
     height: 35px;
+    border: none;
+    border-bottom:1px solid #CCC;
 }
 #BgDiv{
     background-color:#e3e3e3; position:absolute; 
@@ -177,7 +179,7 @@ a:hover { color:#FF3300; }
 
 
 /*简单的响应式样式*/
-@media screen and (max-width: 600px) { 
+@media screen and (max-width: 720px) { 
   .page {
     width: 90%;
   }
