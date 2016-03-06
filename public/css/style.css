@@ -160,7 +160,7 @@ H4{
 
 code {
   font-size: 14px;
-  font-family: cursive;
+  font-family: inherit;
 }
 
 nav{
@@ -541,6 +541,7 @@ article a:hover{
     }
     nav{
       float: none;
+      width: 100%;
       display: inline-flex;
       margin-top: 1%;
       font-size: 1em;
