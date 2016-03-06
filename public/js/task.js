@@ -1,19 +1,201 @@
     var finishedload = false;
     var lockloading=false;
     var lastdate = new Date();
-
     lastdate.setDate(lastdate.getDate()-10);
 
+    var xmlHttpReq = null; 
+
+    
+    var task={
+        init:function(){
+            // 初始化ajax
+            if(xmlHttpReq==null){
+                this.getAjaxReq();
+            }
+            // 拓展dom实现appendhtml方法,参考:http://www.zhangxinxu.com/wordpress/2013/05/js-dom-basic-useful-method/
+            HTMLElement.prototype.appendHTML = function(html) {
+                var divTemp = document.createElement("div"), nodes = null
+                    , fragment = document.createDocumentFragment();
+                divTemp.innerHTML = html;
+                nodes = divTemp.childNodes;
+                for (var i=0, length=nodes.length; i<length; i+=1) {
+                   fragment.appendChild(nodes[i].cloneNode(true));
+                }
+                this.appendChild(fragment);
+                nodes = null;
+                fragment = null;
+            };
+        },
+       // 获取滚动条至顶部距离
+       getScrollTop:function() { 
+          var scrollTop = 0; 
+          if (document.documentElement && document.documentElement.scrollTop) { 
+            scrollTop = document.documentElement.scrollTop; 
+          } 
+          else if (document.body) { 
+            scrollTop = document.body.scrollTop; 
+          } 
+          return scrollTop; 
+       },
+
+      // 获取当前可视范围的高度 
+       getClientHeight:function() { 
+          var clientHeight = 0; 
+          if (document.body.clientHeight && document.documentElement.clientHeight) { 
+            clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight); 
+          } 
+          else { 
+            clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight); 
+          } 
+          return clientHeight; 
+  
+        },
+
+      // 获取文档完整的高度 
+       getScrollHeight:function() { 
+          return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); 
+       },
+
+       getAjaxReq:function(){
+            if (window.ActiveXObject) { 
+              xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP"); 
+            } 
+            else if (window.XMLHttpRequest) { 
+              xmlHttpReq = new XMLHttpRequest(); 
+            } 
+            return xmlHttpReq;
+        }
+  
+    }
+
+    task.init();
+
+    // 事件绑定，实现局部刷新
     document.getElementsByClassName("page")[0].onclick=function(e){
-        if(e.srcElement.name == 'edit'){
-            var id = e.srcElement.id;
-            var title = e.srcElement.title;
-            document.getElementById("edit_title_form").action='task/'+id+'/edit';
+        var ele=e.srcElement;
+        var tips_div = document.getElementById('tips_div');
+        if(ele.name == 'edit'){
+            var id = ele.getAttribute('titleid');
+            var title = document.getElementById(id).innerHTML;
+            var edit_title_form = document.getElementById("edit_title_form");
+            var BgDiv = document.getElementById("BgDiv");
+            edit_title_form.action='task/'+id+'/edit';
+            edit_title_form.name= id;
             document.getElementById("editInput").value=title;
-            document.getElementById("BgDiv").style.display="block";
-            document.getElementById("BgDiv").style.height=document.body.scrollHeight;
+            BgDiv.style.display="block";
+            BgDiv.style.height=document.body.scrollHeight;
             document.getElementsByClassName("popuplayer")[0].style.display="block";
         }
+
+         if(ele.name == 'finish'){
+            var id = ele.getAttribute('titleid');
+            var title = document.getElementById(id).innerHTML;
+            var url =  '/task/'+id+'/finish';
+           
+            xmlHttpReq.open("get", url, true); 
+            xmlHttpReq.onreadystatechange = function () { 
+                if(xmlHttpReq.readyState==4 && xmlHttpReq.status==200){
+                  debugger;
+                   var data =eval("("+xmlHttpReq.responseText+")");
+                   tips_div.style.display="block";
+                   if(data.success == true){
+                          tips_div.innerHTML='已修改为完成.';
+                          // 替换节点
+                          var pNode = document.createElement('del');
+                          pNode.id=id;
+                          var tNode = document.createTextNode(title);
+                          pNode.appendChild(tNode);
+                          var reNode = document.getElementById(id);
+                          reNode.parentNode.replaceChild(pNode, reNode);
+                          // 链接切换
+                          ele.name='recover';
+                          ele.innerHTML='恢复';
+                   }
+                   else{
+                        tips_div.innerHTML='修改为完成失败.';
+                   }
+                    setTimeout(function(){
+                       tips_div.style.display="none";
+                    },2000);
+                   return;
+                }
+            }; 
+            xmlHttpReq.send(); 
+        }
+
+        if(ele.name == 'recover'){
+            var id = ele.getAttribute('titleid');
+            debugger;
+
+            var title = document.getElementById(id).innerHTML;
+            var url =  '/task/'+id+'/recover';
+            
+            xmlHttpReq.open("get", url, true); 
+            xmlHttpReq.onreadystatechange = function () { 
+                if(xmlHttpReq.readyState==4 && xmlHttpReq.status==200){
+                   var data =eval("("+xmlHttpReq.responseText+")");
+                   tips_div.style.display="block";
+                   if(data.success == true){
+                          tips_div.innerHTML='已恢复.';
+                          // 替换节点
+                          var pNode = document.createElement('span');
+                          pNode.id=id;
+                          pNode.className="unfinish-title";
+                          var tNode = document.createTextNode(title);
+                          pNode.appendChild(tNode);
+                          var reNode = document.getElementById(id);
+                          reNode.parentNode.replaceChild(pNode, reNode);
+                          // 链接切换
+                          ele.name='finish';
+                          ele.innerHTML='完成';
+                   }
+                   else{
+                        tips_div.innerHTML='恢复失败.';
+                   }
+                    // 2s后解锁
+                    setTimeout(function(){
+                       tips_div.style.display="none";
+                    },2000);
+                   return;
+                }
+            }; 
+            xmlHttpReq.send(); 
+        }
+    }
+
+    // 更新
+    document.getElementById("saveEdit").onclick=function(e){
+            var title = document.getElementById("editInput").value;
+            var edit_title_form =  document.getElementById("edit_title_form");
+            var url =  edit_title_form.action;
+            var titleid= edit_title_form.name;
+
+            var tips_div = document.getElementById('tips_div');
+            
+            //设置请求（没有真正打开，true：表示异步 
+            xmlHttpReq.open("post", url, true); 
+            xmlHttpReq.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+            xmlHttpReq.onreadystatechange = function () { 
+                if(xmlHttpReq.readyState==4 && xmlHttpReq.status==200){
+                   var data =eval("("+xmlHttpReq.responseText+")");
+                   tips_div.style.display="block";
+                   if(data.success == true){
+                        tips_div.innerHTML='更新成功.';
+                        document.getElementById(titleid).innerHTML=title;
+                   }
+                   else{
+                        tips_div.innerHTML='更新失败.';
+                   }
+                   document.getElementById("BgDiv").style.display="none";
+                   document.getElementsByClassName("popuplayer")[0].style.display="none";
+                    // 2s后解锁
+                    setTimeout(function(){
+                       tips_div.style.display="none";
+                    },2000);
+                   return;
+                }
+            }; 
+            xmlHttpReq.send(encodeURI("title="+title)); 
     }
 
     document.getElementById("cancelEdit").onclick=function(e){
@@ -21,23 +203,14 @@
             document.getElementsByClassName("popuplayer")[0].style.display="none";
     }
 
-    var xmlHttpReq = null; 
-    function getAjaxReq(){
-        if (window.ActiveXObject) { 
-          xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP"); 
-        } 
-        else if (window.XMLHttpRequest) { 
-          xmlHttpReq = new XMLHttpRequest(); 
-        } 
-        return xmlHttpReq;
-    }
+
 
     // window 滚动事件
     window.onscroll = function () { 
          if (xmlHttpReq == null) { 
              xmlHttpReq=getAjaxReq();
          }
-         if (getScrollTop() + getClientHeight() == getScrollHeight()) { 
+         if (task.getScrollTop() + task.getClientHeight() == task.getScrollHeight()) { 
          //加载完成后不再请求
             if(!finishedload){
                 // 锁住后不再请求
@@ -73,7 +246,6 @@
         console.log('readyState:'+req.readyState);
         if(req.readyState==4 && req.status==200){
            var data =eval(xmlHttpReq.responseText);
-           console.log(data);
            if(data.length == 0){
                 finishedload=true;
                 document.getElementById('loading_div').style.display="block";
@@ -90,13 +262,6 @@
                 lastdate.setDate(lastdate.getDate()-5);
            }
         }
-        //显示请求过程
-        // var newnode = document.createElement("a"); 
-        // newnode.setAttribute("href", "#"); 
-        // newnode.innerHTML = req.readyState + " " + req.status + " " + req.responseText; 
-        // document.body.appendChild(newnode); 
-        // var newline = document.createElement("br"); 
-        // document.body.appendChild(newline); 
     } 
 
     // 滚动加载
@@ -135,51 +300,10 @@
                    html+='<a href="/task/'+task._id+'/delete" onclick="return confirm('+deleteNotice+')">删除</a>';
                    html+='</li>';
           }
-          console.log(html);
           document.getElementById("task_ul").appendHTML(html);
      }
 
-     // 拓展dom实现appendhtml方法,参考自:http://www.zhangxinxu.com/wordpress/2013/05/js-dom-basic-useful-method/
-     HTMLElement.prototype.appendHTML = function(html) {
-            var divTemp = document.createElement("div"), nodes = null
-                // 文档片段，一次性append，提高性能
-                , fragment = document.createDocumentFragment();
-            divTemp.innerHTML = html;
-            nodes = divTemp.childNodes;
-            for (var i=0, length=nodes.length; i<length; i+=1) {
-               fragment.appendChild(nodes[i].cloneNode(true));
-            }
-            this.appendChild(fragment);
-            // 据说下面这样子世界会更清净
-            nodes = null;
-            fragment = null;
-    };
 
-     //获取滚动条当前的位置 
-    function getScrollTop() { 
-        var scrollTop = 0; 
-        if (document.documentElement && document.documentElement.scrollTop) { 
-          scrollTop = document.documentElement.scrollTop; 
-        } 
-        else if (document.body) { 
-          scrollTop = document.body.scrollTop; 
-        } 
-        return scrollTop; 
-    } 
 
-    //获取当前可视范围的高度 
-    function getClientHeight() { 
-        var clientHeight = 0; 
-        if (document.body.clientHeight && document.documentElement.clientHeight) { 
-          clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight); 
-        } 
-        else { 
-          clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight); 
-        } 
-        return clientHeight; 
-    } 
+   
 
-    //获取文档完整的高度 
-    function getScrollHeight() { 
-        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); 
-    } 

@@ -5,7 +5,7 @@
           unit:'',
 
           // 画布大小
-          width:800,
+          width:400,
           height:150,
 
           //画布间距
@@ -16,7 +16,7 @@
 
           // 数据
           labels:['1','2','3','4','5','6','7','8','9','10','11','12月'],
-          data:[],
+          data:[3,3,3,3,3,2,2,2,2,2,2,5],
 
           // 样式
           color:'#555'
@@ -38,7 +38,7 @@
             paddingTop = option.paddingTop,
             color=option.color;
 
-        var r = Raphael("DevLine", width, height),
+        var r = Raphael(option.domId, width, height),
           txt = {"font": '11px "Arial"', stroke: "none", fill: "#555",opacity:0.6},
           title = {"font": '12px "Arial"', stroke: "none", fill: "#555",opacity:0.6},
           tooltip = {"font": '12px "Arial"', stroke: "none", fill: "#1E90FF",opacity:0.6};
@@ -110,7 +110,6 @@
 
             addEvent.addEvent(context,'touchstart',function(evt){
               touchEvent(evt);
-              // 这句异常关键
               evt.preventDefault();
             });
 
@@ -118,25 +117,25 @@
               touchEvent(evt);
         });
 
-          function touchEvent(evt){
-            var evtPosition = getRelativePosition.getRelativePosition(evt);
-            var barLen = barBackup.length;
+       function touchEvent(evt){
+         var evtPosition = getRelativePosition(evt);
+         var barLen = barBackup.length;
 
-            for(var index=0; index<barLen; index++){
-              var barModel = barRanges[index];
-              if(barModel[0]<evtPosition.x && evtPosition.x< ( barModel[0]+barModel[2]) ){
-                barBackup[index].attr({opacity: .5});
-                if(evtPosition.x>200){
-                  bar_value.attr({text:data[index],"text-anchor": "end"}).show().animate({x:evtPosition.x, y: Y+24},5).toFront();
-                  indexline.show().animate({x:barModel[0]+2, y: Y+22},5);
-                }else{
-                  bar_value.attr({text:data[index],"text-anchor": "start"}).show().animate({x:evtPosition.x, y: Y+24},5).toFront();
-                  indexline.show().animate({x:barModel[0]-1, y: Y+22},5);
-                }
-              }else{
-                barBackup[index].attr({opacity: 1});
-              }
-            }
+         for(var index=0; index<barLen; index++){
+           var barModel = barRanges[index];
+           if(barModel[0]<evtPosition.x && evtPosition.x< ( barModel[0]+barModel[2]) ){
+             barBackup[index].attr({opacity: .5});
+             if(evtPosition.x>200){
+               bar_value.attr({text:data[index],"text-anchor": "end"}).show().animate({x:evtPosition.x, y: Y+24},5).toFront();
+               indexline.show().animate({x:barModel[0]+2, y: Y+22},5);
+             }else{
+               bar_value.attr({text:data[index],"text-anchor": "start"}).show().animate({x:evtPosition.x, y: Y+24},5).toFront();
+               indexline.show().animate({x:barModel[0]-1, y: Y+22},5);
+             }
+           }else{
+             barBackup[index].attr({opacity: 1});
+           }
+         }
           }
         }
       }
@@ -145,7 +144,6 @@
 function CalculateDay(date){
       var dateArr = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
       var day = date.getDate();
-      // getMonth()是从0开始
       var month = date.getMonth(); 
       var year = date.getFullYear();
       var result = 0;

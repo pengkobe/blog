@@ -438,20 +438,19 @@ app.post('/task/:_id/edit', function (req, res) {
         req.flash('error', err); 
         return res.redirect('back');
       }
-      req.flash('success', '更新完成!');
-      res.redirect('/tasks');
+      res.json({success:true});
     });
 });
 
 app.get('/task/:_id/finish', checkLogin);
 app.get('/task/:_id/finish', function (req, res) {
     Task.finish(req.params._id, function (err) {
+      console.log(err);
       if (err) {
         req.flash('error', err); 
         return res.redirect('back');
       }
-      req.flash('success', '已修改为完成!');
-      res.redirect('/tasks');
+     res.json({success:true});
     });
 });
 
@@ -462,8 +461,7 @@ app.get('/task/:_id/recover', function (req, res) {
         req.flash('error', err); 
         return res.redirect('back');
       }
-      req.flash('success', '已恢复!');
-      res.redirect('/tasks');
+      res.json({success:true});
     });
 });
 

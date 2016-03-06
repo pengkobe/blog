@@ -4,9 +4,9 @@
                   defaultAngle:0,
                   
                   // 当前值与最大值
-                  label:'',
-                  value:'',
-                  unit:'',
+                  label:'湿度',
+                  value:'78',
+                  unit:'%',
                   total:'100',
 
                   // 画布大小
@@ -14,7 +14,7 @@
                   height:280,
 
                   // 圆心图片
-                  img:'ionic.png',
+                  img:'/public/img/favicon.ico',
                   imgWidth:100,
                   imgHeight:100,
                   //范围数组
@@ -26,27 +26,27 @@
 
                   // top
                   top:{
-                    label:'',value:'',unit:''
+                    label:'top',value:'value',unit:''
                   },
                   // bottom
                   bottom:{
-                    label:'',value:'',unit:''
+                    label:'bottom',value:'value',unit:''
                   },
                   // left
                   left:{
-                    label:'',value:'',unit:''
+                    label:'left',value:'left',unit:''
                   },
                   // right
                   right:{
-                    label:'',value:'',unit:''
+                    label:'right',value:'right',unit:''
                   },
                   // other info
                   other:{
-                    label:'',value:'',unit:''
+                    label:'other',value:'other',unit:''
                   },
 
                  // 数值范围
-                 range:{start:0,end:0},
+                 range:{start:170,end:260},
 
                  startAngle:30,
                  endAngle:330,
@@ -61,7 +61,7 @@
 
                   option={};
                   // 属性拷贝
-                  option = deepCopy.deepCopy(option_default);
+                  option = deepCopy(option_default);
                   // 合并属性
                   for(var proName in seft_options){
                       option[proName]=seft_options[proName];
@@ -85,6 +85,7 @@
                     var position = 30+ option.value/option.total * 300;
                     var y_position =  option.height-23;
                     var dataArrLength = option.dataArray.length;
+
                     // 确定小圈颜色
                     for(var i =0; i<dataArrLength; i++){
                       var dataModel = option.dataArray[i];
@@ -94,9 +95,9 @@
                     }
 
                   // 此方法可增加矩形齿轮长度
-                  //if(position>option.range.start && position < option.range.end){
-                  //    y_position = option.height-25;
-                  //}
+                  if(position>option.range.start && position < option.range.end){
+                      y_position = option.height-25;
+                  }
                   
                   r.circle(option.width/2, y_position, 4).attr({fill:circleColor, "fill-opacity":.5, "stroke-width": 0,
                       transform: "r"+position+ " "+option.width/2+" "+option.height/2});
@@ -136,14 +137,14 @@
                                c=dataArray[i].color;
                                t = "r" + angle + " "+width/2+" "+height/2;
                                if(range.start < angle && range.end > angle){
-                                   r.rect(width/2, height-16, 0.4, 10).attr({ stroke: c, fill: c, transform: t, "fill-opacity": .4 ,"stroke-opacity": 0.8 });
+                                   r.rect(width/2, height-16, 0.8, 10).attr({ stroke: c, fill: c, transform: t, "fill-opacity": .4 ,"stroke-opacity": 0.8 });
                                }else{
                                    r.rect(width/2, height-16, 0.05, 10).attr({ stroke: c, fill: c, transform: t, "fill-opacity": .4,"stroke-opacity": 0.3 });
                                }
                            }
                          }
                          angle += 5;
-                       }
+                      }
                  }
               }
 
@@ -209,7 +210,7 @@
                             a = (90 - alpha) * Math.PI / 180,
                             x = option.width/2 + R * Math.cos(a),
                             y = option.height/2 - R * Math.sin(a),
-                            color = "#111",//"hsb(".concat(Math.round(R) / 200, ",", value / total, ", .75)"),
+                            color = "#111",
                             path;
                         if (total == value) {
                             path = [["M", option.width/2, option.height/2 - R], ["A", R, R, 0, 1, 1, option.width/2, option.height/2 - R]];

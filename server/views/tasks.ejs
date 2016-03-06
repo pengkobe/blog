@@ -13,6 +13,7 @@
   	<link href="/public/css/tasks.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+
 <div class="page">
   <div class="main box">
       <div class="box">
@@ -41,27 +42,27 @@
 
             <li <%- status %>>
               <% if (!task.finished) { %>
-                <h4><span class="unfinish-title"> <%= task.title %> </span>
+                <h4><span id="<%- task._id%>" class="unfinish-title"> <%= task.title %> </span>
                 <% if (task.isPrivate) { %>
                   <em tabindex="0" class="privatetag">私</em>
                 <% }%>
                 </h4>
                 <span class="time">创建:<%= task.createTime.minute %> </span>
                 &nbsp;
-                <a href="/task/<%- task._id%>/finish">完成</a>&nbsp;
+                <a name="finish" titleid="<%- task._id%>"  href="javascript:void(0);">完成</a>&nbsp;
               <% } else { %>
-               <h4><del><%= task.title %></del> 
+               <h4><del id="<%- task._id%>"><%= task.title %></del> 
                <% if (task.isPrivate) { %>
                   <em tabindex="0" class="privatetag">私</em>
                 <% }%>
                 </h4>
                  <span class="time">创建:<%= task.createTime.minute %> </span>
                 &nbsp;
-                 <span class="time">完成:<%= task.finishTime.minute %> </span>
+                 <span  class="time">完成:<%= task.finishTime.minute %> </span>
                 &nbsp;
-                <a href="/task/<%- task._id%>/recover">恢复</a>&nbsp;
+                <a name="recover" titleid="<%- task._id%>" href="javascript:void(0);">恢复</a>&nbsp;
               <% } %>
-              <a name="edit" id="<%- task._id%>" title="<%- task.title%>" href="#">修改</a>
+              <a name="edit" titleid="<%- task._id%>" href="javascript:void(0);">修改</a>
               &nbsp;
               <a href="/task/<%- task._id%>/delete" onclick="return confirm('删除以后不能恢复的，确定？')">删除</a>
             </li>
@@ -75,18 +76,30 @@
 <!--  弹出修改层 -->
 <div class="popuplayer">
   <form action="/" method="post" id="edit_title_form">
-      <input type="text" name="title" id="editInput" />
+      <input id="editInput" type="text" name="title"  />
       </br>
-      <input type="submit" class="edit-save" value="保存" />
-      <input type="button" id="cancelEdit" value="取消" />
+      <input id="saveEdit" type="button"  class="edit-save" value="保存" />
+      <input id="cancelEdit" type="button"  value="取消" />
   </form>
 </div>
 <div id="BgDiv"></div>
 
 <!--显示加载中 -->
 <div id="loading_div" style="position:fixed;bottom:0px;height:20px;display:none;
-background:#ccc;width:100%;text-align:center">
+background:rgba(69,139,0,.5);width:100%;text-align:center">
 	<img src="../../public/img/loading.gif"/>
+</div>
+
+<!--显示提示信息 -->
+<div id="tips_div" style="position:fixed;top:0px;height:25px;display:none;color:white;
+font-size:16px;
+background:rgba(0,238,2,.5);width:100%;text-align:center;margin:auto;left:50%;transform: translate(-50%, 0%); ">
+
+<!--显示错误-->
+<div id="tips_div" style="position:fixed;top:0px;height:25px;display:none;color:white;
+font-size:16px;
+background:red;width:100%;text-align:center;margin:auto;left:50%;transform: translate(-50%, 0%); ">
+	
 </div>
 <!-- js -->
 <script src="/public/js/task.js"></script>

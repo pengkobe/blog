@@ -5,7 +5,7 @@
              unit:'11',
 
              // 画布大小
-             width:800,
+             width:400,
              height:150,
 
              //画布间距
@@ -23,7 +23,6 @@
          };
 
         this.init = function(seft_options){
-          debugger;
             // 合并属性
             for(var proName in seft_options){
                 option[proName]=seft_options[proName];
@@ -145,37 +144,35 @@
             function bindEvents(){
               var context = document.getElementById(option.domId).querySelector("svg");
 
-              addEvent.addEvent(context,'touchstart',function(evt){
+              addEvent(context,'touchstart',function(evt){
                 touchEvent(evt);
                 evt.preventDefault();
               });
 
-              addEvent.addEvent(context,'touchmove',function(evt){
+              addEvent(context,'touchmove',function(evt){
                 touchEvent(evt);
               });
 
             function touchEvent(evt){
-              var evtPosition = getRelativePosition.getRelativePosition(evt);
-              var barLen = barBackup.length;
+                var evtPosition = getRelativePosition(evt);
+                var barLen = barBackup.length;
 
-              for(var index=0; index<barLen; index++){
-                var barModel = barRanges[index];
-                if(barModel[0]<evtPosition.x && evtPosition.x< ( barModel[0]+barModel[2]) ){
-                  barBackup[index].attr({opacity: .5});
-                  if(evtPosition.x>200){
-                   // tooltip.show().animate({x: evtPosition.x-80, y:  Y+18});
-                    bar_label.attr({text: labels[index],"text-anchor": "end"}).show().animate({x:evtPosition.x, y: Y+16},5).toFront();
-                    bar_value.attr({text:data[index],"text-anchor": "end"}).show().animate({x:evtPosition.x, y: Y+26},5).toFront();
-                    indexline.show().animate({x:barModel[0]+2, y: Y+22},5);
+                for(var index=0; index<barLen; index++){
+                  var barModel = barRanges[index];
+                  if(barModel[0]<evtPosition.x && evtPosition.x< ( barModel[0]+barModel[2]) ){
+                    barBackup[index].attr({opacity: .5});
+                    if(evtPosition.x>200){
+                      bar_label.attr({text: labels[index],"text-anchor": "end"}).show().animate({x:evtPosition.x, y: Y+16},5).toFront();
+                      bar_value.attr({text:data[index],"text-anchor": "end"}).show().animate({x:evtPosition.x, y: Y+26},5).toFront();
+                      indexline.show().animate({x:barModel[0]+2, y: Y+22},5);
+                    }else{
+                      bar_label.attr({text: labels[index],"text-anchor": "start"}).show().animate({x:evtPosition.x, y: Y+16},5).toFront();
+                      bar_value.attr({text:data[index],"text-anchor": "start"}).show().animate({x:evtPosition.x, y: Y+26},5).toFront();
+                      indexline.show().animate({x:barModel[0]-1, y: Y+22},5);
+                    }
                   }else{
-                    // tooltip.show().animate({x: evtPosition.x-2, y:  Y+18});
-                    bar_label.attr({text: labels[index],"text-anchor": "start"}).show().animate({x:evtPosition.x, y: Y+16},5).toFront();
-                    bar_value.attr({text:data[index],"text-anchor": "start"}).show().animate({x:evtPosition.x, y: Y+26},5).toFront();
-                    indexline.show().animate({x:barModel[0]-1, y: Y+22},5);
+                    barBackup[index].attr({opacity: 1});
                   }
-                }else{
-                  barBackup[index].attr({opacity: 1});
-                }
               }
             }
           }
