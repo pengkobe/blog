@@ -520,4 +520,37 @@ article a:hover{
 }
 
 
+/*简单的响应式样式*/
+@media screen and (max-width: 720px) { 
+    h1{
+      margin-top: 20px;
+      text-align: center;
+    }
+    header{
+      text-align: center;
+    }
+    .ui.breadcrumb{
+      position: absolute;
+      width: 50%;
+      left: 50%;
+      top:0px;
+      text-transform: translate(-50%, 0%);
+    }
+    .searchform{
+      float: none;
+    }
+    nav{
+      float: none;
+      display: inline-flex;
+      margin-top: 1%;
+      font-size: 1em;
+    }
+    article{
+      width: 96%;
+      margin: 2% 2%;
+      padding: 0px;
+    }
+ 
+}  
+
 
