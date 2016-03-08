@@ -8,14 +8,14 @@ em{
 	font-size: 14px;
 }
 em:after{
-  content: "\”;
+  content: "\”";
   padding: 0 3px;
   transform: rotateZ(-20deg);
   color: #7ca5e2;
   font-size: 14px;
 }
 em:before{
-  content: "\“;
+  content: "\“";
   padding: 0 3px;
   transform: rotateZ(-20deg);
   color: #7ca5e2;
