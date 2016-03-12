@@ -278,24 +278,24 @@
 
                 html+='<li  '+status+' >';
                    if (!task.finished) { 
-                        html+='<h4><span class="unfinish-title">'+  task.title  +'</span>';
+                        html+='<h4><span id="'+task._id+'" class="unfinish-title">'+  task.title  +'</span>';
                         if (task.isPrivate) { 
                           html+='<em tabindex="0" class="privatetag">私</em>';
                         }
                         html+='</h4>';
                         html+='<span class="time">创建: '+task.createTime.minute+'  </span>&nbsp;';
-                        html+='<a href="/task/'+task._id+'/finish">完成</a>&nbsp';
+                        html+='<a name="finish"  titleid="'+task._id+'"  href="javascript:void(0);">完成</a>&nbsp';
                    } else { 
-                        html+='<h4><del> '+task.title+' </del> ';
+                        html+='<h4><del  id="'+task._id+'"  > '+task.title+' </del> ';
                         if (task.isPrivate) { 
                           html+='<em tabindex="0" class="privatetag">私</em>';
                         }
                         html+='</h4>';
                         html+='<span class="time">创建: '+task.createTime.minute+ ' </span>&nbsp;';
                         html+='<span class="time">完成:'+ task.finishTime.minute+'  </span>&nbsp;';
-                        html+='<a href="/task/'+task._id+'/recover">恢复</a>&nbsp';
+                        html+='<a  name="recover"  titleid="'+task._id+'"  href="javascript:void(0);">恢复</a>&nbsp';
                    } 
-                   html+='<a name="edit" id="'+task._id+'" title="'+task.title+'" href="#">修改</a>&nbsp;';
+                   html+='<a name="edit" titleid="<%- task._id%>" href="javascript:void(0);">修改</a>&nbsp;';
                    var deleteNotice="删除以后不能恢复的，确定？";
                    html+='<a href="/task/'+task._id+'/delete" onclick="return confirm('+deleteNotice+')">删除</a>';
                    html+='</li>';
