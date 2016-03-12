@@ -25,6 +25,13 @@
                 nodes = null;
                 fragment = null;
             };
+
+            // 添加链接按钮
+            document.getElementById("addLink").onclick=function(){
+              console.log('sss');
+                var editInput= document.getElementById("editInput");
+                editInput.value= editInput.value + '<a href=""></a>'; 
+            }
         },
        // 获取滚动条至顶部距离
        getScrollTop:function() { 
