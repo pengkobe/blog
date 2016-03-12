@@ -1,3 +1,4 @@
+// 最低级的判断了呃！
 var isMobile = {
     Android: function() {
         return navigator.userAgent.match(/Android/i);

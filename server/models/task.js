@@ -76,6 +76,7 @@ Task.getAll = function(haslogin,callback) {
          if (err) {
            return callback(err);
          }
+
          callback(null, docs,total);
        });
       });

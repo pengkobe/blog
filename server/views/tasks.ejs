@@ -42,7 +42,7 @@
 
             <li <%- status %>>
               <% if (!task.finished) { %>
-                <h4><span id="<%- task._id%>" class="unfinish-title"> <%= task.title %> </span>
+                <h4><span id="<%- task._id%>" class="unfinish-title"> <%- task.title %> </span>
                 <% if (task.isPrivate) { %>
                   <em tabindex="0" class="privatetag">私</em>
                 <% }%>
