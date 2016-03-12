@@ -2,56 +2,51 @@ var mongodb = require('./db'),
 ObjectID = require('mongodb').ObjectID,
 formatTime = require('../../public/js/plugins/formatTime');
 
-
-function Task(task) {
-  this.title= task.title,
-  this.createTime= task.createTime,
-  this.lastUpdate= task.createDate,
-  this.finished= task.finished,
-  this.isPrivate= task.isPrivate,
-  this.finishTime = task.finishTime
+function Thought(thought) {
+  this.title= thought.title,
+  this.createTime= thought.createTime,
+  this.lastUpdate= thought.createDate,
+  this.isPrivate= thought.isPrivate,
 };
 
-module.exports = Task;
+module.exports = Thought;
 
 //存储用户信息
-Task.prototype.save = function(callback) {
+Thought.prototype.save = function(callback) {
   var createtime = formatTime(this.createTime);
 
-  var task = {
+  var thought = {
       title: this.title,
       createTime: createtime,
       lastUpdate: createtime.date,
-      finished: this.finished,
       isPrivate: this.isPrivate,
-      finishTime:this.finishTime
   };
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);//错误，返回 err 信息
     }
-    //读取 tasks 集合
-    db.collection('tasks', function (err, collection) {
+    //读取 thoughts 集合
+    db.collection('thoughts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);//错误，返回 err 信息
       }
-      //将用户数据插入 tasks 集合
-      collection.insert(task, {
+      //将用户数据插入 thoughts 集合
+      collection.insert(thought, {
         safe: true
-      }, function (err, task) {
+      }, function (err, thought) {
         mongodb.close();
         if (err) {
           return callback(err);
         }
-        callback(null, task[0]);//成功！err 为 null，并返回存储后的用户文档
+        callback(null, thought[0]);//成功！err 为 null，并返回存储后的用户文档
       });
     });
   });
 };
 
-Task.getAll = function(haslogin,callback) {
+Thought.getAll = function(haslogin,callback) {
   var query={};
   if(!haslogin){
     query.isPrivate = 0;
@@ -62,7 +57,7 @@ Task.getAll = function(haslogin,callback) {
       return callback(err);
     }
     //读取 posts 集合
-    db.collection('tasks', function (err, collection) {
+    db.collection('thoughts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);
@@ -83,12 +78,12 @@ Task.getAll = function(haslogin,callback) {
   });
 };
 
-Task.update = function(_id, title, callback) {
+Thought.update = function(_id, title, callback) {
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
     }
-    db.collection('tasks', function (err, collection) {
+    db.collection('thoughts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);
@@ -109,14 +104,14 @@ Task.update = function(_id, title, callback) {
 };
 
 
-Task.finish = function(_id, callback) {
+Thought.finish = function(_id, callback) {
   var finishtime =  formatTime(new Date());
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
     }
     //读取 posts 集合
-    db.collection('tasks', function (err, collection) {
+    db.collection('thoughts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);
@@ -137,13 +132,13 @@ Task.finish = function(_id, callback) {
   });
 };
 
-Task.recover = function(_id, callback) {
+Thought.recover = function(_id, callback) {
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
     }
     //读取 posts 集合
-    db.collection('tasks', function (err, collection) {
+    db.collection('thoughts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);
@@ -164,12 +159,12 @@ Task.recover = function(_id, callback) {
   });
 };
 
-Task.remove = function(_id, callback) {
+Thought.remove = function(_id, callback) {
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
     }
-    db.collection('tasks', function (err, collection) {
+    db.collection('thoughts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);
@@ -191,7 +186,7 @@ Task.remove = function(_id, callback) {
 };
 
 //一次获取5篇文章
-Task.getFiveDay = function(lastdate,haslogin, callback) {
+Thought.getFiveDay = function(lastdate,haslogin, callback) {
   var nowdate = new Date();
   nowdate.setTime(lastdate.getTime()); 
   nowdate.setDate(nowdate.getDate()+5);
@@ -203,7 +198,7 @@ Task.getFiveDay = function(lastdate,haslogin, callback) {
       return callback(err);
     }
     //读取 posts 集合
-    db.collection('tasks', function (err, collection) {
+    db.collection('thoughts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);

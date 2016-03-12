@@ -13,7 +13,7 @@ module.exports = User;
 User.prototype.save = function(callback) {
   var md5 = crypto.createHash('md5'),
       email_MD5 = md5.update(this.email.toLowerCase()).digest('hex'),
-      head = "http://tp2.sinaimg.cn/2656201077/180/5746541082/1";
+      head = "";
   //要存入数据库的用户信息文档
   var user = {
       name: this.name,
