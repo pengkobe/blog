@@ -1,5 +1,6 @@
  /*
 created by coofly on 2014/7/12.
+edited by pengyi at 2015
  */
  
 var io = require('socket.io')();
