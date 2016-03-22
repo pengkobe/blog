@@ -30,7 +30,7 @@
             document.getElementById("addLink").onclick=function(){
               console.log('sss');
                 var editInput= document.getElementById("editInput");
-                editInput.value= editInput.value + '<a href=""></a>'; 
+                editInput.value= editInput.value + '<a href="" target="_blank"></a>'; 
             }
         },
        // 获取滚动条至顶部距离
