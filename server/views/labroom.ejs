@@ -7,7 +7,24 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <!-- Bootstrap CSS 
       <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+	 
     -->
+	<!-- 放这里也是无赖，其不兼容-->
+	<script src="http://cdn.bootcss.com/raphael/2.1.4/raphael-min.js"></script>
+	
+	<script src="/projects/labroom/sea.js"></script>
+	<link rel="stylesheet" href="/public/css/labroom.css">
+	<script type="text/javascript">
+	seajs.config({
+            base: './',
+            alias: {
+				 'labroom':'/public/js/labroom.js',
+				 'navbar':'/projects/navbar.js'
+				}
+			});
+	</script>			
+				
+ 
     <style type="text/css">
       .chart{
         width: 400px;
@@ -19,23 +36,34 @@
       }
     </style>
   </head>
-  <body style="background-color:#333">
-    <h1 style="text-align:center;color:white">[实验室]</h1>
-    <div id="barChart" class="chart"> </div>
-    <div id="dash_chart" class="chart"> </div>
-    <div id="scatterChart" class="chart"> </div>
+  <body>
+    <div class="labroom-title">实验室</div>
+	
+    <div  class="labroom-nav"> </div>
+	
+	 <div class="content-panel">
+	 <div id="raphael_charts" style="display:none">
+	    <div id="barChart" class="chart"> </div>
+		<div id="dash_chart" class="chart"> </div>
+		<div id="scatterChart" class="chart"> </div>
+	 </div>
+			
+	 </div>
+ 
 
-    <!-- jQuery first, then Bootstrap JS. -->
-    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/raphael/2.1.4/raphael-min.js"></script>
-    <script src="/projects/helper.js"></script>
-    <script src="/projects/bar-chart.js"></script>
-    <script src="/projects/scatter-chart.js"></script>
-    <script src="/projects/raphael.charts.js"></script>
+    <!-- jQuery first, then Bootstrap JS.   -->
+  <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/projects/labroom/helper.js"></script>
+    <script src="/projects/labroom/bar-chart.js"></script>
+    <script src="/projects/labroom/scatter-chart.js"></script>
+    <script src="/projects/labroom/raphael.charts.js"></script>
    
-  
-    <script src="/public/js/labroom.js"></script>
+   <script>
+	seajs.use('labroom');
+   </script>
+ 
 
-   <!-- <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>-->
+   <!--   <script src="/public/js/labroom.js"></script>
+   <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>-->
   </body>
 </html>

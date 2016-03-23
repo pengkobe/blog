@@ -13,7 +13,7 @@ var req = http.request(url, function(res){
     res.on('end', function(){
         dealData(data);
     });
-});
+}); 
 
 req.on('error', function(e){
     throw e;

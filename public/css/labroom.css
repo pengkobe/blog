@@ -1,0 +1,50 @@
+@chartset "utf-8";
+/**/
+body{
+	background-color:#333;
+	color:#777;
+	font-family:微软雅黑;
+	
+}
+.labroom-title{
+	font-size: 18px;
+	text-align:center;
+	color:white
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-bottom: 32px solid #272728;
+    border-left: 50px solid transparent;
+}
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-bottom: 32px solid #272728;
+    border-right: 50px solid transparent;
+}
+.nav-cell {
+    cursor: pointer;
+    background-color: #272728;
+    padding: 5px 8px;
+    border-left: solid 1px #111;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: center;
+    width: 100px;
+}
+.labroom-nav{
+	display: table;
+    margin-top: 5px;
+    width: 100%;
+}
+.labroom-nav > div {
+    display: table-cell;
+}
+
+.selected{
+	background-color:#1a1a1a;
+	color: white;
+}

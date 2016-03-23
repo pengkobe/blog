@@ -7,7 +7,6 @@
 ~function(window, undefined) {
   // exports to global
   umd("raphael_charts", charts);
-
   function charts(type, opts){
       switch(type){
         case 'dash':
@@ -206,17 +205,23 @@
      return des;
   } 
 
-  // UMD
+  // UMD(barrentlee)
   function umd(name, component) {
     switch (true) {
       case typeof module === 'object' && !!module.exports:
-        module.exports = component;
-        break;
+			module.exports = component;
+			break;
       case typeof define === 'function' && !!define.amd:
-        define(name, function() {
-          return component;
-        });
-        break;
+			define(name, function() {
+			  return component;
+			});
+			break;
+	  // 支持seajs(kobepeng)
+	  case typeof define === 'function' && !!define.cmd:
+		   define(name, function(require, exports, module) {
+			  return module.exports = component;
+		   });
+       break;
       default:
         try { /* Fuck IE8- */
           if (typeof execScript === 'object') execScript('var ' + name);
