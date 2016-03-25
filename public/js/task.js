@@ -236,7 +236,7 @@
                         console.log('lock released!');
                      },2000);
                          //设置请求（没有真正打开，true：表示异步 
-                        xmlHttpReq.open("post", "/tasks/five", true); 
+                        xmlHttpReq.open("post", "/task/five", true); 
                         xmlHttpReq.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
                         xmlHttpReq.onreadystatechange = function () { 
                           onajaxtest(xmlHttpReq); 

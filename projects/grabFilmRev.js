@@ -22,9 +22,8 @@ req.on('error', function(e){
 req.end();
 console.log("数据下载中...");
 
-
+// 电影查询
 function dealData(data){
-	
 	var reg = /<a.*?href="(https:\/\/movie.douban.com\/subject.*?)"[^>]*?>\n*?(.*?\n*?.*?<span[^>]*?>.*?)<\/span>\n*?.*?\n*?<\/a>/g;
     var res = [];
 
@@ -45,7 +44,7 @@ function dealData(data){
  function dealData_c(data){
    console.log("dealData_c");
    
-  
+    // 导航
     var reg = /<div.*?class="comment-item".*?>[\s\S]*?<div\sclass="comment">[\s\S]*?<h3>[\s\S]*?<span\sclass="votes.*?>(.*?)<\/span>[\s\S]*?<a\shref="(https.*?)".*?>(.*?)<\/a>[\s\S]*?<p\sclass.*?>([.\s\S]*?)<\/p>[\s\S]*?<\/div>/g;
 	//===test begin===
     //console.log('comment:'+reg.test(data));

@@ -3,8 +3,8 @@ var app = express.Router();
 
 var crypto = require('crypto'),
     User = require('../models/user.js'),
-    Task = require('../models/task.js'),
     Post = require('../models/post.js');
+var Task = require('../models/task.js');
 
 // 多文件上传
 var multer  = require('multer');
@@ -356,7 +356,10 @@ app.get('/movie-comments', function (req, res) {
     });
 });
 
-app.get('/tasks', function (req, res) {
+
+
+
+app.get('/task/all', function (req, res) {
    var haslogin = req.session.user? 1 :0;
    var date = new Date();
    date.setDate(date.getDate()-5);
@@ -381,7 +384,7 @@ app.get('/tasks', function (req, res) {
   });
 });
 
-app.post('/tasks/five', function (req, res) {
+app.post('/task/five', function (req, res) {
    var haslogin = req.session.user? 1 :0;
    var lastdate = req.body.lastdate ? new Date(req.body.lastdate) : new Date('2016/01/01');
 
@@ -466,10 +469,23 @@ app.get('/task/:_id/recover', function (req, res) {
 });
 
 
-// 404
-app.use(function (req, res) {
-  res.render("404");
-});
+function checkLogin(req, res, next) {
+  if (!req.session.user) {
+    req.flash('error', '未登录!'); 
+    res.redirect('/login');
+    return;
+  }
+  next();
+}
+
+function checkNotLogin(req, res, next) {
+  if (req.session.user) {
+    req.flash('error', '已登录!'); 
+    res.redirect('back');//返回之前的页面
+    return;
+  }
+  next();
+}
 
 function checkLogin(req, res, next) {
   if (!req.session.user) {

@@ -1,29 +1,22 @@
 var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+var path = require('path');
+var favicon = require('static-favicon');
+
+
+
+// data log
+var logger = require('morgan');
 var fs = require('fs');
 var accessLog = fs.createWriteStream('access.log', {flags: 'a'});
 var errorLog = fs.createWriteStream('error.log', {flags: 'a'});
 
-// 支持markdown
-var marked = require('marked');
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: true,
-  smartLists: true,
-  smartypants: false
-});
 
 var routes = require('./server/routes/index');
-var settings = require('./server/settings');
 
+var settings = require('./server/settings');
 var flash = require('connect-flash');
 
 var app = express();
@@ -53,16 +46,7 @@ app.use(session({
     url: settings.dbUrl
   })
 }));
-
-// 处理文件后缀为.md页面
-app.engine('md', function(path, options, fn){  
-  fs.readFile(path, 'utf8', function(err, str){  
-    if (err) return fn(err);  
-    str = marked(str);  
-    fn(null, str);  
-  });  
-});  
-
+ 
 app.use('/', routes);
 
 app.use(function (err, req, res, next) {

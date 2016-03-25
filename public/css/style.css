@@ -524,7 +524,7 @@ article a:hover{
 }
 
 
-/*简单的响应式样式*/
+/*简单响应式样式*/
 @media screen and (max-width: 720px) { 
     h1{
       margin-top: 20px;
@@ -554,6 +554,9 @@ article a:hover{
       width: 96%;
       margin: 2% 2%;
       padding: 0px;
+    }
+    .weibo{
+      display: none;
     }
  
 }  
