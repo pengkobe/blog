@@ -178,7 +178,8 @@ app.get('/upload', function (req, res) {
 app.post('/upload', checkLogin);
 app.post('/upload', upload.array('photos', 12),function (req, res) {
   req.flash('success', '文件上传成功!');
-  res.redirect('/upload');
+   // res.redirect('/upload');
+   res.json({success:true});
 });
 
 app.get('/archive', function (req, res) {
@@ -252,6 +253,16 @@ app.get('/search', function (req, res) {
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
     });
+  });
+});
+app.get('/autocomplete', function (req, res) {
+  console.log(req.query.keyword);
+  Post.search(req.query.keyword, function (err, posts) {
+    if (err) {
+      req.flash('error', err); 
+      return res.redirect('/');
+    }
+    res.json(posts);
   });
 });
 

@@ -16,8 +16,9 @@
 <h1><%= title %></h1>
 <span class="searchform">
 	<form id="searchartical" action="/search" method="GET">
-        <input class="searchinput" name="keyword" value="" placeholder="文章">
-        <a class="searchbutton" name="submit"  href="JavaScript:" title="搜索！"onclick="document.getElementById('searchartical').submit();return false" >搜
+        <input class="searchinput" id="searchdiv" name="keyword" value="" placeholder="文章" autocomplete="off">
+        <a class="searchbutton" name="submit"  href="JavaScript:" 
+        title="搜索！"onclick="document.getElementById('searchartical').submit();return false" >搜
         </a>
 	</form>
 </span>

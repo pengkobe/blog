@@ -29,7 +29,22 @@ var operation={
 		  this.insertWeibo();
          }
         this.toTop();
+        this.autoComplete();
 	},
+    autoComplete:function(){ //实现搜索框自动提示
+        var pr={
+            id: 'searchdiv', 
+            //data: [], 
+            textFiled: 'title', // 显示的文字的属性名
+            valueFiled: 'title', // 获取value的属性名
+            style: {}, 
+            url: '/autocomplete', //ajax请求的url
+            paraName:'keyword',//ajax请求的参数
+            select: function() {}, 
+            showdivId: 'autodiv' 
+        };
+        AutoComplete(pr);
+    },
 	insertWeibo: function(){
         var htmlStr = '<iframe width="220" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=200&height=350&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2656201077&verifier=1b82284c&dpc=1"></iframe>';
         if(!isMobile.any()  && ($(window).width() > 992) && !$(".share_self").size()){
@@ -182,7 +197,6 @@ var operation={
 
 $(function(){
     operation.init();
- 
     // 显示欢迎消息
     duoshuoName = $(".ds-thread").attr("data-name");
     window.duoshuoQuery = {short_name: duoshuoName};
