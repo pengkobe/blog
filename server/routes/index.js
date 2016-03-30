@@ -428,7 +428,7 @@ app.post('/task/new', function (req, res) {
       return res.redirect('/');
     }
     req.flash('success', '发布成功!');
-    res.redirect('/tasks');
+    res.redirect('/task/all');
   });
 });
 
@@ -440,7 +440,7 @@ app.get('/task/:_id/delete', function (req, res) {
         return res.redirect('back');
       }
       req.flash('success', '删除成功!');
-      res.redirect('/tasks');
+      res.redirect('/task/all');
     });
 });
 
