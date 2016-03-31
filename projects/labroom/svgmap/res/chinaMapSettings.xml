@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+      <stateData stateName="hainan" stateInitColor= "7" stateHoverColor= 'feb41c' stateSelectedColor= 'E32F02' baifenbi="0.25" />
+      <stateData stateName="guangdong" stateInitColor= "7" stateHoverColor= 'feb41c' stateSelectedColor= 'E32F02' />
+      <stateData stateName="guangxi" stateInitColor= "7" stateHoverColor= 'feb41c' stateSelectedColor= 'E32F02' />
+</data>

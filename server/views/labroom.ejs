@@ -15,26 +15,23 @@
 	<script src="/projects/labroom/sea.js"></script>
 	<link rel="stylesheet" href="/public/css/labroom.css">
 	<script type="text/javascript">
-	seajs.config({
-            base: './',
-            alias: {
-				 'labroom':'/public/js/labroom.js',
-				 'navbar':'/projects/navbar.js'
+		
+		seajs.config({
+				base: './',
+				alias: {
+					 'labroom':'/public/js/labroom.js',
+					 'navbar':'/projects/navbar.js',
+					 'treeList': '/projects/labroom/treeList.js',
+					 'accordionMenu': '/projects/labroom/accordionMenu.js',
+					 'svgmap': '/projects/labroom/svgmap/svgmap.js?12',
+					 
+					 'dashchart': '/projects/labroom/dashchart.js?12',
+					 'scatterchart': '/projects/labroom/scatterchart.js?12',
+					 'barchart': '/projects/labroom/barchart.js?12'
 				}
-			});
+		});
 	</script>			
 				
- 
-    <style type="text/css">
-      .chart{
-        width: 400px;
-        height: 150px;
-      }
-      #dashChart{
-        height: 300px;
-        text-align: center;
-      }
-    </style>
   </head>
   <body>
     <div class="labroom-title">实验室</div>
@@ -43,22 +40,33 @@
 	
 	 <div class="content-panel">
 	 <div id="raphael_charts" style="display:none">
-	    <div id="barChart" class="chart"> </div>
-		<div id="dash_chart" class="chart"> </div>
-		<div id="scatterChart" class="chart"> </div>
 	 </div>
-			
+	 
+	  <div id="raphelchart" class="projectboard" style="display: none">
+            <div class="menu" style="font-size: 12px; overflow: auto;">
+            </div>
+            <div class="page">
+                <div class="page-name" style="height: 30px">
+                </div>
+                <div class="page-content">
+                </div>
+            </div>
+      </div>
+	 
 	 </div>
+	 
  
-
-    <!-- jQuery first, then Bootstrap JS.   -->
-  <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="/projects/labroom/svgmap/res/bigArea.js"></script>
+    <script src="/projects/labroom/svgmap/map.js"></script>
+	
     <script src="/projects/labroom/helper.js"></script>
     <script src="/projects/labroom/bar-chart.js"></script>
     <script src="/projects/labroom/scatter-chart.js"></script>
     <script src="/projects/labroom/raphael.charts.js"></script>
-   
+
    <script>
+    // init
 	seajs.use('labroom');
    </script>
  

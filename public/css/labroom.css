@@ -1,15 +1,15 @@
 @chartset "utf-8";
 /**/
-body{
-	background-color:#333;
-	color:#777;
-	font-family:微软雅黑;
-	
+body {
+    background-color: #333;
+    color: #777;
+    font-family: 微软雅黑;
 }
-.labroom-title{
-	font-size: 18px;
-	text-align:center;
-	color:white
+
+.labroom-title {
+    font-size: 18px;
+    text-align: center;
+    color: white;
 }
 
 .triangle-left {
@@ -25,6 +25,7 @@ body{
     border-bottom: 32px solid #272728;
     border-right: 50px solid transparent;
 }
+
 .nav-cell {
     cursor: pointer;
     background-color: #272728;
@@ -35,16 +36,123 @@ body{
     text-align: center;
     width: 100px;
 }
-.labroom-nav{
-	display: table;
+
+.labroom-nav {
+    display: table;
     margin-top: 5px;
     width: 100%;
 }
-.labroom-nav > div {
-    display: table-cell;
+
+    .labroom-nav > div {
+        display: table-cell;
+    }
+
+.selected {
+    background-color: #1a1a1a;
+    color: white;
 }
 
-.selected{
-	background-color:#1a1a1a;
-	color: white;
+.chart {
+    width: 400px;
+    height: 150px;
+}
+
+.map {
+    width: 1000px;
+    height: 550px;
+}
+
+#dashChart {
+    height: 300px;
+    text-align: center;
+}
+
+.menu {
+    display: inline-block;
+    width: 14%;
+    vertical-align: top;
+    letter-spacing: 3px;
+}
+
+    .menu a {
+        color: #7c7c7e;
+        text-decoration: none;
+    }
+
+    .menu ul {
+        padding-left: 0px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
+.menu-list {
+    float: right;
+    margin-bottom: 0px;
+}
+
+    .menu-list > li {
+        display: inline-block;
+        font-size: 14px;
+    }
+
+/*.parent_li*/
+.menu li > span {
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    border-bottom: solid #444 1px;
+}
+
+.menu > ul > li > span {
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    background-color: #222;
+    border-bottom: solid #111 1px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+}
+
+.menu > ul > li > ul span {
+    background-color: #272728;
+}
+
+.menu li > span:hover {
+    background-color: #333;
+}
+
+.menu li.li_selected > span {
+    background: #333;
+    font-size: 16px;
+}
+
+.menu li.li_selected > ul > li.li_selected > span {
+    background: #333;
+    font-size: 13px;
+}
+
+.menu li.li_selected > span > a {
+    color: white;
+}
+
+.page {
+    width: 86%;
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: 2px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border-left: solid 1px #111;
+}
+
+.projectboard {
+    position: relative;
+    vertical-align: top;
+    display: inline-block;
+    width: 85%;
+    letter-spacing: -3px;
+    font-size: 0;
 }
