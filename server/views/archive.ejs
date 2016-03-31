@@ -1,16 +1,46 @@
 <%- include header %>
-<ul class="archive">
+<ul class="archive"><li><ul>
 <% var lastYear = 0 %>
 <% posts.forEach(function (post, index) { %>
   <% if (lastYear != post.createtime.year) { %>
-    <li><h3><%= post.createtime.year %></h3></li>
+  </ul></li><li><h3><%= post.createtime.year %></h3><ul>
   <% lastYear=post.createtime.year } %>
-  <li><time><%= post.createtime.day %></time></li>
-  <li><a href="/p/<%= post._id %>"><%= post.title %></a>
-   <% if(post.isprivate){%>
-   		<em tabindex="0" class="privatetag">私</em>
-   <%}%>
+  <li>
+	  <time><%= post.createtime.day %></time>
+	  <a href="/p/<%= post._id %>"><%= post.title %></a>
+	   <% if(post.isprivate){%>
+	   		<em tabindex="0" class="privatetag">私</em>
+	   <%}%>
   </li>
 <% }) %>
-</ul>
+</ul></li></ul>
+
+<script>
+
+var length = document.getElementsByTagName('h3').length;
+for(var i=0;i<length; i++){
+	document.getElementsByTagName('h3')[i].addEventListener("click",function(){
+		var silb=sibling(this);
+		if(silb[0].style.display==='none'){
+			silb[0].style.display='block';
+		}else{
+			silb[0].style.display='none';
+		}
+		//debugger;
+	},false);  
+}
+
+// 获取元素兄弟节点
+function sibling(elem) { 
+	var r = []; 
+	var n = elem.parentNode.firstChild; 
+	for ( ; n; n = n.nextSibling ) { 
+	    if ( n.nodeType === 1 && n !== elem ) { 
+	        r.push( n ); 
+	    } 
+	} 
+	return r; 
+}
+
+</script>
 <%- include footer %>

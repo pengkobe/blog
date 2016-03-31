@@ -77,8 +77,12 @@ em:before{
   list-style:none;
   line-height:28px;
 }
+.archive li{
+  list-style: none;
+}
 .archive h3{
   margin:0.5em 0;
+  cursor: pointer;
 }
 .archive time{
   float:left;font-size:14px;

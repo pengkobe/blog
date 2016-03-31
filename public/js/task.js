@@ -83,6 +83,7 @@
 		init:function(){
 			helper.init();
 			this.loadData();
+			this.bindEvents();
 		},
 		loadData:function(){
 			var that = this;

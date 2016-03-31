@@ -195,11 +195,11 @@ var operation={
             return returnvalue;
         }
     },
-	  // 导航树
+    // 目录导航树
     menuIndex: function($obj){
-		//if(/p/.test(window.location.href)){
-		//	
-		//}
+		if(!/\/p\//.test(window.location.href)){
+			return;
+		}
 		
         if($('h3',$obj).length > 2 && !isMobile.any()){
             var h3 = [],h4 = [],tmpl = '<ul>',h3index = 0;
@@ -324,4 +324,3 @@ $(function(){
         operation.cookieHelper.SetCookie('skin','yellow');
     });
 });
-
