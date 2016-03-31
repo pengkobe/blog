@@ -569,7 +569,6 @@ article a:hover{
   border-radius: 20%;
 }
 
-
 /*简单响应式样式*/
 @media screen and (max-width: 720px) { 
     h1{
