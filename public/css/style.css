@@ -9,6 +9,7 @@ img{
 
 em{
 	font-size: 14px;
+	font-style:normal;
 }
 em:after{
   content: "\”";
@@ -418,7 +419,7 @@ article a:hover{
 .alertInfo {
   position: fixed;
   right: -9999px;
-  top: 20px;
+  bottom: 40px;
   z-index: 10;
   background-color: #f5f5d5;
   padding: 12px 18px;
@@ -561,7 +562,7 @@ article a:hover{
   border-width: 1px 1px 1px 0;
   float: left;
   line-height: 20px;
-  padding: 4px 10px;
+  padding: 5px 15px;
   text-decoration: none;
 }
 .pageJump{ float:left;
