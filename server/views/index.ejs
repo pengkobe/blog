@@ -1,7 +1,7 @@
 <%- include header %>
 <% posts.forEach(function (post, index) { %>
   <p><h2 class="index-title"><a  href="/p/<%= post._id %>"><%= post.title %></a></h2></p>
-  <p class="info"> 
+  <p class="index-info"> 
     日期：<%= post.createtime.minute %> | 
     标签：
     <% post.tags.forEach(function (tag, index) { %>
