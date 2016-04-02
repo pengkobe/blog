@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
   Post.getTen(null, page, haslogin,function (err, posts, total) {
     if (err) {
       posts = [];
-      console.log(error);
+      console.log(err);
     } 
     var totalpage = parseInt(total/5);
     if(total % 5 !==0){
