@@ -123,7 +123,7 @@ Post.getTen = function(name, page,haslogin, callback) {
             var index=0;
             index = doc.post.indexOf("<!-- more -->");
             if(index !== -1){
-               doc.post = marked(doc.post.slice(0,index)) +'<a class="seemore" href="/p/'+doc._id+'">查看更多...</a>';
+               doc.post = marked(doc.post.slice(0,index)) +'<a class="seemore" href="/p/'+doc._id+'">more...</a>';
             }else{
                doc.post = marked(doc.post);
             }

@@ -9,6 +9,7 @@ img{
 
 em{
 	font-size: 14px;
+	font-style:normal;
 }
 em:after{
   content: "\”";
@@ -126,9 +127,9 @@ em:before{
 article {
     font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 18px;
-    margin: 3% 20% 5% 20%;
+    margin: 3% 20% 5% 15%;
     padding: 2% 5% 5% 5%;
-    width: 50%;
+    width: 55%;
     line-height: 150%;
     border: 1px solid LightGrey;
 }
@@ -137,7 +138,7 @@ article {
   font-size: 14px;
   color: #4a75b5;
   display: block;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 .copyright-article{
   background: #ddd;
@@ -157,16 +158,23 @@ H1 {
 
 /* 首页文章列表标题 */
 h2 a{
-  color: #556677 !important;
+  color: #444 !important;
+  text-decoration:none;
+  transition:color 0.2s ease, border-color 0.2s ease;
   font-family: Michroma,'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;
   /*font-family: Palatino, Garamond, Times, Georgia, serif;*/
 }
+h2 a:hover{
+	color: #f33 !important;
+	 text-decoration:none !important;
+}
+
 
 /* ### 作为段落的标题 */
 H3 {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    margin-top: 35px;
+    margin-bottom: 15px;
     border-bottom: 1px LightGrey solid;
     width: 98%;
     line-height: 150%;
@@ -202,9 +210,9 @@ nav a{
 }
 
 nav a:hover{
-  background-color:#f00;
+  background-color:#f33;
   color:#f9f9f9;
-  -webkit-transition:color .2s linear;
+  -webkit-transition:color .1s linear, background-color 0.8s ease;
 }
 
 article a{
@@ -218,9 +226,28 @@ article a:hover{
 
 .index-title{
   padding: 8px;
+  position:relative;
   border: dashed 1px #d9d9d9; 
+  background:rgba(220,220,220,.2)
 }
 
+.index-title:before{
+	content: '';
+    border-left: 2px solid #aaa;
+    position: absolute;
+    left: -2px;
+    height: 100%;
+    top: 0%;
+}
+
+
+
+
+.index-info{
+	margin-bottom: 5px;
+	font-size:14px;
+	color: #b6b6b6;
+}
 
 .info{
 	margin-bottom: 20px;
@@ -403,7 +430,7 @@ article a:hover{
 .alertInfo {
   position: fixed;
   right: -9999px;
-  top: 20px;
+  bottom: 40px;
   z-index: 10;
   background-color: #f5f5d5;
   padding: 12px 18px;
@@ -546,7 +573,7 @@ article a:hover{
   border-width: 1px 1px 1px 0;
   float: left;
   line-height: 20px;
-  padding: 4px 10px;
+  padding: 5px 15px;
   text-decoration: none;
 }
 .pageJump{ float:left;
