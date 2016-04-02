@@ -4,7 +4,6 @@ create at:2016-02-22
 ps:将js放在html后面
 */
 
-
 // 拖拽事件监听，首先要禁用浏览器默认事件
 document.addEventListener("dragenter", function(e){  
     dropbox.style.borderColor = 'gray';  
@@ -72,7 +71,6 @@ function handleFiles(files) { 
 		else{
 			fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + "KB";
 		}
-
 		
 		xhr.upload.addEventListener("progress", function(e) {  
 		    if (e.lengthComputable) {  

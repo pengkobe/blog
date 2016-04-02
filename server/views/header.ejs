@@ -7,58 +7,57 @@
 <meta name="author" content="kobepeng" />
 <meta name="keywords" content="前端开发,生活趣事" />
 <meta name="description" content="kobepeng的个人站，欢迎访问交流。" />
+<link rel="stylesheet" href="/public/css/normalize.css">
+<link rel="stylesheet" href="/public/css/main.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="/public/css/checkbox.css">
 </head>
+
 <body>
+  <header>
+  <h1><%= title %></h1>
+  <span class="searchform">
+  	<form id="searchartical" action="/search" method="GET">
+          <input class="searchinput" id="searchdiv" name="keyword" value="" placeholder="文章" autocomplete="off">
+          <a class="searchbutton" name="submit"  href="JavaScript:" 
+          title="搜索！"onclick="document.getElementById('searchartical').submit();return false" >搜
+          </a>
+  	</form>
+  </span>
+  <!-- 悬挂链接 -->
+  <div class="ui breadcrumb">
+        <a class="section lab-link" href="/labroom" target="_blank">实验室</a><a class="section thought-link" href="/thoughts" target="_blank">随想录</a><a class="section movie-link" href="/movie-comments" target="_blank">影评</a><a class="section task-link" href="/task/all" target="_blank">任务</a>
+  </div>
+  <!-- -->
+  <div class="changebackground">
+      <a class="white" href="#"></a><a class="yellow" href="#"></a>
+  </div>
+  </header>
 
-<header>
-<h1><%= title %></h1>
-<span class="searchform">
-	<form id="searchartical" action="/search" method="GET">
-        <input class="searchinput" id="searchdiv" name="keyword" value="" placeholder="文章" autocomplete="off">
-        <a class="searchbutton" name="submit"  href="JavaScript:" 
-        title="搜索！"onclick="document.getElementById('searchartical').submit();return false" >搜
-        </a>
-	</form>
-</span>
+  <nav>
+    <span><a title="主页" href="/">主页</a></span>
+    <span><a title="存档" href="/archive">归档</a></span>
+    <span><a title="标签" href="/tags">标签</a></span>
+    <span><a title="友情链接" href="/links">友链</a></span>
+    <span><a title="关于我" href="/about">找我</a></span>
+    <% if (user) { %>
+      <span><a title="上传" href="/upload">上传</a></span>
+      <span><a title="发表" href="/post">发表</a></span>
+      <span><a title="登出" href="/logout">登出</a></span>
+    <% }  %>
+  </nav>
 
-<!-- 悬挂链接 -->
-<div class="ui breadcrumb">
-      <a class="section lab-link" href="/labroom" target="_blank">实验室</a><a class="section thought-link" href="/thoughts" target="_blank">随想录</a><a class="section movie-link" href="/movie-comments" target="_blank">影评</a><a class="section task-link" href="/task/all" target="_blank">任务</a>
-</div>
+  <% if (success) { %>
+    <div class="success-notice"><%= success %></div>
+    <script type="text/javascript"> setTimeout(function(){
+      document.getElementsByClassName('success-notice')[0].style.display="none";
+    },4500);
+    </script>
+  <% } %>
 
-<!-- -->
-<div class="changebackground">
-    <a class="white" href="#"></a><a class="yellow" href="#"></a>
-</div>
-
-</header>
-
-<nav>
-  <span><a title="主页" href="/">主页</a></span>
-  <span><a title="存档" href="/archive">归档</a></span>
-  <span><a title="标签" href="/tags">标签</a></span>
-  <span><a title="友情链接" href="/links">友链</a></span>
-  <span><a title="关于我" href="/about">找我</a></span>
-  <% if (user) { %>
-    <span><a title="上传" href="/upload">上传</a></span>
-    <span><a title="发表" href="/post">发表</a></span>
-    <span><a title="登出" href="/logout">登出</a></span>
-  <% }  %>
-</nav>
-
-<% if (success) { %>
-  <div class="success-notice"><%= success %></div>
-  <script type="text/javascript"> setTimeout(function(){
-    document.getElementsByClassName('success-notice')[0].style.display="none";
-  },4500);
-  </script>
-<% } %>
-
-<% if (error) { %>
-  <div><%= error %> </div>
-<% } %>
-<article>
+  <% if (error) { %>
+    <div><%= error %> </div>
+  <% } %>
+  <article>
 
 

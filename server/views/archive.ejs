@@ -3,7 +3,7 @@
 <% var lastYear = 0 %>
 <% posts.forEach(function (post, index) { %>
   <% if (lastYear != post.createtime.year) { %>
-  </ul></li><li><h3><%= post.createtime.year %></h3><ul>
+  </ul></li><li><h3 data-content＝"-"><%= post.createtime.year %></h3><ul>
   <% lastYear=post.createtime.year } %>
   <li>
 	  <time><%= post.createtime.day %></time>
@@ -16,18 +16,33 @@
 </ul></li></ul>
 
 <script>
+// DOM Level 2 standard 事件初始化
+var evt;
+if (document.createEvent) { 
+	evt = document.createEvent("MouseEvents"); 
+	evt.initMouseEvent("click", true, true, window, 
+	0, 0, 0, 0, 0, false, false, false, false, 0, null); 
+} 
 
-var length = document.getElementsByTagName('h3').length;
+var element = document.getElementsByTagName('h3');
+var length = element.length;
+var evt; 
 for(var i=0;i<length; i++){
-	document.getElementsByTagName('h3')[i].addEventListener("click",function(){
+
+	element[i].addEventListener("click",function(){
 		var silb=sibling(this);
 		if(silb[0].style.display==='none'){
 			silb[0].style.display='block';
+			this.setAttribute('dataContent','－');
 		}else{
 			silb[0].style.display='none';
+			this.setAttribute('dataContent','＋');
 		}
 		//debugger;
-	},false);  
+	},false); 
+
+	// 第一次手动触发
+	triggerEvt(element[i],i);
 }
 
 // 获取元素兄弟节点
@@ -40,6 +55,22 @@ function sibling(elem) {
 	    } 
 	} 
 	return r; 
+}
+
+// 触发事件
+function triggerEvt(ele,i){
+	// DOM Level 2 standard 
+	if (document.createEvent) { 
+		ele.dispatchEvent(evt); 
+		if(i==0){
+			ele.dispatchEvent(evt); 
+		}
+	} else if (element[i].fireEvent) { // IE 
+		ele.fireEvent('onclick'); 
+		if(i==0){
+			ele.fireEvent('onclick'); 
+		}
+	} 
 }
 
 </script>
