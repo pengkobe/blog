@@ -1,5 +1,8 @@
 /*resume page styles*/
 @chartset "utf-8";
+body{
+	background-color: #618dad;
+}
 a{
 	text-decoration:none !important;
 	outline:none !important;
@@ -25,6 +28,7 @@ a{
 	margin-left:auto;
 	padding-left:15px;
 	padding-right:15px;
+	box-sizing:border-box;
 }
 #page>.container>.row{
 	display:-webkit-box;
@@ -88,5 +92,28 @@ a{
 .info-block  span{
 	font-size:12px;
 }
+.info-nav{
+	padding: 0px;
+	margin-top: 0px;
+}
+.info-nav > li{
+	cursor: pointer;
+	list-style: none;
+	padding: 10px 50px;
+	border-bottom:1px solid rgba(255,255,255,0.1);
+}
+li.active{
+	background-color: rgba(110,110,110,.5);
+}
+.contact-info{
+	margin-top: 150px;
+	margin-bottom: 0px;
+	list-style: none;
+	padding: 0px;
+}
 
+.contact-info>li{
+	padding: 5px 10px;
+	display: inline-block;
+}
 

@@ -218,8 +218,9 @@ nav a:hover{
 }
 
 article a{
-  color:#00f;
+  color:#026ed2;
   text-decoration:none;
+  border-bottom: 3px solid transparent;
 }
 
 article a:hover{
@@ -653,6 +654,27 @@ article a:hover{
 		  }
 
 		}
+
+/*标签云*/
+#tagscloud{
+  position:relative;
+  margin:20px auto 0px;
+  width:400px;
+  height:350px;
+  background:#f5f5d5;
+}
+#tagscloud a{
+  position:absolute;
+  padding:3px 6px;
+  top:0px;
+  font-weight:bold;
+  text-decoration:none;left:0px
+}
+#tagscloud a:hover{
+  border:#eee 1px solid;
+  color:#f33;
+}
+
 
 
 

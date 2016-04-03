@@ -27,49 +27,58 @@
 						<header id="headinfo" >
 							<div class="hgroup">
 								<h1 class="me-title">
-								<a href="http://new.kobepeng.com/" title="EVILCOS" rel="home"><span itemprop="name">彭奕</br>kobepeng</span></a></h1>
-								<h2 class="me-description">just do it!</h2>					
+								<a href="http://new.kobepeng.com/" title="EVILCOS" rel="home">
+								<span itemprop="name">彭奕<br/>kobepeng</span></a></h1>
+								<h2 class="me-description">WEB前端工程师<br/>(深圳)</h2>					
 							</div>
 						</header>
 						<!-- 概览区域 -->
-						<div>
+						<div style="overflow: hidden;">
 							<div class="col-4 info-block">
 								<h3>24<h3>
 								<span>年龄</span>
 							</div>
 							<div class="col-4 info-block">
-								<h3>2.5+<h3>
+								<h3 style="color:green">2.5+<h3>
 								<span>工作经验</span>
 							</div>
 							<div class="col-4 info-block">
-								<h3>5+<h3>
+								<h3 style="color:yellow">5+<h3>
 								<span>项目</span>
 							</div>
 						</div>
 						
 						<!-- 信息导航 -->
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
+						<ul class="info-nav">
+							<li class="active" link-target="profile_info">简介</li>
+							<li link-target="edu_info">教育</li>
+							<li link-target="work_info">工作</li>
+							<li link-target="skill_info">技能</li>
 						</ul>
 						
 						<!-- 联系方式 -->
-						<ul>
-							<li>微博</li>
-							<li><a href="https://github.com/pengkobe">github</a></li>
-							<li>qq</li>
-							<li>linkin</li>
+						<ul class="contact-info">
+							<li><a href="http://www.weibo.com/kobepeng1" target="_blank">WeiBo</a></li>
+							<li><a href="https://github.com/pengkobe" target="_blank">GitHub</a></li>
+							<li><a href="mailto:pengkobe123@gmail.com" target="_blank">EMail</a></li>
 						</ul>
 					</div>
 					
 					<div id="primary" class="col-9">
+						<!-- 简介 -->
+						<div id="profile_info">简介</div>
+						<!-- 教育 -->
+						<div id="edu_info" style="display: none">教育</div>
+						<!-- 工作 -->
+						<div id="work_info" style="display: none">工作</div>
+						<!-- 技能 -->
+						<div id="skill_info" style="display: none">技能</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-        <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script> -->
         <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.12.2.min.js"><\/script>')</script>
         <script src="../js/plugins.js"></script>
         <script src="../js/resume.js"></script>
