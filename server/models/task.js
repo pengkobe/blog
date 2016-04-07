@@ -1,6 +1,6 @@
 var mongodb = require('./db'),
 ObjectID = require('mongodb').ObjectID,
-formatTime = require('../../public/js/plugins/formatTime');
+formatTime = require('../../public/js/plugins/format_time');
 
 
 function Task(task) {
