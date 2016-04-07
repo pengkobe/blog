@@ -155,7 +155,10 @@ a:hover { color:#FF3300; }
                 border-bottom: solid 2px #777 !important;
                 margin-top: 20px;
             }
-            .unfinish-title{ font-weight: bold;}
+            .unfinish-title{ 
+              font-weight: bold;
+              word-wrap: break-word;
+            }
             .tasks {}
                 .tasks ul li { 
                     list-style-type:none; 

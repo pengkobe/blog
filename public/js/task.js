@@ -6,6 +6,7 @@
 	// 标识
     var finishedload = false;
     var lockloading=false;
+    var loadCount=0;
 
     // 一次加载10天
     var lastdate = new Date();
@@ -271,7 +272,11 @@
 	        if(req.readyState==4 && req.status==200){
 	           var data =eval(xmlHttpReq.responseText);
 	           if(data.length == 0){
-	                finishedload=true;
+		           	if(loadCount<5){
+		           		loadCount++;
+		           	}else{
+		           		finishedload=true;
+		           	}
 	                document.getElementById('loading_div').style.display="block";
 	                document.getElementById('loading_div').innerHTML='已全部加载完成.';
 	                // 2s后解锁
@@ -288,7 +293,7 @@
 	        }
 		},
 		// 这里使用传统的拼字符串形式构建［待改成模板引擎的方式］
-		loadlines:function(){
+		loadlines:function(data){
 			var lastDate = '0'; 
 		    var html='';
 		       for (var i = 0, len = data.length; i < len; i++) {
@@ -299,7 +304,7 @@
 		                lastDate=task.createTime.day; 
 		             } 
 
-		            htm+='<li  '+status+' >';
+		            html+='<li  '+status+' >';
 		               if (!task.finished) { 
 		                    html+='<h4><span id="'+task._id+'" class="unfinish-title">'+  task.title  +'</span>';
 		                    if (task.isPrivate) { 
@@ -332,4 +337,3 @@
    
 
 })(window,void 0);    
-    
