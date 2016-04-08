@@ -344,6 +344,7 @@ article a:hover{
     float: right;
     margin-right: 3%;
     position: relative;
+    z-index: 10
 }
 .searchinput{
   width: 150px;
@@ -368,6 +369,9 @@ article a:hover{
   background:linear-gradient(to bottom,#F5F5F5,#EEEEEE);
   background:-webkit-linear-gradient(top,#F5F5F5,#EEEEEE);
   filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#F5F5F5,endColorstr=#EEEEEE);
+}
+#autodiv{
+	background-color: #f5f5d5;
 }
 
 @keyframes glow {  
@@ -662,7 +666,6 @@ article a:hover{
   margin:20px auto 0px;
   width:400px;
   height:350px;
-  background:#f5f5d5;
 }
 #tagscloud a{
   position:absolute;
