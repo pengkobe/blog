@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width，initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 	<!-- 放这里也是无赖，其不兼容-->
+	<script src="/projects/labroom/path.js"></script>
 	<script src="http://cdn.bootcss.com/raphael/2.1.4/raphael-min.js"></script>
 	<script src="/projects/labroom/sea.js"></script>
 	<link rel="stylesheet" href="/public/css/labroom.css">
@@ -13,7 +14,10 @@
 		seajs.config({
 				base: './',
 				alias: {
+					 // index page
 					 'labroom':'/public/js/labroom.js',
+					 
+					 // components
 					 'navbar':'/projects/navbar.js',
 					 'treeList': '/projects/labroom/treeList.js',
 					 'accordionMenu': '/projects/labroom/accordionMenu.js',
@@ -21,7 +25,10 @@
 					 
 					 'dashchart': '/projects/labroom/dashchart.js?12',
 					 'scatterchart': '/projects/labroom/scatterchart.js?12',
-					 'barchart': '/projects/labroom/barchart.js?12'
+					 'barchart': '/projects/labroom/barchart.js?12',
+					 
+					 // nav
+					 'raphelchart':'/projects/labroom/nav/raphelchart.js',
 				}
 		});
 	</script>			
@@ -48,13 +55,10 @@
       </div>
 	 </div>
 	 
- 
 	<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 	<script src="/projects/labroom/svgmap/res/big_area.js"></script>
     <script src="/projects/labroom/svgmap/map.js"></script>
     <script src="/projects/labroom/helper.js"></script>
-
-
    <script>
     // init
 	seajs.use('labroom');

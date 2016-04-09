@@ -46,6 +46,13 @@ body {
     .labroom-nav > div {
         display: table-cell;
     }
+	
+	.labroom-nav a {
+            display: block;
+            text-decoration: none; 
+            font-weight: bold;
+            color: #DEDEDE;
+        }
 
 .selected {
     background-color: #1a1a1a;
