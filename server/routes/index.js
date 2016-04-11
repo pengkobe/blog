@@ -432,6 +432,18 @@ app.post('/task/new', function (req, res) {
   });
 });
 
+app.post('/task/:_id/edit', checkLogin);
+app.post('/task/:_id/edit', function (req, res) {
+  var title = req.body.title;
+    Task.update(req.params._id, title,function (err,obj) {
+      if (err) {
+        req.flash('error', err); 
+        return res.redirect('back');
+      }
+      res.json({success:true,_m_title:obj._m_title});
+    });
+});
+
 app.get('/task/:_id/delete', checkLogin);
 app.get('/task/:_id/delete', function (req, res) {
     Task.remove(req.params._id, function (err) {
@@ -444,17 +456,7 @@ app.get('/task/:_id/delete', function (req, res) {
     });
 });
 
-app.post('/task/:_id/edit', checkLogin);
-app.post('/task/:_id/edit', function (req, res) {
-  var title = req.body.title;
-    Task.update(req.params._id, title,function (err) {
-      if (err) {
-        req.flash('error', err); 
-        return res.redirect('back');
-      }
-      res.json({success:true});
-    });
-});
+
 
 app.get('/task/:_id/finish', checkLogin);
 app.get('/task/:_id/finish', function (req, res) {

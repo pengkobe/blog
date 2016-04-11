@@ -1,7 +1,17 @@
 var mongodb = require('./db'),
+ marked = require('marked'),
 ObjectID = require('mongodb').ObjectID,
 formatTime = require('../../public/js/plugins/format_time');
-
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false
+});
 
 function Task(task) {
   this.title= task.title,
@@ -76,6 +86,10 @@ Task.getAll = function(haslogin,callback) {
          if (err) {
            return callback(err);
          }
+		 //解析 markdown 为 html
+          docs.forEach(function (doc) {
+               doc._m_title = marked(doc.title);
+          });  
 
          callback(null, docs,total);
        });
@@ -103,7 +117,9 @@ Task.update = function(_id, title, callback) {
         if (err) {
           return callback(err);
         }
-        callback(null);
+        callback(null,{
+			_m_title:marked(title)
+		});
       });
     });
   });
@@ -226,6 +242,10 @@ Task.getFiveDay = function(lastdate,haslogin, callback) {
           if (err) {
             return callback(err);
           }
+		  //解析 markdown 为 html
+          docs.forEach(function (doc) {
+               doc._m_title = marked(doc.title);
+          }); 
           callback(null, docs, total);
         });
       });

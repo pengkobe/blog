@@ -27,7 +27,7 @@
 		        </form>
 		      </div>
 		  <% } %>
-
+		  
       <div class="box tasks">
         <ul id="task_ul">
           <% var lastDate = '0'; %>
@@ -42,7 +42,7 @@
 
             <li <%- status %>>
               <% if (!task.finished) { %>
-                <h4><span id="<%- task._id%>" class="unfinish-title"> <%- task.title %> </span>
+                <h4><span id="<%- task._id%>" class="unfinish-title" realTitle="<%- task.title %>" > <%- task._m_title %> </span>
                 <% if (task.isPrivate) { %>
                   <em tabindex="0" class="privatetag">私</em>
                 <% }%>
@@ -51,7 +51,7 @@
                 &nbsp;
                 <a name="finish" titleid="<%- task._id%>"  href="javascript:void(0);">完成</a>&nbsp;
               <% } else { %>
-               <h4><del id="<%- task._id%>"><%= task.title %></del> 
+               <h4><del id="<%- task._id%>" realTitle="<%- task.title %>"><%= task._m_title %></del> 
                <% if (task.isPrivate) { %>
                   <em tabindex="0" class="privatetag">私</em>
                 <% }%>
