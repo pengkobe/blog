@@ -1,27 +1,57 @@
-## this file used record develop process
+# [kobepeng个人站](new.kobepeng.com)
 
-### 2016-01-06 webpack test success!
-  * project directory refer to [html5-boilerplate](https://github.com/h5bp/html5-boilerplate)  
+##      	目录
 
-### 2016-01-10 reconstruct blog refer to N-blog
-  * finish chapter 1  
+*   [dependency](#dependency)
+*	[install](#install)
+*	[features](#features)
+*	[config](#config)
+*	[ToDo](#ToDo)
+*	[Protocol](#Protocol)
 
-### 2016-01-12
-  * finish all chapter
-  * config git to commit  
 
-### 2016-02-21
-  * start to build tasks page  
+## dependency
+*   nodejs
+*   mongodb
+*   redis(to do)
 
-### 2016-03-02
-  * start to build labroom  
+### features
+just click it:  
+http://new.kobepeng.com
 
-### ToDo
-* movie comments page
-* thoughts page
-* jquery calendar plugin 
-* knowledge collection page
-* a beatiful theme
-* a chatting rrom
+## install
+```
+git clone https://github.com/pengkobe/my_blog.git
+cd my_blog
+npm install
+cd server
+node  www
+```
+
+## config
+edit settings.js at /blogroot/server  
+mine for example:
+```
+module.exports = { 
+   cookieSecret: 'myblog', 
+   db: 'blog', 
+   host: 'localhost',
+   port: 27017,
+   dbUrl:'mongodb://localhost/blog'
+}; 
+
+```
+
+
+## ToDo
+*	movie comments page
+*	finish thoughts record page 
+*	finish labroom page
+*   a chatting room
+*   build with webpack
+*   test case
+
            
+## Protocol
 
+Released under the MIT, BSD, and GPL Licenses
