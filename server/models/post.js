@@ -201,7 +201,7 @@ Post.edit = function(_id, callback) {
         if (err) {
           return callback(err);
         }
-        callback(null, doc);//返回查询的一篇文章（markdown 格式）
+        callback('err', doc);//返回查询的一篇文章（markdown 格式）
       });
     });
   });

@@ -244,7 +244,7 @@ app.get('/search', function (req, res) {
   Post.search(req.query.keyword, function (err, posts) {
     if (err) {
       req.flash('error', err); 
-      return res.redirect('/');
+     // return res.redirect('/');
     }
     res.render('search', {
       title: "SEARCH:" + req.query.keyword,
@@ -260,7 +260,7 @@ app.get('/autocomplete', function (req, res) {
   Post.search(req.query.keyword, function (err, posts) {
     if (err) {
       req.flash('error', err); 
-      return res.redirect('/');
+     // return res.redirect('/');
     }
     res.json(posts);
   });
@@ -270,7 +270,7 @@ app.get('/p/:_id', function (req, res) {
   Post.getOne(req.params._id, function (err, post) {
     if (err) {
       req.flash('error', err); 
-      return res.redirect('/');
+    //  return res.redirect('/');
     }
     res.render('article', {
       title: post.title,
@@ -289,15 +289,16 @@ app.get('/edit/:_id', function (req, res) {
   Post.edit(req.params._id, function (err, post) {
     if (err) {
       req.flash('error', err); 
-      return res.redirect('back');
-    }
-    res.render('edit', {
-      title: '编辑',
-      post: post,
-      user: req.session.user,
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
-    });
+      //return res.redirect('back');
+    }else{
+		res.render('edit', {
+		  title: '编辑',
+		  post: post,
+		  user: req.session.user,
+		  success: req.flash('success').toString(),
+		  error: req.flash('error').toString()
+		});
+	}
   });
 });
 

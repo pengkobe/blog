@@ -119,6 +119,8 @@
 	        } 
 		},
 		bindEvents:function(){
+			var title;
+			var realTitle;
 			// 滚动事件
 			var that = this;
 		    window.onscroll = function () { 
@@ -137,7 +139,8 @@
 		        var tips_div = document.getElementById('tips_div');
 		        if(ele.name == 'edit'){
 		            var id = ele.getAttribute('titleid');
-		            var title = document.getElementById(id).innerHTML;
+					// realTtitle
+		            title = document.getElementById(id).getAttribute("realTitle");
 		            var edit_title_form = document.getElementById("edit_title_form");
 		            var BgDiv = document.getElementById("BgDiv");
 		            edit_title_form.action='/task/'+id+'/edit';
@@ -150,7 +153,8 @@
 
 		         if(ele.name == 'finish'){
 		            var id = ele.getAttribute('titleid');
-		            var title = document.getElementById(id).innerHTML;
+		            title = document.getElementById(id).innerHTML;
+					realTitle = document.getElementById(id).getAttribute("realTitle");
 		            var url =  '/task/'+id+'/finish';
 		           
 		            xmlHttpReq.open("get", url, true); 
@@ -163,8 +167,10 @@
 		                          // 替换节点
 		                          var pNode = document.createElement('del');
 		                          pNode.id=id;
-		                          var tNode = document.createTextNode(title);
-		                          pNode.appendChild(tNode);
+		                         // var tNode = document.createTextNode(title);
+		                          //pNode.appendChild(tNode);
+								  pNode.appendHTML(title);
+								  pNode.setAttribute("realTitle",realTitle);
 		                          var reNode = document.getElementById(id);
 		                          reNode.parentNode.replaceChild(pNode, reNode);
 		                          // 链接切换
@@ -185,9 +191,9 @@
 
 		        if(ele.name == 'recover'){
 		            var id = ele.getAttribute('titleid');
-		            debugger;
 
-		            var title = document.getElementById(id).innerHTML;
+		            title = document.getElementById(id).innerHTML;
+					realTitle = document.getElementById(id).getAttribute("realTitle");
 		            var url =  '/task/'+id+'/recover';
 		            
 		            xmlHttpReq.open("get", url, true); 
@@ -201,8 +207,10 @@
 		                          var pNode = document.createElement('span');
 		                          pNode.id=id;
 		                          pNode.className="unfinish-title";
-		                          var tNode = document.createTextNode(title);
-		                          pNode.appendChild(tNode);
+		                          //var tNode = document.createTextNode(title);
+		                          //pNode.appendChild(tNode);
+								  pNode.appendHTML(title);
+								  pNode.setAttribute("realTitle",realTitle);
 		                          var reNode = document.getElementById(id);
 		                          reNode.parentNode.replaceChild(pNode, reNode);
 		                          // 链接切换
@@ -225,7 +233,7 @@
 
 		    // 更新
 		    document.getElementById("saveEdit").onclick=function(e){
-		            var title = document.getElementById("editInput").value;
+		            title = document.getElementById("editInput").value;
 		            var edit_title_form =  document.getElementById("edit_title_form");
 		            var url =  edit_title_form.action;
 		            var titleid= edit_title_form.name;
@@ -241,7 +249,8 @@
 		                   tips_div.style.display="block";
 		                   if(data.success == true){
 		                        tips_div.innerHTML='更新成功.';
-		                        document.getElementById(titleid).innerHTML=title;
+		                        document.getElementById(titleid).setAttribute("realTitle",title);
+								document.getElementById(titleid).innerHTML=data._m_title;
 		                   }
 		                   else{
 		                        tips_div.innerHTML='更新失败.';
@@ -306,7 +315,7 @@
 
 		            html+='<li  '+status+' >';
 		               if (!task.finished) { 
-		                    html+='<h4><span id="'+task._id+'" class="unfinish-title">'+  task.title  +'</span>';
+		                    html+='<h4><span id="'+task._id+'" class="unfinish-title" realTitle="task.title">'+  task._m_title  +'</span>';
 		                    if (task.isPrivate) { 
 		                      html+='<em tabindex="0" class="privatetag">私</em>';
 		                    }
@@ -314,7 +323,7 @@
 		                    html+='<span class="time">创建: '+task.createTime.minute+'  </span>&nbsp;';
 		                    html+='<a name="finish"  titleid="'+task._id+'"  href="javascript:void(0);">完成</a>&nbsp';
 		               } else { 
-		                    html+='<h4><del  id="'+task._id+'"  > '+task.title+' </del> ';
+		                    html+='<h4><del  id="'+task._id+'" realTitle="task.title"> '+task._m_title+' </del> ';
 		                    if (task.isPrivate) { 
 		                      html+='<em tabindex="0" class="privatetag">私</em>';
 		                    }
@@ -332,7 +341,6 @@
 		}
 	}
 
-	  
 	taskobj.init();
    
 

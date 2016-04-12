@@ -171,6 +171,7 @@ a:hover { color:#FF3300; }
                 .tasks ul li del { 
                     opacity: .5;
                     padding-left:25px; 
+					display:block;
                     background:url(../img/finished.jpg) no-repeat left center;
                 }
 
