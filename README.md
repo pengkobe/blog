@@ -8,9 +8,10 @@ https://github.com/nswbmw/N-blog.git
 *   [dependency](#dependency)
 *	[install](#install)
 *	[features](#features)
+*	[structure](#structure)
 *	[config](#config)
-*	[ToDo](#ToDo)
-*	[Protocol](#Protocol)
+*	[todo](#todo)
+*	[protocol](#protocol)
 
 
 ## dependency
@@ -18,7 +19,7 @@ https://github.com/nswbmw/N-blog.git
 *   mongodb
 *   redis(to do)
 
-## features
+## feature
 i use these framework or Midware you may concern:
 1. express
 2. ejs
@@ -27,6 +28,37 @@ i use these framework or Midware you may concern:
 5. socket.io(to do)
 how it looks? just click it:  
 http://new.kobepeng.com
+
+
+## structure
+```
+my_blog/
+├── LICENSE.txt
+├── README.md
+├── app.js (for Express)
+├── server
+│   ├── model 
+│   ├── route 
+│   ├── view  
+│   ├── settings.js 
+│   └── www 
+├── package.json
+├── public
+│   ├── html
+│   ├── css
+│   ├── js
+│   ├── font
+│   └── img
+├── project
+│   ├── nav.js 
+│   ├── labroom 
+│   └── movie_coment 
+├── test (todo)
+├── webpack.config.js
+├── humans.txt
+├── commit
+└── sitemap.js
+```
 
 ## install
 ```
@@ -51,8 +83,7 @@ module.exports = {
 
 ```
 
-
-## ToDo
+## todo
 *	movie comments page
 *	finish thoughts record page 
 *	finish labroom page
@@ -61,6 +92,6 @@ module.exports = {
 *   test case
 
            
-## Protocol
+## protocol
 
 Released under the MIT Licenses
