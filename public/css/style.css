@@ -1,13 +1,9 @@
 @chartset "utf-8";
 
-/* 全局样式 */
-*{margin:0;}
-
-::selection{
-	background-color:greenyellow;
-}
 body{
-  background-color: #f5f5d5;}
+  background-color: #f5f5d5;
+}
+
 img{
 	max-width:100%;
 }
@@ -30,7 +26,10 @@ em:before{
   color: #7ca5e2;
   font-size: 14px;
 }
-
+ 
+ ::selection{
+	background-color:greenyellow;
+}
 /* 滚动条长宽 */
 ::-webkit-scrollbar {
     width: 3px;
@@ -109,14 +108,13 @@ em:before{
 .l_head{
   float:left;
   margin-left:-4em;
-  box-shadow:0px 1px 4px #888;}
+  box-shadow:0px 1px 4px #888;
+}
 .r_head{
   float:right;margin-top:-2.5em;
   box-shadow:0px 1px 4px #888;
   width:25px;
 }
-
-/*self define*/
 
 .success-notice{
   position: fixed;
@@ -174,7 +172,6 @@ h2 a:hover{
 	color: #f33 !important;
 	 text-decoration:none !important;
 }
-
 
 /* ### 作为段落的标题 */
 H3 {
@@ -248,8 +245,6 @@ article a:hover{
     height: 100%;
     top: 0%;
 }
-
-
 
 
 .index-info{
@@ -683,8 +678,6 @@ article a:hover{
   border:#eee 1px solid;
   color:#f33;
 }
-
-
 
 
 /*简单响应式样式*/

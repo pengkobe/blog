@@ -20,12 +20,12 @@ https://github.com/nswbmw/N-blog.git
 *   redis(to do)
 
 ## feature
-i use these framework or Midware you may concern:
-1. express
-2. ejs
-3. multer
-4. webpack(doing)
-5. socket.io(to do)
+i use these framework or Midware you may concern:  
+1. express  
+2. ejs  
+3. multer  
+4. webpack(doing)  
+5. socket.io(to do)  
 how it looks? just click it:  
 http://new.kobepeng.com
 

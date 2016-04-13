@@ -315,7 +315,7 @@
 
 		            html+='<li  '+status+' >';
 		               if (!task.finished) { 
-		                    html+='<h4><span id="'+task._id+'" class="unfinish-title" realTitle="'+task.title'+">'+  task._m_title  +'</span>';
+		                    html+='<h4><span id="'+task._id+'" class="unfinish-title" realTitle="'+task.title+'">'+  task._m_title  +'</span>';
 		                    if (task.isPrivate) { 
 		                      html+='<em tabindex="0" class="privatetag">私</em>';
 		                    }
@@ -323,7 +323,7 @@
 		                    html+='<span class="time">创建: '+task.createTime.minute+'  </span>&nbsp;';
 		                    html+='<a name="finish"  titleid="'+task._id+'"  href="javascript:void(0);">完成</a>&nbsp';
 		               } else { 
-		                    html+='<h4><del  id="'+task._id+'" realTitle="'+task.title'+"> '+task._m_title+' </del> ';
+		                    html+='<h4><del  id="'+task._id+'" realTitle="'+task.title+'"> '+task._m_title+' </del> ';
 		                    if (task.isPrivate) { 
 		                      html+='<em tabindex="0" class="privatetag">私</em>';
 		                    }
@@ -345,7 +345,3 @@
    
 
 })(window,void 0);    
-
-“343805159”：根据教育经历来看，这个该没毕业，项目也有点假。
-“310363005”，此人虽然写了前端开发，但是项目中多是java后端开发.
-以上两个建议不约哈
