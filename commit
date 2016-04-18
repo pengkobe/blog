@@ -1,5 +1,1 @@
 #!/bin/bash
-
-git add .
-git commit -m 'just do the normal bug fix'
-git push -u ori master

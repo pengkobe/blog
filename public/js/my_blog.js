@@ -78,8 +78,7 @@ var operation={
             $obj.animate({
                 scrollTop: 0
             }, 240);
-            evt.preventD
-            efault();
+            evt.preventDefault();
         });
     },
     alertMsg: function(msg){
