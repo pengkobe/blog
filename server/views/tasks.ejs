@@ -4,12 +4,13 @@
   	<meta charset="utf-8" />
   	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="kobepeng">
-	<meta property="og:url" content="http://new.kobepeng.com">
-	<meta property="og:site_name" content="kobepeng个人站">
-	<meta property="og:description">
- 	<title><%= title %></title>
+  	<meta property="og:type" content="website">
+  	<meta property="og:title" content="kobepeng task page">
+  	<meta property="og:url" content="http://new.kobepeng.com">
+  	<meta property="og:site_name" content="kobepeng个人站">
+  	<meta property="og:description" content="kobepeng任务分享页面">
+   	<title><%= title %></title>
+    <link rel="stylesheet" href="/public/css/kissy_reset.css">
   	<link href="/public/css/tasks.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -27,7 +28,7 @@
 		        </form>
 		      </div>
 		  <% } %>
-		  
+
       <div class="box tasks">
         <ul id="task_ul">
           <% var lastDate = '0'; %>
@@ -42,18 +43,20 @@
 
             <li <%- status %>>
               <% if (!task.finished) { %>
-                <h4><span id="<%- task._id%>" class="unfinish-title" realTitle="<%- task.title %>" > <%- task._m_title %> </span>
+                <h4> <em tabindex="0" class="privatetag">私</em>
+                <span id="<%- task._id%>" class="unfinish-title" realTitle="<%- task.title %>" > <%- task._m_title %> </span>
                 <% if (task.isPrivate) { %>
-                  <em tabindex="0" class="privatetag">私</em>
+
                 <% }%>
                 </h4>
                 <span class="time">创建:<%= task.createTime.minute %> </span>
                 &nbsp;
                 <a name="finish" titleid="<%- task._id%>"  href="javascript:void(0);">完成</a>&nbsp;
               <% } else { %>
-               <h4><del id="<%- task._id%>" realTitle="<%- task.title %>"><%- task._m_title %></del> 
+               <h4><em tabindex="0" class="privatetag">私</em>
+               <del id="<%- task._id%>" realTitle="<%- task.title %>"><%- task._m_title %></del>
                <% if (task.isPrivate) { %>
-                  <em tabindex="0" class="privatetag">私</em>
+
                 <% }%>
                 </h4>
                  <span class="time">创建:<%= task.createTime.minute %> </span>
@@ -84,23 +87,15 @@
   </form>
 </div>
 <div id="BgDiv"></div>
-
 <!--显示加载中 -->
-<div id="loading_div" style="position:fixed;bottom:0px;height:20px;display:none;
-background:rgba(69,139,0,.5);width:100%;text-align:center">
+<div id="loading_div">
 	<img src="../../public/img/loading.gif"/>
 </div>
-
 <!--显示提示信息 -->
-<div id="tips_div" style="position:fixed;top:0px;height:25px;display:none;color:white;
-font-size:16px;
-background:rgba(0,238,2,.5);width:100%;text-align:center;margin:auto;left:50%;transform: translate(-50%, 0%); ">
-
+<div id="tips_div">
+</div>
 <!--显示错误-->
-<div id="tips_div" style="position:fixed;top:0px;height:25px;display:none;color:white;
-font-size:16px;
-background:red;width:100%;text-align:center;margin:auto;left:50%;transform: translate(-50%, 0%); ">
-	
+<div id="err_div">
 </div>
 <!-- js -->
 <script src="/public/js/task.js"></script>
