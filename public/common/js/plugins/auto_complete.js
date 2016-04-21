@@ -1,4 +1,4 @@
-/* 
+/*
 一个不错的纯js自动搜索提示，功能不多，但是够用
 参考自: http://www.cnblogs.com/a546558309/p/4754767.html
 */
@@ -171,7 +171,6 @@
  
                     } else {
                         setTimeout(function() {
- 
                              xhr.abort();
                         }, timeout);
                     }

@@ -88,7 +88,8 @@
 		},
 		loadData:function(){
 			var that = this;
-			if ((helper.getScrollTop() + helper.getClientHeight() == helper.getScrollHeight()) || helper.getScrollTop()==0){ 
+			// 当滚动高度小于可视高度或者滚动至快到底部时进行加载
+			if ((helper.getScrollTop() + helper.getClientHeight() == helper.getScrollHeight()) || (helper.getScrollHeight() < helper.getClientHeight())){ 
 	        //加载完成后不再请求
 	        if(!finishedload){
 	            // 锁住后不再请求
