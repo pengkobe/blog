@@ -125,7 +125,6 @@
                 }
                 add(tpl.substr(cursor, tpl.length - cursor));
                 code += 'return r.join("");';
-                debugger;
                 var tasks = data;
                 // 第一个参数指定参数名称,第二个参数为方法体，最后一个参数传数据
                 return new Function('tasks', code.replace(/[\r\t\n]/g, ''))(tasks);
@@ -244,6 +243,7 @@
                     xmlHttpReq.open("get", url, true);
                     xmlHttpReq.onreadystatechange = function() {
                         if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+
                             var data = eval("(" + xmlHttpReq.responseText + ")");
                             tips_div.style.display = "block";
                             if (data.success == true) {

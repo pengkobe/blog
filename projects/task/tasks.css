@@ -1,24 +1,25 @@
 body { background:#EEE; }
 .box { margin-bottom:20px; }
 .clear { clear:both; }
-.float_left { float:left; }
-.float_right { float:right; }
 .left { text-align:left; }
 .right { text-align:right; }
-.url { background:url(../img/website.png) no-repeat right; padding-right:20px; }
 .tips { color:#CCC; }
 .v_top { vertical-align:top; }
-.qq { background:url(../img/qq.png) no-repeat right; padding-right:20px; }
-.msn { background:url(../img/msn.png) no-repeat right; padding-right:20px; }
-.email { background:url(../img/email.png) no-repeat right; padding-right:20px; }
 .tips { color:#666; }
-.long_txt { width:98%; }
-.must_be { color:red !important; }
+.long_txt{
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: solid 1px #777;
+  height: 35px;
+}
+ul{
+  margin: 0px;
+  padding: 0px;
+}
 textarea { line-height:1.5em; }
-
 image { border:none; }
 p { line-height:1.5em; }
-
 a { color:#3366CC; text-decoration:underline; }
 a:hover { color:#FF3300; }
 .privatetag{
@@ -94,6 +95,9 @@ a:hover { color:#FF3300; }
               font-weight: bold;
               word-wrap: break-word;
               display: inline-block;
+              padding-left:28px;
+              background:url(../../public/img/doing.png) no-repeat left center;
+              background-size: 25px;
             }
             .tasks {}
                 .tasks ul li {
@@ -108,7 +112,8 @@ a:hover { color:#FF3300; }
                     opacity: .5;
                     padding-left:25px;
                     display: inline-block;
-                    background:url(../img/finished.jpg) no-repeat left center;
+                    background:url(../../public/img/finished.png) no-repeat left center;
+                    background-size: 25px;
                 }
 
             .post {border: 3px dotted green;padding: 15px;  }
@@ -163,11 +168,8 @@ a:hover { color:#FF3300; }
     border-bottom:1px solid #aaa;
   }
   .unfinish-title{
+
     word-break:break-all;
+
   }
 }
-
-
-
-
-
