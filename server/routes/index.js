@@ -4,7 +4,6 @@ var app = express.Router();
 var crypto = require('crypto'),
     User = require('../models/user.js'),
     Post = require('../models/post.js');
-var Task = require('../models/task.js');
 
 // 多文件上传
 var multer  = require('multer');
@@ -342,165 +341,33 @@ app.get('/about', function (req, res) {
     });
 });
 
-app.get('/labroom', function (req, res) {
-    res.render('labroom', {
-      title: '实验室',
-      user: req.session.user,
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
-    });
-});
+// app.get('/labroom', function (req, res) {
+//     res.render('labroom', {
+//       title: '实验室',
+//       user: req.session.user,
+//       success: req.flash('success').toString(),
+//       error: req.flash('error').toString()
+//     });
+// });
 
-app.get('/thoughts', function (req, res) {
-    res.render('thoughts', {
-      title: '随想录',
-      user: req.session.user,
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
-    });
-});
+// app.get('/thoughts', function (req, res) {
+//     res.render('thoughts', {
+//       title: '随想录',
+//       user: req.session.user,
+//       success: req.flash('success').toString(),
+//       error: req.flash('error').toString()
+//     });
+// });
 
-app.get('/movie-comments', function (req, res) {
-    res.render('movie-comments', {
-      title: '我的影评',
-      user: req.session.user,
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
-    });
-});
+// app.get('/movie-comments', function (req, res) {
+//     res.render('movie-comments', {
+//       title: '我的影评',
+//       user: req.session.user,
+//       success: req.flash('success').toString(),
+//       error: req.flash('error').toString()
+//     });
+// });
 
-
-
-
-app.get('/task/all', function (req, res) {
-   var haslogin = req.session.user? 1 :0;
-   var date = new Date();
-   date.setDate(date.getDate()-5);
-   Task.getFiveDay(date,haslogin,function (err, tasks,total) {
-    if (err) {
-      req.flash('error', err);
-      console.log(err);
-      return res.redirect('/');
-    }
-    var totalpage = parseInt(total/5);
-    if(total % 5 !==0){
-      totalpage=totalpage+1;
-    }
-    res.render('tasks', {
-      title: '任务',
-      totalpage:totalpage,
-      tasks:tasks,
-      user: req.session.user,
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
-   });
-  });
-});
-
-app.post('/task/five', function (req, res) {
-   var haslogin = req.session.user? 1 :0;
-   var lastdate = req.body.lastdate ? new Date(req.body.lastdate) : new Date('2016/01/01');
-
-   Task.getFiveDay(lastdate, haslogin,function (err, tasks, total) {
-    if (err) {
-      tasks = [];
-      console.log(error);
-    }
-
-    res.json(tasks);
-  });
-});
-
-app.post('/task/new', checkLogin);
-app.post('/task/new', function (req, res) {
-  var currentUser = req.session.user,
-      createtime = new Date();
-  var info={
-    title:req.body.title,
-    createTime:createtime,
-    lastUpdate:createtime,
-    finished:false,
-    isPrivate:req.body.isPrivate? 1 : 0,
-    finishTime:{}
-  };
-  var task = new Task(info);
-  task.save(function (err) {
-    if (err) {
-      req.flash('error', err);
-      return res.redirect('/');
-    }
-    req.flash('success', '发布成功!');
-    res.redirect('/task/all');
-  });
-});
-
-app.post('/task/:_id/edit', checkLogin);
-app.post('/task/:_id/edit', function (req, res) {
-  var title = req.body.title;
-    Task.update(req.params._id, title,function (err,obj) {
-      if (err) {
-        req.flash('error', err);
-        return res.redirect('back');
-      }
-      res.json({success:true,_m_title:obj._m_title});
-    });
-});
-
-app.get('/task/:_id/delete', checkLogin);
-app.get('/task/:_id/delete', function (req, res) {
-    Task.remove(req.params._id, function (err) {
-      if (err) {
-        req.flash('error', err);
-        return res.redirect('back');
-      }
-      req.flash('success', '删除成功!');
-      res.redirect('/task/all');
-    });
-});
-
-
-
-app.get('/task/:_id/finish', checkLogin);
-app.get('/task/:_id/finish', function (req, res) {
-    Task.finish(req.params._id, function (err) {
-      console.log(err);
-      if (err) {
-        req.flash('error', err);
-        return res.redirect('back');
-      }
-     res.json({success:true});
-    });
-});
-
-app.get('/task/:_id/recover', checkLogin);
-app.get('/task/:_id/recover', function (req, res) {
-    Task.recover(req.params._id, function (err) {
-      if (err) {
-        req.flash('error', err);
-        return res.redirect('back');
-      }
-      res.json({success:true});
-    });
-});
-
-
-function checkLogin(req, res, next) {
-  if (!req.session.user) {
-    req.flash('error', '未登录!');
-    res.redirect('/login');
-    return;
-  }
-  next();
-}
-
-function checkNotLogin(req, res, next) {
-  if (req.session.user) {
-    req.flash('error', '已登录!');
-    res.redirect('back');//返回之前的页面
-    return;
-  }
-  next();
-}
 
 function checkLogin(req, res, next) {
   if (!req.session.user) {

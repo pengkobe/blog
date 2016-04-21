@@ -1,7 +1,7 @@
 var mongodb = require('./db'),
  marked = require('marked'),
 ObjectID = require('mongodb').ObjectID,
-formatTime = require('../../public/js/plugins/format_time');
+formatTime = require('../../public/common/js/plugins/format_time');
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -24,7 +24,6 @@ function Task(task) {
 
 module.exports = Task;
 
-//存储用户信息
 Task.prototype.save = function(callback) {
   var createtime = formatTime(this.createTime);
 
@@ -50,12 +49,13 @@ Task.prototype.save = function(callback) {
       //将用户数据插入 tasks 集合
       collection.insert(task, {
         safe: true
-      }, function (err, task) {
+      }, function (err, doc) {
         mongodb.close();
         if (err) {
           return callback(err);
         }
-        callback(null, task[0]);//成功！err 为 null，并返回存储后的用户文档
+        task._m_title = marked(task.title? task.title:'no message');
+        callback(null, task);//成功！err 为 null，并返回存储后的用户文档
       });
     });
   });
@@ -89,7 +89,7 @@ Task.getAll = function(haslogin,callback) {
 		 //解析 markdown 为 html
           docs.forEach(function (doc) {
                doc._m_title = marked(doc.title);
-          });  
+          });
 
          callback(null, docs,total);
        });
@@ -210,7 +210,7 @@ Task.remove = function(_id, callback) {
 //一次获取5篇文章
 Task.getFiveDay = function(lastdate,haslogin, callback) {
   var nowdate = new Date();
-  nowdate.setTime(lastdate.getTime()); 
+  nowdate.setTime(lastdate.getTime());
   nowdate.setDate(nowdate.getDate()+5);
   console.log(nowdate);
   console.log(lastdate);
@@ -229,7 +229,7 @@ Task.getFiveDay = function(lastdate,haslogin, callback) {
       if(!haslogin){
           query.isPrivate = 0;
       }
-      
+
       if(lastdate){
         query["createTime.date"] = {"$gt":lastdate,"$lte":nowdate};
       }
@@ -244,8 +244,9 @@ Task.getFiveDay = function(lastdate,haslogin, callback) {
           }
 		  //解析 markdown 为 html
           docs.forEach(function (doc) {
-               doc._m_title = marked(doc.title);
-          }); 
+               var title_str = doc.title? doc.title :'no message';
+               doc._m_title = marked(title_str);
+          });
           callback(null, docs, total);
         });
       });
