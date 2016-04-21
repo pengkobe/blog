@@ -11,7 +11,7 @@
     var loadCount = 0;
     // 一次加载10天
     var lastdate = new Date();
-    lastdate.setDate(lastdate.getDate() - 10);
+    lastdate.setDate(lastdate.getDate() - 0);
     // ajax
     var xmlHttpReq = null;
 
@@ -27,7 +27,7 @@
         htmlAppend: function() {
             // 拓展dom实现appendhtml方法
             // 参考:http://www.zhangxinxu.com/wordpress/2013/05/js-dom-basic-useful-method/
-            HTMLElement.prototype.appendHTML = function(html) {
+            HTMLElement.prototype.appendHTML = function(html, type) {
                 var divTemp = document.createElement("div"),
                     nodes = null,
                     fragment = document.createDocumentFragment();
@@ -36,7 +36,12 @@
                 for (var i = 0, length = nodes.length; i < length; i += 1) {
                     fragment.appendChild(nodes[i].cloneNode(true));
                 }
-                this.appendChild(fragment);
+                if (type === "insert") {
+                    this.insertBefore(fragment, this.childNodes[0]);
+                } else {
+                    this.appendChild(fragment);
+                }
+
                 nodes = null;
                 fragment = null;
             };
@@ -51,7 +56,6 @@
             }
             return scrollTop;
         },
-
         // 获取当前可视范围的高度
         getClientHeight: function() {
             var clientHeight = 0;
@@ -62,12 +66,10 @@
             }
             return clientHeight;
         },
-
         // 获取文档完整的高度
         getScrollHeight: function() {
             return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
         },
-
         getAjaxReq: function() {
             if (window.ActiveXObject) {
                 xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
@@ -75,6 +77,59 @@
                 xmlHttpReq = new XMLHttpRequest();
             }
             return xmlHttpReq;
+        },
+        addEvent: function(elem, type, handle) {
+            if (elem.addEventListener)
+                elem.addEventListener(type, handle, false);
+            else if (elem.attachEvent)
+                elem.attachEvent("on" + type, handle);
+        },
+        fireEvent: function(name) {
+            // 手动触发事件
+            if (post_form.fireEvent) {
+                post_form.fireEvent('on' + name);
+                post_form.submit();
+            } else if (document.createEvent) {
+                //DOM2 fire event
+                var ev = document.createEvent('HTMLEvents');
+                ev.initEvent(name, false, true);
+                post_form.dispatchEvent(ev);
+            }
+        },
+        taskTpl: function(str, data) {
+            // 获取存储模板的元素
+            var element = document.getElementById(str);
+            if (element) {
+                // 支持元素：textarea|input
+                var html = /^(textarea|input)$/i.test(element.nodeName) ? element.value : element.innerHTML;
+                return tplEngine(html, data);
+            } else {
+                // 直接是字符串
+                return tplEngine(str, data);
+            }
+
+            function tplEngine(tpl, data) {
+                var reg = /<%([^%>]+)?%>/g,
+                    regOut = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
+                    code = 'var r=[];\n',
+                    cursor = 0;
+
+                var add = function(line, js) {
+                    js ? (code += line.match(regOut) ? line + '\n' : 'r.push(' + line + ');\n') :
+                        (code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
+                    return add;
+                }
+                while (match = reg.exec(tpl)) {
+                    add(tpl.slice(cursor, match.index))(match[1], true);
+                    cursor = match.index + match[0].length;
+                }
+                add(tpl.substr(cursor, tpl.length - cursor));
+                code += 'return r.join("");';
+                debugger;
+                var tasks = data;
+                // 第一个参数指定参数名称,第二个参数为方法体，最后一个参数传数据
+                return new Function('tasks', code.replace(/[\r\t\n]/g, ''))(tasks);
+            };
         }
     }
 
@@ -120,23 +175,52 @@
         bindEvents: function() {
             var title;
             var realTitle;
+            var post_form;
+            var tips_div = document.getElementById('tips_div');
             // 滚动事件
             var that = this;
             window.onscroll = function() {
                 that.loadData();
             }
 
+            // 新增
+            post_form = document.getElementById("post_new");
+            helper.addEvent(post_form, 'submit', function(e) {
+                var url = '/task/new';
+                xmlHttpReq.open("post", url, true);
+                xmlHttpReq.onreadystatechange = function() {
+                    if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                        var data = eval("(" + xmlHttpReq.responseText + ")");
+                        var task_ul = document.getElementById("task_ul");
+                        var html = helper.taskTpl('task_tpl', data.tasks);
+                        task_ul.appendHTML(html, 'insert');
+                        tips_div.style.display = "block";
+                        if (data.success == true) {
+                            tips_div.innerHTML = '新增成功.';
+                        } else {
+                            tips_div.innerHTML = '新增失败.';
+                        }
+                        setTimeout(function() {
+                            tips_div.style.display = "none";
+                        }, 2000);
+                        return;
+                    }
+                };
+                var target = e.target;
+                xmlHttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlHttpReq.send(encodeURI("title=" + target.title.value + "&isPrivate=" + target.isPrivate.checked));
+                e.preventDefault();
+            });
 
-            // 添加链接按钮
+            // 添加链接按钮(正则)
             document.getElementById("addLink").onclick = function() {
                 var editInput = document.getElementById("editInput");
-                editInput.value = editInput.value + '<a href="" target="_blank"></a>';
+                editInput.value = editInput.value + '[]()';
             }
 
             // 事件绑定，实现局部刷新
             document.getElementsByClassName("page")[0].onclick = function(e) {
                 var ele = e.srcElement;
-                var tips_div = document.getElementById('tips_div');
                 if (ele.name == 'edit') {
                     var id = ele.getAttribute('titleid');
                     // realTtitle保存在属性中
@@ -151,7 +235,6 @@
                     BgDiv.style.height = document.body.scrollHeight;
                     document.getElementsByClassName("popuplayer")[0].style.display = "block";
                 }
-
                 if (ele.name == 'finish') {
                     var id = ele.getAttribute('titleid');
                     title = document.getElementById(id).innerHTML;
@@ -186,7 +269,6 @@
                     };
                     xmlHttpReq.send();
                 }
-
                 if (ele.name == 'recover') {
                     var id = ele.getAttribute('titleid');
 
@@ -205,8 +287,6 @@
                                 var pNode = document.createElement('span');
                                 pNode.id = id;
                                 pNode.className = "unfinish-title";
-                                //var tNode = document.createTextNode(title);
-                                //pNode.appendChild(tNode);
                                 pNode.appendHTML(title);
                                 pNode.setAttribute("realTitle", realTitle);
                                 var reNode = document.getElementById(id);
@@ -226,50 +306,70 @@
                     };
                     xmlHttpReq.send();
                 }
+                if (ele.name == 'delete') {
+
+                    var id = ele.getAttribute('titleid');
+                    var url = '/task/' + id + '/delete';
+                    xmlHttpReq.open("get", url, true);
+                    xmlHttpReq.onreadystatechange = function() {
+
+                        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                            var data = eval("(" + xmlHttpReq.responseText + ")");
+                            tips_div.style.display = "block";
+                            if (data.success == true) {
+                                tips_div.innerHTML = '已删除.';
+                                ele.parentNode.parentNode.removeChild(ele.parentNode);
+                            } else {
+                                tips_div.innerHTML = '删除失败.';
+                            }
+                            // 2s后解锁
+                            setTimeout(function() {
+                                tips_div.style.display = "none";
+                            }, 2000);
+                            return;
+                        }
+                    };
+                    xmlHttpReq.send();
+                }
             }
 
             // 更新
             document.getElementById("saveEdit").onclick = function(e) {
-                title = document.getElementById("editInput").value;
-                var edit_title_form = document.getElementById("edit_title_form");
-                var url = edit_title_form.action;
-                var titleid = edit_title_form.name;
-
-                var tips_div = document.getElementById('tips_div');
-
-                //设置请求（没有真正打开，true：表示异步
-                xmlHttpReq.open("post", url, true);
-                xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlHttpReq.onreadystatechange = function() {
-                    if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-                        var data = eval("(" + xmlHttpReq.responseText + ")");
-                        tips_div.style.display = "block";
-                        if (data.success == true) {
-                            tips_div.innerHTML = '更新成功.';
-                            document.getElementById(titleid).setAttribute("realTitle", title);
-                            document.getElementById(titleid).innerHTML = data._m_title;
-                        } else {
-                            tips_div.innerHTML = '更新失败.';
+                    title = document.getElementById("editInput").value;
+                    var edit_title_form = document.getElementById("edit_title_form");
+                    var url = edit_title_form.action;
+                    var titleid = edit_title_form.name;
+                    //设置请求（没有真正打开，true：表示异步
+                    xmlHttpReq.open("post", url, true);
+                    xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlHttpReq.onreadystatechange = function() {
+                        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                            var data = eval("(" + xmlHttpReq.responseText + ")");
+                            tips_div.style.display = "block";
+                            if (data.success == true) {
+                                tips_div.innerHTML = '更新成功.';
+                                document.getElementById(titleid).setAttribute("realTitle", title);
+                                document.getElementById(titleid).innerHTML = data._m_title;
+                            } else {
+                                tips_div.innerHTML = '更新失败.';
+                            }
+                            document.getElementById("BgDiv").style.display = "none";
+                            document.getElementsByClassName("popuplayer")[0].style.display = "none";
+                            // 2s后解锁
+                            setTimeout(function() {
+                                tips_div.style.display = "none";
+                            }, 2000);
+                            return;
                         }
-                        document.getElementById("BgDiv").style.display = "none";
-                        document.getElementsByClassName("popuplayer")[0].style.display = "none";
-                        // 2s后解锁
-                        setTimeout(function() {
-                            tips_div.style.display = "none";
-                        }, 2000);
-                        return;
-                    }
-                };
-                xmlHttpReq.send(encodeURI("title=" + title));
-            }
-
-            // 取消
+                    };
+                    xmlHttpReq.send(encodeURI("title=" + title));
+                }
+                // 取消
             document.getElementById("cancelEdit").onclick = function(e) {
                 document.getElementById("BgDiv").style.display = "none";
                 document.getElementsByClassName("popuplayer")[0].style.display = "none";
             }
         },
-
         ajaxState: function(req) {
             var that = this;
             // 处理返回的结果
@@ -297,49 +397,49 @@
                 }
             }
         },
-
         // 这里使用传统的拼字符串形式构建［待改成模板引擎的方式］
         loadlines: function(data) {
-            var lastDate = '0';
-            var html = '';
-            for (var i = 0, len = data.length; i < len; i++) {
-                var task = data[i];
-                var status = task.finished ? 'class="finished"' : '';
-                if (lastDate !== task.createTime.day) {
-                    html += '<li class="title-li"><span class="title-day"> ' + task.createTime.day + '</span></li>';
-                    lastDate = task.createTime.day;
-                }
-
-                html += '<li  ' + status + ' >';
-                if (!task.finished) {
-                    html += '<h4>';
-                    if (task.isPrivate) {
-                        html += '<em tabindex="0" class="privatetag">私</em>';
-                    }
-                    html += '<span id="' + task._id + '" class="unfinish-title" realTitle="' + task.title + '">' + task._m_title + '</span>';
-                    html += '</h4>';
-                    html += '<span class="time">创建: ' + task.createTime.minute + '  </span>&nbsp;';
-                    html += '<a name="finish"  titleid="' + task._id + '"  href="javascript:void(0);">完成</a>&nbsp';
-                } else {
-                    html += '<h4>';
-                    if (task.isPrivate) {
-                        html += '<em tabindex="0" class="privatetag">私</em>';
-                    }
-                    html += '<del  id="' + task._id + '" realTitle="' + task.title + '"> ' + task._m_title + ' </del> ';
-                    html += '</h4>';
-                    html += '<span class="time">创建: ' + task.createTime.minute + ' </span>&nbsp;';
-                    html += '<span class="time">完成:' + task.finishTime.minute + '  </span>&nbsp;';
-                    html += '<a  name="recover"  titleid="' + task._id + '"  href="javascript:void(0);">恢复</a>&nbsp';
-                }
-                html += '<a name="edit" titleid="' + task._id + '" href="javascript:void(0);">修改</a>&nbsp;';
-                var deleteNotice = "删除以后不能恢复的，确定？";
-                html += '<a href="/task/' + task._id + '/delete" onclick="return confirm(' + deleteNotice + ')">删除</a>';
-                html += '</li>';
-            }
+            lastDate = '0';
+            // 使用模板引擎改装后只需要简单的几行代码
+            var html= helper.taskTpl('task_tpl',data);
             document.getElementById("task_ul").appendHTML(html);
+            // var html = '';
+            // for (var i = 0, len = data.length; i < len; i++) {
+            //     var task = data[i];
+            //     var status = task.finished ? 'class="finished"' : '';
+            //     if (lastDate !== task.createTime.day) {
+            //         html += '<li class="title-li"><span class="title-day"> ' + task.createTime.day + '</span></li>';
+            //         lastDate = task.createTime.day;
+            //     }
+
+            //     html += '<li  ' + status + ' >';
+            //     if (!task.finished) {
+            //         html += '<h4>';
+            //         if (task.isPrivate) {
+            //             html += '<em tabindex="0" class="privatetag">私</em>';
+            //         }
+            //         html += '<span id="' + task._id + '" class="unfinish-title" realTitle="' + task.title + '">' + task._m_title + '</span>';
+            //         html += '</h4>';
+            //         html += '<span class="time">创建: ' + task.createTime.minute + '  </span>&nbsp;';
+            //         html += '<a name="finish"  titleid="' + task._id + '"  href="javascript:void(0);">完成</a>&nbsp';
+            //     } else {
+            //         html += '<h4>';
+            //         if (task.isPrivate) {
+            //             html += '<em tabindex="0" class="privatetag">私</em>';
+            //         }
+            //         html += '<del  id="' + task._id + '" realTitle="' + task.title + '"> ' + task._m_title + ' </del> ';
+            //         html += '</h4>';
+            //         html += '<span class="time">创建: ' + task.createTime.minute + ' </span>&nbsp;';
+            //         html += '<span class="time">完成:' + task.finishTime.minute + '  </span>&nbsp;';
+            //         html += '<a  name="recover"  titleid="' + task._id + '"  href="javascript:void(0);">恢复</a>&nbsp';
+            //     }
+            //     html += '<a name="edit" titleid="' + task._id + '" href="javascript:void(0);">修改</a>&nbsp;';
+            //     var deleteNotice = "删除以后不能恢复的，确定？";
+            //     html += '<a name="delete" titleid="' + task._id + '" href="javascript:void(0);">删除</a>';
+            //     html += '</li>';
+            // }
+            // document.getElementById("task_ul").appendHTML(html);
         }
     }
-
     taskobj.init();
-
 })(window, void 0);

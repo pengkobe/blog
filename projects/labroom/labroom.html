@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>kobepeng | 实验室</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width，initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- 放这里也是无赖，其不兼容-->
+    <script src="../../public/common/js/lib/path.js"></script>
+    <script src="http://cdn.bootcss.com/raphael/2.1.4/raphael-min.js"></script>
+    <script src="../../public/common/js/lib/sea.js"></script>
+    <link rel="stylesheet" href="css/labroom.css">
+    <script type="text/javascript">
+    seajs.config({
+        base: '.',
+        alias: {
+            // index page
+            'labroom': 'labroom.js',
+
+            // components
+            'navbar': 'navbar.js',
+            'treeList': 'treeList.js',
+            'accordionMenu': 'accordionMenu.js',
+            'svgmap': 'svgmap/svgmap.js?12',
+
+            'dashchart': 'dashchart.js?12',
+            'scatterchart': 'scatterchart.js?12',
+            'barchart': 'barchart.js?12',
+
+            // nav
+            'raphelchart': 'nav/raphelchart.js',
+            'daydayup': 'nav/daydayup.js',
+
+        }
+    });
+    </script>
+</head>
+
+<body>
+    <div class="labroom-title">实验室</div>
+    <div class="labroom-nav"> </div>
+    <div class="content-panel">
+        <div id="raphael_charts" style="display:none">
+        </div>
+        <div id="raphelchart" class="projectboard" style="display: none">
+            <div class="menu" style="font-size: 12px; overflow: auto;">
+            </div>
+            <div class="page">
+                <div class="page-name" style="height: 30px">
+                </div>
+                <div class="page-content">
+                </div>
+            </div>
+        </div>
+        <div id="raphelchartx" class="projectboard" style="display: none">
+            raphelchartx
+        </div>
+        <div id="daydayup" class="projectboard" style="display: none">
+            <div class="menu" style="font-size: 12px; overflow: auto;">
+            </div>
+            <div class="page">
+                <div class="page-name" style="height: 30px">
+                </div>
+                <div class="page-content">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="svgmap/res/big_area.js"></script>
+    <script src="svgmap/map.js"></script>
+    <script src="helper.js"></script>
+    <script>
+      // init
+      seajs.use('labroom');
+    </script>
+</body>
+
+</html>

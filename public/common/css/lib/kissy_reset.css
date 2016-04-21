@@ -5,9 +5,9 @@ KISSY CSS Reset
 维护：玉伯(lifesinger@gmail.com), 正淳(ragecarrier@gmail.com)
 */
 
-/* 清除内外边距 */
+/* 清除内外边距 ul,li 去掉ul和li,kobepeng*/
 body, h1, h2, h3, h4, h5, h6, p, blockquote, /* structural elements 结构元素 */
-dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+dl, dt, dd,  ol,  /* list elements 列表元素 */
 pre, /* text formatting elements 文本格式元素 */
 fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
 th, td { /* table elements 表格元素 */

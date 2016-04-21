@@ -5,8 +5,6 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var favicon = require('static-favicon');
 
-
-
 // data log
 var logger = require('morgan');
 var fs = require('fs');
@@ -14,7 +12,8 @@ var accessLog = fs.createWriteStream('access.log', {flags: 'a'});
 var errorLog = fs.createWriteStream('error.log', {flags: 'a'});
 
 
-var routes = require('./server/routes/index');
+var index_routes = require('./server/routes/index');
+var task_routes = require('./server/routes/task');
 
 var settings = require('./server/settings');
 var flash = require('connect-flash');
@@ -46,8 +45,9 @@ app.use(session({
     url: settings.dbUrl
   })
 }));
- 
-app.use('/', routes);
+
+app.use('/', index_routes);
+app.use('/task', task_routes);
 
 app.use(function (err, req, res, next) {
   var meta = '[' + new Date() + '] ' + req.url + '\n';
