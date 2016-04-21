@@ -12,7 +12,7 @@
         for (i; i < len; i++) {
             if (i == (len - 1)) {
                 html += ' <div class="nav-cell" style="border-right:solid #111 1px" ';
-			    html +='">' + dataArr[i].itemName + '</div>';
+			    html +='"><a href="#/'+dataArr[i].url+'">' + dataArr[i].itemName + '</a></div>';
             } else {
                 html += ' <div class="nav-cell" ><a href="#/'+dataArr[i].url+'">' + dataArr[i].itemName + '</a></div>';
             }

@@ -1,4 +1,5 @@
 <%- include header %>
+试试控件上传：
 <form method='post' action='/upload' enctype='multipart/form-data' >
 
   <input type="file" name='photos'/><br>
@@ -17,17 +18,19 @@
 </form>
 
 <!-- 拖拽上传 -->
-<div name="image" id="dropbox" 
-style="min-width:300px;
-min-height:100px;border:3px dashed silver;">
+
+<div name="image" id="dropbox" >
+试试拖拽上传：
+<div class="modal-dropzone-img"></div>
+<p><b>拖到这里</b> 上传文件 (限值 2MiB)</p>
 </div> 
-<!-- 进度条-->
+<!-- 进度条   <input class="modal-input-file user-input" type="file" name="file" accept="image/*" value="">-->
 <div id="progressNumber" >
-</div>  
+</div>
 
 <!-- 预览 -->
 <div id="preview" style="width:100px;height:100px">
-</div> 
+</div>
 
 <script src="/public/js/upload.js"></script>
 

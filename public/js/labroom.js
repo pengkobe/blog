@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
 
-    // 导航栏
+    // 初始化导航栏
     seajs.use("navbar", function(navFunc) {
         var data = [
             { itemName: '图表', url: 'raphelchart' },
@@ -9,12 +9,14 @@ define(function(require, exports, module) {
             { itemName: '树形插件', url: 'deviceManage' },
             { itemName: '组织图', url: 'energyManage' },
             { itemName: '代码片', url: 'staffManage' },
-            { itemName: 'semantic按钮', url: 'statistics' },
             { itemName: '各种测试', url: 'staffManage' },
+            { itemName: '资料集', url: 'daydayup' },
         ];
 
         var obj = $('.labroom-nav');
         navFunc(obj, data);
+
+
     });
 
     // tab页切换cb
@@ -34,6 +36,18 @@ define(function(require, exports, module) {
         });
 
     });
+    Path.map("#/raphelchartx").to(function() {
+        debugger;
+        clickCallback('raphelchartx');
+    });
+
+    Path.map("#/daydayup").to(function() {
+        seajs.use('daydayup', function(o) {
+            clickCallback('daydayup');
+        });
+    });
+
+
     Path.map("#/raphelchartx").to(function() {
         debugger;
     });
