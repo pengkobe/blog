@@ -119,7 +119,8 @@ app.get('/:_id/recover', function (req, res) {
 function checkLogin(req, res, next) {
   if (!req.session.user) {
     req.flash('error', '未登录!');
-    res.redirect('/login');
+    res.json({success:false});
+   // res.redirect('/login');
     return;
   }
   next();
@@ -128,7 +129,8 @@ function checkLogin(req, res, next) {
 function checkNotLogin(req, res, next) {
   if (req.session.user) {
     req.flash('error', '已登录!');
-    res.redirect('back');//返回之前的页面
+    res.json({success:false});
+   // res.redirect('back');//返回之前的页面
     return;
   }
   next();

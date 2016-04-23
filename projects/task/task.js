@@ -1,6 +1,6 @@
 /* author :kobepeng
    contact: www.kobepeng.com
-   description：你看到的是最原始的拼接字符串方式，代码可读性极差，这里主要是自己学学原生js的场所。
+   description：这里主要是自己学学原生js的地方。
 */
 ;
 (function(window, undefined) {
@@ -141,6 +141,10 @@
         },
         loadData: function() {
             var that = this;
+            var fullyear;
+            var month;
+            var day;
+            var datestr;
             if ((helper.getScrollTop() + helper.getClientHeight() == helper.getScrollHeight()) || helper.getScrollTop() == 0) {
                 //加载完成后不再请求
                 if (!finishedload) {
@@ -161,10 +165,10 @@
                             that.ajaxState(xmlHttpReq);
                         };
                         //提交请求
-                        var fullyear = lastdate.getFullYear();
-                        var month = lastdate.getMonth() + 1;
-                        var day = lastdate.getDate();
-                        var datestr = fullyear + "/" + (month < 10 ? '0' + month : month) + "/" + (day < 10 ? '0' + day : day);
+                        fullyear = lastdate.getFullYear();
+                        month = lastdate.getMonth() + 1;
+                        day = lastdate.getDate();
+                        datestr = fullyear + "/" + (month < 10 ? '0' + month : month) + "/" + (day < 10 ? '0' + day : day);
                         console.log('send...');
                         xmlHttpReq.send(encodeURI("lastdate=" + datestr));
                     }
@@ -175,17 +179,19 @@
             var title;
             var realTitle;
             var post_form;
+            var url;
             var tips_div = document.getElementById('tips_div');
             // 滚动事件
             var that = this;
+            var page = document.getElementsByClassName("page")[0];
+            var task_ul = document.querySelector("#task_ul");
             window.onscroll = function() {
-                that.loadData();
-            }
-
-            // 新增
+                    that.loadData();
+                }
+                // 新增
             post_form = document.getElementById("post_new");
             helper.addEvent(post_form, 'submit', function(e) {
-                var url = '/task/new';
+                url = '/task/new';
                 xmlHttpReq.open("post", url, true);
                 xmlHttpReq.onreadystatechange = function() {
                     if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
@@ -210,134 +216,179 @@
                 xmlHttpReq.send(encodeURI("title=" + target.title.value + "&isPrivate=" + target.isPrivate.checked));
                 e.preventDefault();
             });
-
             // 添加链接按钮(正则)
             document.getElementById("addLink").onclick = function() {
                 var editInput = document.getElementById("editInput");
                 editInput.value = editInput.value + '[]()';
             }
-
-            // 事件绑定，实现局部刷新
-            document.getElementsByClassName("page")[0].onclick = function(e) {
+            helper.addEvent(task_ul, 'mouseover', function(e) {
                 var ele = e.srcElement;
-                if (ele.name == 'edit') {
-                    var id = ele.getAttribute('titleid');
-                    // realTtitle保存在属性中
-                    title = document.getElementById(id).getAttribute("realTitle");
-                    var edit_title_form = document.getElementById("edit_title_form");
-                    var BgDiv = document.getElementById("BgDiv");
-
-                    edit_title_form.action = '/task/' + id + '/edit';
-                    edit_title_form.name = id;
-                    document.getElementById("editInput").value = title;
-                    BgDiv.style.display = "block";
-                    BgDiv.style.height = document.body.scrollHeight;
-                    document.getElementsByClassName("popuplayer")[0].style.display = "block";
-                }
-                if (ele.name == 'finish') {
-                    var id = ele.getAttribute('titleid');
-                    title = document.getElementById(id).innerHTML;
-                    realTitle = document.getElementById(id).getAttribute("realTitle");
-                    var url = '/task/' + id + '/finish';
-
-                    xmlHttpReq.open("get", url, true);
-                    xmlHttpReq.onreadystatechange = function() {
-                        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-
-                            var data = eval("(" + xmlHttpReq.responseText + ")");
-                            tips_div.style.display = "block";
-                            if (data.success == true) {
-                                tips_div.innerHTML = '已修改为完成.';
-                                // 替换节点
-                                var pNode = document.createElement('del');
-                                pNode.id = id;
-                                pNode.appendHTML(title);
-                                pNode.setAttribute("realTitle", realTitle);
-                                var reNode = document.getElementById(id);
-                                reNode.parentNode.replaceChild(pNode, reNode);
-                                // 链接切换
-                                ele.name = 'recover';
-                                ele.innerHTML = '恢复';
-                            } else {
-                                tips_div.innerHTML = '修改为完成失败.';
-                            }
-                            setTimeout(function() {
-                                tips_div.style.display = "none";
-                            }, 2000);
-                            return;
+                var path = e.path;
+                if (ele.nodeName.toLowerCase() == 'li') {
+                    var objs = ele.childNodes;
+                    for (var i = 0; i < objs.length; i++) {
+                        if (objs[i].nodeName.toLowerCase() == "a") {
+                            objs[i].style.display = "inline-block";
                         }
-                    };
-                    xmlHttpReq.send();
-                }
-                if (ele.name == 'recover') {
-                    var id = ele.getAttribute('titleid');
-
-                    title = document.getElementById(id).innerHTML;
-                    realTitle = document.getElementById(id).getAttribute("realTitle");
-                    var url = '/task/' + id + '/recover';
-
-                    xmlHttpReq.open("get", url, true);
-                    xmlHttpReq.onreadystatechange = function() {
-                        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-                            var data = eval("(" + xmlHttpReq.responseText + ")");
-                            tips_div.style.display = "block";
-                            if (data.success == true) {
-                                tips_div.innerHTML = '已恢复.';
-                                // 替换节点
-                                var pNode = document.createElement('span');
-                                pNode.id = id;
-                                pNode.className = "unfinish-title";
-                                pNode.appendHTML(title);
-                                pNode.setAttribute("realTitle", realTitle);
-                                var reNode = document.getElementById(id);
-                                reNode.parentNode.replaceChild(pNode, reNode);
-                                // 链接切换
-                                ele.name = 'finish';
-                                ele.innerHTML = '完成';
-                            } else {
-                                tips_div.innerHTML = '恢复失败.';
+                    }
+                } else {
+                    for (var pi = 1; pi < path.length; pi++) {
+                        if (path[pi] && path[pi].nodeName.toLowerCase() == 'li') {
+                            var objs = path[pi].childNodes;
+                            for (var i = 0; i < objs.length; i++) {
+                                if (path[pi] && objs[i].nodeName.toLowerCase() == "a") {
+                                    objs[i].style.display = "inline-block";
+                                }
                             }
-                            // 2s后解锁
-                            setTimeout(function() {
-                                tips_div.style.display = "none";
-                            }, 2000);
-                            return;
+                            break;
                         }
-                    };
-                    xmlHttpReq.send();
+                    }
                 }
-                if (ele.name == 'delete') {
-
-                    var id = ele.getAttribute('titleid');
-                    var url = '/task/' + id + '/delete';
-                    xmlHttpReq.open("get", url, true);
-                    xmlHttpReq.onreadystatechange = function() {
-
-                        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-                            var data = eval("(" + xmlHttpReq.responseText + ")");
-                            tips_div.style.display = "block";
-                            if (data.success == true) {
-                                tips_div.innerHTML = '已删除.';
-                                ele.parentNode.parentNode.removeChild(ele.parentNode);
-                            } else {
-                                tips_div.innerHTML = '删除失败.';
+            });
+            helper.addEvent(task_ul, 'mouseout', function(e) {
+                var ele = e.srcElement;
+                var path = e.path;
+                if (ele.nodeName.toLowerCase() == 'li') {
+                    var objs = ele.childNodes;
+                    for (var i = 0; i < objs.length; i++) {
+                        if (objs[i].nodeName.toLowerCase() == "a") {
+                            objs[i].style.display = "none";
+                        }
+                    }
+                } else {
+                    for (var pi = 0; pi < path.length; pi++) {
+                        if (path[pi] && path[pi].nodeName.toLowerCase() == 'li') {
+                            var objs = path[pi].childNodes;
+                            for (var i = 0; i < objs.length; i++) {
+                                if (objs[i].nodeName.toLowerCase() == "a") {
+                                    objs[i].style.display = "none";
+                                }
                             }
-                            // 2s后解锁
-                            setTimeout(function() {
-                                tips_div.style.display = "none";
-                            }, 2000);
-                            return;
+                            break;
                         }
-                    };
-                    xmlHttpReq.send();
+                    }
                 }
-            }
+                //  e.stopPropagation();
+            });
+            // 事件绑定，实现局部刷新
+            page.onclick = function(e) {
+                    var ele = e.srcElement;
+                    if (ele.name == 'edit') {
+                        var id = ele.getAttribute('titleid');
+                        // realTtitle保存在属性中
+                        title = document.getElementById(id).getAttribute("realTitle");
+                        var edit_title_form = document.getElementById("edit_title_form");
+                        var BgDiv = document.getElementById("BgDiv");
 
-            // 更新
+                        edit_title_form.action = '/task/' + id + '/edit';
+                        edit_title_form.name = id;
+                        document.getElementById("editInput").value = title;
+                        BgDiv.style.display = "block";
+                        BgDiv.style.height = document.body.scrollHeight;
+                        document.getElementsByClassName("popuplayer")[0].style.display = "block";
+                    }
+                    if (ele.name == 'finish') {
+                        var id = ele.getAttribute('titleid');
+                        title = document.getElementById(id).innerHTML;
+                        realTitle = document.getElementById(id).getAttribute("realTitle");
+                        url = '/task/' + id + '/finish';
+
+                        xmlHttpReq.open("get", url, true);
+                        xmlHttpReq.onreadystatechange = function() {
+                            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+
+                                var data = eval("(" + xmlHttpReq.responseText + ")");
+                                tips_div.style.display = "block";
+                                if (data.success == true) {
+                                    tips_div.innerHTML = '已修改为完成.';
+                                    // 替换节点
+                                    var pNode = document.createElement('del');
+                                    pNode.id = id;
+                                    pNode.appendHTML(title);
+                                    pNode.setAttribute("realTitle", realTitle);
+                                    var reNode = document.getElementById(id);
+                                    reNode.parentNode.replaceChild(pNode, reNode);
+                                    // 链接切换
+                                    ele.name = 'recover';
+                                    ele.innerHTML = '恢复';
+                                } else {
+                                    tips_div.innerHTML = '修改为完成失败.';
+                                }
+                                setTimeout(function() {
+                                    tips_div.style.display = "none";
+                                }, 2000);
+                                return;
+                            }
+                        };
+                        xmlHttpReq.send();
+                    }
+                    if (ele.name == 'recover') {
+                        var id = ele.getAttribute('titleid');
+
+                        title = document.getElementById(id).innerHTML;
+                        realTitle = document.getElementById(id).getAttribute("realTitle");
+                        url = '/task/' + id + '/recover';
+
+                        xmlHttpReq.open("get", url, true);
+                        xmlHttpReq.onreadystatechange = function() {
+                            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                                var data = eval("(" + xmlHttpReq.responseText + ")");
+                                tips_div.style.display = "block";
+                                if (data.success == true) {
+                                    tips_div.innerHTML = '已恢复.';
+                                    // 替换节点
+                                    var pNode = document.createElement('span');
+                                    pNode.id = id;
+                                    pNode.className = "unfinish-title";
+                                    pNode.appendHTML(title);
+                                    pNode.setAttribute("realTitle", realTitle);
+                                    var reNode = document.getElementById(id);
+                                    reNode.parentNode.replaceChild(pNode, reNode);
+                                    // 链接切换
+                                    ele.name = 'finish';
+                                    ele.innerHTML = '完成';
+                                } else {
+                                    tips_div.innerHTML = '恢复失败.';
+                                }
+                                // 2s后解锁
+                                setTimeout(function() {
+                                    tips_div.style.display = "none";
+                                }, 2000);
+                                return;
+                            }
+                        };
+                        xmlHttpReq.send();
+                    }
+                    if (ele.name == 'delete') {
+
+                        var id = ele.getAttribute('titleid');
+                        url = '/task/' + id + '/delete';
+                        xmlHttpReq.open("get", url, true);
+                        xmlHttpReq.onreadystatechange = function() {
+                            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                                var data = eval("(" + xmlHttpReq.responseText + ")");
+                                tips_div.style.display = "block";
+                                if (data.success == true) {
+                                    tips_div.innerHTML = '已删除.';
+                                    ele.parentNode.parentNode.removeChild(ele.parentNode);
+                                } else {
+                                    tips_div.innerHTML = '删除失败.';
+                                }
+                                // 2s后解锁
+                                setTimeout(function() {
+                                    tips_div.style.display = "none";
+                                }, 2000);
+                                return;
+                            }
+                        };
+                        xmlHttpReq.send();
+                    }
+                }
+                // 更新
             document.getElementById("saveEdit").onclick = function(e) {
                     title = document.getElementById("editInput").value;
                     var edit_title_form = document.getElementById("edit_title_form");
-                    var url = edit_title_form.action;
+                    url = edit_title_form.action;
                     var titleid = edit_title_form.name;
                     //设置请求（没有真正打开，true：表示异步
                     xmlHttpReq.open("post", url, true);
@@ -365,7 +416,7 @@
                     xmlHttpReq.send(encodeURI("title=" + title));
                 }
                 // 取消
-            document.getElementById("cancelEdit").onclick = function(e) {
+                document.getElementById("cancelEdit").onclick = function(e) {
                 document.getElementById("BgDiv").style.display = "none";
                 document.getElementsByClassName("popuplayer")[0].style.display = "none";
             }
@@ -401,44 +452,8 @@
         loadlines: function(data) {
             lastDate = '0';
             // 使用模板引擎改装后只需要简单的几行代码
-            var html= helper.taskTpl('task_tpl',data);
+            var html = helper.taskTpl('task_tpl', data);
             document.getElementById("task_ul").appendHTML(html);
-            // var html = '';
-            // for (var i = 0, len = data.length; i < len; i++) {
-            //     var task = data[i];
-            //     var status = task.finished ? 'class="finished"' : '';
-            //     if (lastDate !== task.createTime.day) {
-            //         html += '<li class="title-li"><span class="title-day"> ' + task.createTime.day + '</span></li>';
-            //         lastDate = task.createTime.day;
-            //     }
-
-            //     html += '<li  ' + status + ' >';
-            //     if (!task.finished) {
-            //         html += '<h4>';
-            //         if (task.isPrivate) {
-            //             html += '<em tabindex="0" class="privatetag">私</em>';
-            //         }
-            //         html += '<span id="' + task._id + '" class="unfinish-title" realTitle="' + task.title + '">' + task._m_title + '</span>';
-            //         html += '</h4>';
-            //         html += '<span class="time">创建: ' + task.createTime.minute + '  </span>&nbsp;';
-            //         html += '<a name="finish"  titleid="' + task._id + '"  href="javascript:void(0);">完成</a>&nbsp';
-            //     } else {
-            //         html += '<h4>';
-            //         if (task.isPrivate) {
-            //             html += '<em tabindex="0" class="privatetag">私</em>';
-            //         }
-            //         html += '<del  id="' + task._id + '" realTitle="' + task.title + '"> ' + task._m_title + ' </del> ';
-            //         html += '</h4>';
-            //         html += '<span class="time">创建: ' + task.createTime.minute + ' </span>&nbsp;';
-            //         html += '<span class="time">完成:' + task.finishTime.minute + '  </span>&nbsp;';
-            //         html += '<a  name="recover"  titleid="' + task._id + '"  href="javascript:void(0);">恢复</a>&nbsp';
-            //     }
-            //     html += '<a name="edit" titleid="' + task._id + '" href="javascript:void(0);">修改</a>&nbsp;';
-            //     var deleteNotice = "删除以后不能恢复的，确定？";
-            //     html += '<a name="delete" titleid="' + task._id + '" href="javascript:void(0);">删除</a>';
-            //     html += '</li>';
-            // }
-            // document.getElementById("task_ul").appendHTML(html);
         }
     }
     taskobj.init();

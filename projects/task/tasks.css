@@ -79,7 +79,7 @@ a:hover { color:#FF3300; }
     filter: alpha(opacity=70);-moz-opacity: 0.7;
 }
 
-.page { width:700px; margin:10px auto; background:#FFF; padding:10px 20px;
+.page { width:750px; margin:10px auto; background:#FFF; padding:10px 20px;
     border:1px solid #CCC; border-radius:5px; }
     .main {  }
         .main_content { }
@@ -92,11 +92,12 @@ a:hover { color:#FF3300; }
                 margin-top: 20px;
             }
             .unfinish-title{
+              width: 100%;
               font-weight: bold;
               word-wrap: break-word;
               display: inline-block;
               padding-left:28px;
-              background:url(../../public/img/doing.png) no-repeat left center;
+              background:url(../../public/img/doing.png) no-repeat left top;
               background-size: 25px;
             }
             .tasks {}
@@ -108,11 +109,13 @@ a:hover { color:#FF3300; }
                 }
                 .tasks ul li.finished { color:#666; }
                 .tasks ul li a { color:#666;font-size: 12px }
+                .tasks ul li > a { display: none }
+                .tasks ul li h4 a { display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; }
                 .tasks ul li del {
                     opacity: .5;
                     padding-left:25px;
                     display: inline-block;
-                    background:url(../../public/img/finished.png) no-repeat left center;
+                    background:url(../../public/img/finished.png) no-repeat left top;
                     background-size: 25px;
                 }
 
@@ -168,8 +171,6 @@ a:hover { color:#FF3300; }
     border-bottom:1px solid #aaa;
   }
   .unfinish-title{
-
     word-break:break-all;
-
   }
 }

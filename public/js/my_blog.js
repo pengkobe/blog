@@ -34,24 +34,31 @@ var operation = {
         // 文章导航
         this.menuIndex($('article'));
     },
-    autoComplete: function() { //实现搜索框自动提示
-        var pr = {
+    //实现搜索框自动提示(注意data属性不要配置)
+    autoComplete: function() {
+        var pr = { 
             id: 'searchdiv',
-                         //data: [],
-                        textFiled: 'title', // 显示的文字的属性名
-                        valueFiled: 'title', // 获取value的属性名
-                        style: {},
-                        url: '/autocomplete', //ajax请求的url
-                        paraName: 'keyword', //ajax请求的参数
-                        select: function() {},
-                        showdivId: 'autodiv'
+            //ajax请求的参数
+            paraName: 'keyword',
+            // 显示的文字的属性名
+            textFiled: 'title',
+            // 获取value的属性名
+            valueFiled: 'title',
+            //ajax请求的url
+            url: '/autocomplete',
+            showdivId: 'autodiv',
+            select: function() {},
+            style: {},
         };
         AutoComplete(pr);
     },
     insertWeibo: function() {
-        var htmlStr = '<iframe width="220" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=200&height=350&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=2656201077&verifier=1b82284c&dpc=1"></iframe>';
+        var htmlStr = '<iframe width="220" height="350" class="share_self"';
+        htmlStr += 'frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php';
+        htmlStr += '?language=&width=200&height=350&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1';
+        htmlStr += '&noborder=1&isWeibo=1&isFans=0&uid=2656201077&verifier=1b82284c&dpc=1"></iframe>';
         if (!isMobile.any() && ($(window).width() > 992) && !$(".share_self").size()) {
-            $(".weibo").css("background", "#777").append(htmlStr);
+            $(".weibo").css("background", "#ccc").append(htmlStr);
         }
         if (isMobile.any()) {
             $(".weibo").remove();
@@ -245,10 +252,8 @@ var operation = {
             $('#menuIndex').append($(tmpl)).delegate('a', 'click', function(e) {
                 e.preventDefault();
                 var scrollNum = $(this).attr('data-top') || $('#' + $(this).attr('data-id')).offset().top;
-                //window.scrollTo(0,scrollNum-30);
                 $('body, html').animate({ scrollTop: scrollNum - 30 }, 400, 'swing');
-            }) /*.append("<a href='javascript:void(0);' onclick='return false;' class='menu-unfold'>&gt;</a>");*/
-
+            });
             $(window).load(function() {
                 var scrollTop = [];
                 $.each($('#menuIndex li a'), function(index, item) {
@@ -271,7 +276,6 @@ var operation = {
                         timers[uniqueId] = setTimeout(callback, ms);
                     };
                 })();
-
                 $(window).scroll(function() {
                     waitForFinalEvent(function() {
                         var nowTop = $(window).scrollTop(),
@@ -296,7 +300,6 @@ var operation = {
             $('#menuIndex').css('max-height', $(window).height() - 80);
         }
     },
-
 }
 
 
