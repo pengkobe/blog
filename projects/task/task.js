@@ -70,6 +70,7 @@
         getScrollHeight: function() {
             return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
         },
+        // ajax polyfill
         getAjaxReq: function() {
             if (window.ActiveXObject) {
                 xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
@@ -78,12 +79,14 @@
             }
             return xmlHttpReq;
         },
+        // add event polyfill
         addEvent: function(elem, type, handle) {
             if (elem.addEventListener)
                 elem.addEventListener(type, handle, false);
             else if (elem.attachEvent)
                 elem.attachEvent("on" + type, handle);
         },
+        // fire event polyfill
         fireEvent: function(name) {
             // 手动触发事件
             if (post_form.fireEvent) {
@@ -96,6 +99,7 @@
                 post_form.dispatchEvent(ev);
             }
         },
+        // 模板引擎
         taskTpl: function(str, data) {
             // 获取存储模板的元素
             var element = document.getElementById(str);
@@ -222,53 +226,33 @@
                 editInput.value = editInput.value + '[]()';
             }
             helper.addEvent(task_ul, 'mouseover', function(e) {
-                var ele = e.srcElement;
                 var path = e.path;
-                if (ele.nodeName.toLowerCase() == 'li') {
-                    var objs = ele.childNodes;
-                    for (var i = 0; i < objs.length; i++) {
-                        if (objs[i].nodeName.toLowerCase() == "a") {
-                            objs[i].style.display = "inline-block";
-                        }
-                    }
-                } else {
-                    for (var pi = 1; pi < path.length; pi++) {
-                        if (path[pi] && path[pi].nodeName.toLowerCase() == 'li') {
-                            var objs = path[pi].childNodes;
-                            for (var i = 0; i < objs.length; i++) {
-                                if (path[pi] && objs[i].nodeName.toLowerCase() == "a") {
-                                    objs[i].style.display = "inline-block";
-                                }
+                for (var pi = 0; pi < path.length; pi++) {
+                    if (path[pi].nodeName && path[pi].nodeName.toLowerCase() == 'li') {
+                        var objs = path[pi].childNodes;
+                        for (var i = 0; i < objs.length; i++) {
+                            if (path[pi] && objs[i].nodeName.toLowerCase() == "a") {
+                                objs[i].style.display = "inline-block";
                             }
-                            break;
                         }
+                        break;
                     }
                 }
             });
             helper.addEvent(task_ul, 'mouseout', function(e) {
-                var ele = e.srcElement;
                 var path = e.path;
-                if (ele.nodeName.toLowerCase() == 'li') {
-                    var objs = ele.childNodes;
-                    for (var i = 0; i < objs.length; i++) {
-                        if (objs[i].nodeName.toLowerCase() == "a") {
-                            objs[i].style.display = "none";
-                        }
-                    }
-                } else {
-                    for (var pi = 0; pi < path.length; pi++) {
-                        if (path[pi] && path[pi].nodeName.toLowerCase() == 'li') {
-                            var objs = path[pi].childNodes;
-                            for (var i = 0; i < objs.length; i++) {
-                                if (objs[i].nodeName.toLowerCase() == "a") {
-                                    objs[i].style.display = "none";
-                                }
+                for (var pi = 0; pi < path.length; pi++) {
+                    var nodename = path[pi].nodeName;
+                    if (nodename && nodename.toLowerCase() == 'li') {
+                        var objs = path[pi].childNodes;
+                        for (var i = 0; i < objs.length; i++) {
+                            if (objs[i].nodeName.toLowerCase() == "a") {
+                                objs[i].style.display = "none";
                             }
-                            break;
                         }
+                        break;
                     }
                 }
-                //  e.stopPropagation();
             });
             // 事件绑定，实现局部刷新
             page.onclick = function(e) {
@@ -296,7 +280,6 @@
                         xmlHttpReq.open("get", url, true);
                         xmlHttpReq.onreadystatechange = function() {
                             if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-
                                 var data = eval("(" + xmlHttpReq.responseText + ")");
                                 tips_div.style.display = "block";
                                 if (data.success == true) {
@@ -360,7 +343,6 @@
                         xmlHttpReq.send();
                     }
                     if (ele.name == 'delete') {
-
                         var id = ele.getAttribute('titleid');
                         url = '/task/' + id + '/delete';
                         xmlHttpReq.open("get", url, true);
@@ -416,7 +398,7 @@
                     xmlHttpReq.send(encodeURI("title=" + title));
                 }
                 // 取消
-                document.getElementById("cancelEdit").onclick = function(e) {
+            document.getElementById("cancelEdit").onclick = function(e) {
                 document.getElementById("BgDiv").style.display = "none";
                 document.getElementsByClassName("popuplayer")[0].style.display = "none";
             }

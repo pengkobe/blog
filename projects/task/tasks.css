@@ -28,6 +28,7 @@ a:hover { color:#FF3300; }
     border: 1px solid #e00;
     color:#e00;
     font-size:12px;
+    margin-left:5px;
 }
 
 .time{
@@ -117,6 +118,10 @@ a:hover { color:#FF3300; }
                     display: inline-block;
                     background:url(../../public/img/finished.png) no-repeat left top;
                     background-size: 25px;
+                    width: 100%;
+                }
+                .tasks ul li del a{
+                  margin-left: 3px;
                 }
 
             .post {border: 3px dotted green;padding: 15px;  }
@@ -155,10 +160,12 @@ a:hover { color:#FF3300; }
   .page {
     width: 90%;
   }
+  h4{
+    font-size: 16px;
+  }
   .popuplayer{
 		width: 90%;
 		left: 5%;
-		margin-top: 320px;
 		margin-left: 0px;
   }
   #editInput{
@@ -172,5 +179,9 @@ a:hover { color:#FF3300; }
   }
   .unfinish-title{
     word-break:break-all;
+    width: 90%;
   }
+   .tasks ul li del{
+     width: 90%;
+   }
 }

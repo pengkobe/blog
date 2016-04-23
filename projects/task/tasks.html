@@ -71,20 +71,22 @@
                 <h4>
                 <span id="<% task._id%>" class="unfinish-title" realTitle="<% task.title %>" > <% task._m_title %> </span>
                 </h4>
-                 <% if (task.isPrivate) { %>
+
+                <span class="time">创建:<% task.createTime.minute %> </span>
+                <% if (task.isPrivate) { %>
                 <em tabindex="0" class="privatetag">私</em>
                 <% }%>
-                <span class="time">创建:<% task.createTime.minute %> </span>
                 &nbsp;
                 <a name="finish" titleid="<% task._id%>"  href="javascript:void(0);">完成</a>&nbsp;
               <% } else { %>
                <h4>
                <del id="<% task._id%>" realTitle="<% task.title %>"><% task._m_title %></del>
                 </h4>
+
+                 <span class="time">创建:<% task.createTime.minute %> </span>
                  <% if (task.isPrivate) { %>
                <em tabindex="0" class="privatetag">私</em>
                 <% }%>
-                 <span class="time">创建:<% task.createTime.minute %> </span>
                 &nbsp;
                  <span  class="time">完成:<% task.finishTime.minute %> </span>
                 &nbsp;
