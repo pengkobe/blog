@@ -3,7 +3,6 @@
     function NavBar(obj, dataArr) {
         var html = ' <div class="triangle-left"></div>';
 
-
         html += ' <div class="nav-cell selected" ><a href="#/'+dataArr[0].url+'">' + dataArr[0].itemName + '</a></div>';
 
         var i = 1;
@@ -26,7 +25,7 @@
 			var that = $(this);
 			that.siblings().removeClass('selected');
 			that.addClass('selected');
-        }); 
+        });
     }
 
     module.exports = NavBar;

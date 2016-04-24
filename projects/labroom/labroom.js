@@ -15,8 +15,6 @@ define(function(require, exports, module) {
 
         var obj = $('.labroom-nav');
         navFunc(obj, data);
-
-
     });
 
     // tab页切换cb
@@ -37,7 +35,6 @@ define(function(require, exports, module) {
 
     });
     Path.map("#/raphelchartx").to(function() {
-        debugger;
         clickCallback('raphelchartx');
     });
 
