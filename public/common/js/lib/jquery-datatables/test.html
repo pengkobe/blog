@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../jquery-1.11.2.min.js"></script>
+    <script src="../../bootstrap3.3.2/js/bootstrap.min.js"></script>
+    <link href="../../bootstrap3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="jquery.dataTables.min.js"></script>
+    <script src="dataTables.tableTools.js"></script>
+    <script src="jquery.dataTableUX.js"></script>
+    <link href="jquery.dataTables.css" rel="stylesheet" />
+    <link href="dataTables.tableTools.css" rel="stylesheet" />
+</head>
+<body>
+    <input id="clickme" type="button" value="click me!!!" />
+
+    <div id="RecordListModalFive" class=" fade" role="dialog" aria-labelledby="RecordListModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="color: black">
+                <div class="modal-header footerstyle">
+                    <h4 class="modal-title" id="H4">维修与保养记录</h4>
+                </div>
+               
+                    <table id="customerInfo123" class="display modal-body" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <!--<th><input name="selectAll" type="checkbox" /></th>-->
+                                <th>事业部</th>
+                                <th>计划次数</th>
+                                <th>保养次数</th>
+                                <th>保养完成率</th>
+                                <th>保养合格率</th>
+                                <th>保养费用(元)</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                    </table>
+             
+                <div class="modal-footer footerstyle footerstyle">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mymodal" style="overflow-x:auto;" class=" fade" role="dialog" aria-labelledby="customerInfo" aria-hidden="true">
+        <table id="customerInfo" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th><input name="selectAll" type="checkbox" /></th>
+                    <th>事业部</th>
+                    <th>计划次数</th>
+                    <th>保养次数</th>
+                    <th>保养完成率</th>
+                    <th>保养合格率</th>
+                    <th>保养费用(元)</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div name="CustomerForm">
+    </div>
+
+    <div id="divtoolbars" style="display:none;">
+        状态：
+        <select id="ddlState" name="ddlState" paramsname="state">
+            <option value=""></option>
+            <option value="2">待审核</option>
+            <option value="-1">访客</option>
+            <option value="3">会员</option>
+            <option value="4">已激活</option>
+        </select>
+        关键字：
+        <input id="search" name="search" type="text" paramsname="search" style="width:140px;" />
+    </div>
+
+    <script type="text/javascript">
+        $("#clickme").on('click', function () {
+            $("#RecordListModalFive").modal('show');
+        });
+
+        //当前页面表格变量
+        var table;
+        var action;
+
+        //表格加载
+        $(document).ready(aaa());
+
+        function aaa() {
+            var toolbars = [];
+            var toolbar =
+            [
+                { iconCls: 'add', text: '新增', permissionControl: true, name: 'add' },
+                { iconCls: 'export', text: '导出', name: 'export' }
+            ];
+            window.$.RoleType = 2;
+            if (window.$.RoleType == 3) {
+                toolbars.push(toolbar[0]);
+                toolbars.push(toolbar[1]);
+            }
+
+            table = $('#customerInfo123').dataTableUX({
+                "toolbar": toolbars,
+                paging: true,
+                scrollY: 200,
+                dom: 'T<"toolbar"><"clear">lfrtip',//'<"toolbar">frt<"clear">
+                tableTools: {
+                    "sSwfPath": "../swf/copy_csv_xls_pdf.swf",
+                    "aButtons": [
+                        {
+                            "sExtends": "copy",
+                            "sButtonText": "复制",
+                            "sInfo ": "复制成功",
+                            "fnClick": function (nButton, oConfig, oFlash) {
+                               
+                            },
+                            "fnComplete": function (nButton, oConfig, flash, text) {
+                                var lines = text.split('\n').length;
+                                if (oConfig.bHeader) lines--;
+                                if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
+                                this.fnInfo('<h6>复制成功!</h6>' +
+                                    '<p>复制 ' + lines + ' 行'  + ' 到剪贴板.</p>',
+                                    1500
+                                );
+                            }
+                        },
+                        {
+                            "sExtends": "xls",
+                            "sButtonText": "导出为Excel",
+                            "sFileName": "data.csv"
+                        },
+                        {
+                            "sExtends": "pdf",
+                            "sButtonText": "导出为pdf",
+                            "sPdfOrientation": "landscape",
+                            "sPdfMessage": "下载pdf."
+                        },
+                        {
+                            "sExtends": "print",
+                            "sButtonText": "打印"
+                        }
+                        //,//组装成按钮组
+                        //{
+                        //    "sExtends": "collection",
+                        //    "sButtonText": "Save",
+                        //    "aButtons": ["csv", "xls", "pdf"]
+                        //}
+                    ]
+                },
+                "qbar": [{ html: $('#divtoolbars').html() }],
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "data": "download_link",
+                        "render": function (data, type, full, meta) {
+                            return '<input type="checkbox" value="' + data + '" title="' + data + '" id="checkbox" />';
+                        }
+                    }
+                ],
+                "columns":
+                [
+                    //{ "data": null, defaultContent: '', orderable: false, width: 10 },
+                    { "data": "AlarmID", width: 60, orderable: false },
+                    { "data": "ConfirmUser", width: 70, orderable: false },
+                    { "data": "ConfirmTime", width: 170, orderable: false },
+                    { "data": "DeviceID", width: 100, orderable: false },
+                    { "data": "AlarmTime", width: 170, orderable: false },
+                    { "data": "AlarmInfo", width: 100, orderable: false },
+                    { "data": null, defaultContent: '', orderable: false, width: 50 }
+                ],
+                handler: function (name, data, iconCls, text) {
+                    var CustomerID = data.length > 0 ? data[0].CustomerID : 0;
+                    var qString = encodeURI("?CustomerID=" + CustomerID + "&d=" + new Date());
+                    if (name == "add") {
+                        $.get('manage_customer/add.aspx' + qString, function (html) {
+                            $('div [name="CustomerForm"]').html(html).find("div.modal").modal('show')
+                        });
+                        return false;
+                    }
+                    table.table.tables().ajax.reload();//重新加载数据
+                },
+                "exportConfig": { url: '/ToXls.aspx?Name=HYD.Business.Manage_CustomerInfoBLL.Export', fileName: '报警列表' },
+                "ajax": "Action.ashx?Name=HYD.E3.Business.AlarmBLL.getAlarmList"
+            });
+        }
+    </script>
+
+</body>
+</html>

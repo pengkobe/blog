@@ -1,0 +1,61 @@
+<style type="text/css">
+.calendar {
+    clear: both;
+    margin: 1px;
+    /*width:334px;*/
+}
+.calendarTitle {
+    color: #737373;
+    font-size: 16px;
+    text-decoration: none;
+    margin-left: 10px;
+    display: block;
+    float: left;
+    cursor: pointer;
+}
+
+.calendar_day {
+    display: block;
+    margin: 1px;
+    width: 13.5%;
+    height: 34px;
+    line-height: 34px;
+    font-family: Roboto-Thin;
+    float: left;
+    color: #A1A1A1;
+    padding-top: 0px;
+    padding-left: 0px;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.calendar_day a {
+    cursor: pointer;
+    color: #A1A1A1
+}
+
+.calendar_currday {
+    background: #167870;
+}
+
+.calendar_currdayMouseOn {
+    background: #abaaaa;
+    color: White !important;
+}
+
+.calendar_currdayMouseOn a {
+    cursor: pointer;
+    color: White
+}
+
+.calendar_otherday {
+    background: #2d2d30;
+}
+
+.calendar_otherdayMouseOn {
+    background: #3a3a3b;
+}
+</style>
+<div id="calendarDiv"></div>

@@ -1,36 +1,6 @@
-<!DOCTYPE HTML>
-<html manifest="" lang="en-US">
-
-<head>
-    <meta charset="UTF-8">
-    <!-- 用户两指操作时，防止放大 -->
-    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,minimal-ui">
-    <title>Turnable</title>
-    <style>
-    #centerCircle {
-        border-radius: 125px;
-        background: url('http://images.cnitblog.com/i/636015/201406/151737329993303.jpg') no-repeat;
-        background-size: 270px 260px;
-        background-position: -10px -4px;
-        width: 250px;
-        height: 250px;
-        position: absolute;
-        top: 126px;
-        left: 36px;
-        color: white;
-        z-index: 11;
-        -webkit-transform: rotateZ(0deg);
-        border: 1px solid #f60;
-    }
-    </style>
-</head>
-
-<body>
-    <div id="centerCircle">
-    </div>
-    Rotate me on mobile device!
-    <script type="text/javascript">
-    //先把DOM存起来，以后就不用再重新请求了,节省资源。
+;
+define(function(require, exports, module) {
+ //先把DOM存起来，以后就不用再重新请求了,节省资源。
     var eleCircle = document.querySelector("#centerCircle");
     //获取圆心。注意，这里读的是CSS样式表中定义的样式
     var centerX = GetCircleStyle("left") + GetCircleStyle("width") / 2;
@@ -111,7 +81,4 @@
 
         return 180 / Math.PI * radian;
     }
-    </script>
-</body>
-
-</html>
+});

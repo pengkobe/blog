@@ -10,27 +10,39 @@
     <script src="../../public/common/js/lib/path.js"></script>
     <script src="http://cdn.bootcss.com/raphael/2.1.4/raphael-min.js"></script>
     <script src="../../public/common/js/lib/sea.js"></script>
-    <link rel="stylesheet" href="css/labroom.css">
+    <link rel="stylesheet" href="labroom.css">
+
+<link rel="stylesheet" href="../../public/common/js/lib/jquery-datatables/dataTables.tableTools.css"></script>
+<link rel="stylesheet" href="../../public/common/js/lib/jquery-datatables/jquery.dataTables.css"></script>
+ <link rel="stylesheet" href="../../public/common/js/lib/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript">
     seajs.config({
         base: '.',
         alias: {
-            // index page
+            // labroom page
             'labroom': 'labroom.js',
 
             // components
-            'navbar': 'navbar.js',
-            'treeList': 'treeList.js',
-            'accordionMenu': 'accordionMenu.js',
-            'svgmap': 'svgmap/svgmap.js?12',
+            'navbar': 'componets/navbar',
+            'treeList': 'componets/treeList',
+            'accordionMenu': 'componets/accordionMenu',
+            'datatableUX': 'componets/datatableUX',
 
-            'dashchart': 'dashchart.js?12',
-            'scatterchart': 'scatterchart.js?12',
-            'barchart': 'barchart.js?12',
+            // views
+            'dashchart': 'raphelchart/dashchart',
+            'scatterchart': 'raphelchart/scatterchart',
+            'barchart': 'raphelchart/barchart',
+            'svgmap': 'raphelchart/svgmap',
+
+            'zhuanpan': 'case_study/zhuanpan',
+
+            'calendar': 'jquery_plugins/calendar.js?123',
+            'datatable': 'jquery_plugins/datatable',
+
 
             // nav
-            'raphelchart': 'nav/raphelchart.js',
-            'daydayup': 'nav/daydayup.js',
+            'raphelchart': 'raphelchart.js',
+            'daydayup': 'daydayup.js',
 
         }
     });
@@ -41,8 +53,6 @@
     <div class="labroom-title">实验室</div>
     <div class="labroom-nav"> </div>
     <div class="content-panel">
-        <div id="raphael_charts" style="display:none">
-        </div>
         <div id="raphelchart" class="projectboard" style="display: none">
             <div class="menu" style="font-size: 12px; overflow: auto;">
             </div>
@@ -53,9 +63,34 @@
                 </div>
             </div>
         </div>
+
         <div id="raphelchartx" class="projectboard" style="display: none">
             raphelchartx
         </div>
+
+        <div id="jquery_plugins" class="projectboard" style="display: none">
+            <div class="menu" style="font-size: 12px; overflow: auto;">
+            </div>
+            <div class="page">
+                <div class="page-name" style="height: 30px">
+                </div>
+                <div class="page-content">
+                </div>
+            </div>
+        </div>
+
+
+        <div id="case_study" class="projectboard" style="display: none">
+            <div class="menu" style="font-size: 12px; overflow: auto;">
+            </div>
+            <div class="page">
+                <div class="page-name" style="height: 30px">
+                </div>
+                <div class="page-content">
+                </div>
+            </div>
+        </div>
+
         <div id="daydayup" class="projectboard" style="display: none">
             <div class="menu" style="font-size: 12px; overflow: auto;">
             </div>
@@ -68,9 +103,16 @@
         </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="svgmap/res/big_area.js"></script>
-    <script src="svgmap/map.js"></script>
-    <script src="helper.js"></script>
+     <script src="../../public/common/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="componets/svgmap/res/big_area.js"></script>
+    <script src="componets/svgmap/map.js"></script>
+    <script src="common/helper.js"></script>
+
+    <script src="../../public/common/js/lib/jquery-datatables/jquery.dataTables.js"></script>
+    <script src="../../public/common/js/lib/jquery-datatables/dataTables.tableTools.js"></script>
+<script src="../../public/common/js/lib/validator/jquery.validate.min.js"></script>
+<script src="../../public/common/js/lib/validator/additional-methods.min.js"></script>
+
     <script>
       // init
       seajs.use('labroom');

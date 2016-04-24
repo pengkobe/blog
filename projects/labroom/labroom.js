@@ -4,12 +4,11 @@ define(function(require, exports, module) {
     seajs.use("navbar", function(navFunc) {
         var data = [
             { itemName: '图表', url: 'raphelchart' },
-            { itemName: '日历插件', url: 'raphelchartx' },
-            { itemName: '表格管理插件', url: 'alarmManage' },
-            { itemName: '树形插件', url: 'deviceManage' },
+            { itemName: 'jquery插件', url: 'jquery_plugins' },
+            { itemName: '案例学习', url: 'case_study' },
+            { itemName: '树形插件', url: 'raphelchartx' },
             { itemName: '组织图', url: 'energyManage' },
-            { itemName: '代码片', url: 'staffManage' },
-            { itemName: '各种测试', url: 'staffManage' },
+            { itemName: '代码片', url: 'staffManage(undo)' },
             { itemName: '资料集', url: 'daydayup' },
         ];
 
@@ -36,6 +35,19 @@ define(function(require, exports, module) {
     });
     Path.map("#/raphelchartx").to(function() {
         clickCallback('raphelchartx');
+    });
+
+     Path.map("#/jquery_plugins").to(function() {
+        seajs.use('jquery_plugins', function(o) {
+             clickCallback('jquery_plugins');
+        });
+
+    });
+
+    Path.map("#/case_study").to(function() {
+        seajs.use('case_study', function(o) {
+            clickCallback('case_study');
+        });
     });
 
     Path.map("#/daydayup").to(function() {

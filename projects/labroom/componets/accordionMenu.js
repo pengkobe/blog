@@ -1,9 +1,9 @@
-define('accordionMenu', [], function(require, exports, module) {
-    $.fn.AccordionMenu = function(options) {
+define('accordionMenu', [], function (require, exports, module) {
+    $.fn.AccordionMenu = function (options) {
         var defaults = {
             selectable: true,
             //回调函数
-            selectFunc: function() {},
+            selectFunc: function () {  },
             tips: {
                 collapseTip: '收起分支',
                 expandTip: '展开分支',
@@ -14,10 +14,10 @@ define('accordionMenu', [], function(require, exports, module) {
         // 选项
         options = $.extend(defaults, options);
 
-        this.each(function() {
+        this.each(function () {
 
             var accordionMenu = $(this);
-            $.each($(accordionMenu).find('ul > li'), function() {
+            $.each($(accordionMenu).find('ul > li'), function () {
                 var that = $(this);
                 var text;
                 var url = '';
@@ -28,14 +28,15 @@ define('accordionMenu', [], function(require, exports, module) {
 
                     that.html('<span style="white-space:nowrap;" url="' + url + '"><a  style="display:inline-flex"></a> </span>');
                     that.find(' > span > a').text(text);
-
+                  
                     $(this).append(children);
-                } else {
+                }
+                else {
                     text = that.text();
 
                     url = that.attr('url');
                     that.html('<span style="white-space:nowrap;padding:5px 0px 5px 0px;" url="' + url + '"><a style="display:inline-flex"></a> </span>');
-
+                    
                     that.find(' > span > a').text(text);
                 }
             });
@@ -44,10 +45,10 @@ define('accordionMenu', [], function(require, exports, module) {
             $(accordionMenu).find('li:has(ul)').addClass('parent_li').find(' > span').attr('title', options.tips.collapseTip);
 
             // 收起/展开 .parent_li
-            $(accordionMenu).delegate('li > span', 'click', function(e) {
+            $(accordionMenu).delegate('li > span', 'click', function (e) {
                 var that = $(this);
                 url = that.attr('url');
-
+              
                 // 调用回调函数
                 options.selectFunc(url);
 
@@ -75,10 +76,10 @@ define('accordionMenu', [], function(require, exports, module) {
                 e.stopPropagation();
             });
 
-
+          
 
             // 获取选中项
-            var getSelectedItems = function() {
+            var getSelectedItems = function () {
                 return $(accordionMenu).find('li.li_selected');
             };
 
@@ -86,10 +87,10 @@ define('accordionMenu', [], function(require, exports, module) {
             var children = $(accordionMenu).find('li.parent_li ').find(' > ul > li');
 
             // children.is(':visible')
-            if (true) {
-                children.hide('fast');
+             if (true) {
+                 children.hide('fast');
                 $(this).attr('title', options.tips.expandTip)
-            }
+             }
         });
     };
 });

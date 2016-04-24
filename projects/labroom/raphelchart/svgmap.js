@@ -28,6 +28,6 @@
             // stateSettingsXmlPath: 'DashBoard/assets/svgmap/js/res/chinaMapSettings.xml'
 		});
 	}
-	
+
     module.exports = init;
 });

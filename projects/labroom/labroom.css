@@ -1,8 +1,8 @@
 @chartset "utf-8";
 /**/
 body {
-    background-color: #333;
-    color: #777;
+    background-color: #333 !important;
+    color: #777 !important;
     font-family: 微软雅黑;
 }
 
@@ -46,10 +46,10 @@ body {
     .labroom-nav > div {
         display: table-cell;
     }
-	
+
 	.labroom-nav a {
             display: block;
-            text-decoration: none; 
+            text-decoration: none;
             font-weight: bold;
             color: #DEDEDE;
         }
@@ -74,7 +74,7 @@ body {
     text-align: center;
 }
 
-.menu {    
+.menu {
     width: 200px;
     float: left;
     padding-bottom: 10000px;
@@ -161,4 +161,13 @@ body {
     overflow: hidden;
     padding-bottom: 10000px;
     margin-bottom: -10000px;
+}
+
+
+
+/*简单的响应式样式*/
+@media screen and (max-width: 720px) {
+  #centerCircle {
+    position: absolute;
+  }
 }
