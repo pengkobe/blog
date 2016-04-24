@@ -1,7 +1,6 @@
 ﻿; define(function (require, exports, module) {
 	// 加载插件
     require("accordionMenu");
-
     // 生成单个图
     function GenerateSingleChart(data, moduleName) {
         var datalen = data.length;
@@ -26,7 +25,6 @@
                     return;
                 }
                 var filename = url.split('\/');
-
                 if (url == "") { return; }
                 // 页头
                 $('#' + moduleName + '  .page-name').text(name);
@@ -55,7 +53,6 @@
     }
 
     function getItemRecursively(data, itemCode) {
-
         var retStr = '';
         var aa = "";
         for (var i = 0; i < data.length; i++) {
