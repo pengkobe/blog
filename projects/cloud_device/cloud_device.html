@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>云设施数据中心</title>
     <meta charset="utf-8" />
@@ -28,7 +27,7 @@
         position: absolute;
         width: 60px;
         height: 60px;
-        background: red;
+       /* background: red;*/
         cursor: pointer;
     }
 
@@ -38,6 +37,7 @@
        position: absolute;
        left: 5px;
        top:5px;
+       cursor: pointer;
     }
     </style>
 </head>
@@ -45,86 +45,86 @@
 <body>
     <!-- 主界面-->
     <div style="position: relative;" id="main_div">
-        <div class="main_data" style="top:350px;left: 160px">1xxx</div>
-        <div class="main_data" style="top:350px;right: 280px">2</div>
-        <div class="main_data" style="top:630px;left: 150px">3</div>
-        <div class="main_data" style="top:678px;left: 150px">4</div>
-        <div class="main_data" style="top:670px;right: 490px">5</div>
+        <div id="Data1"  class="main_data" style="top:350px;left: 160px; font-size: 32px;">1</div>
+        <div  id="Data2"  class="main_data" style="top:350px;left: 1100px ;font-size: 32px;">2</div>
+        <div   id="Area1"  class="main_data" style="top:630px;left: 140px">3</div>
+        <div id="Area2"  class="main_data" style="top:678px;left: 140px">4</div>
+        <div  id="Energy" class="main_data" style="top:670px;left: 890px">5</div>
         <img class="main" src="main.png" />
-        <div class="areaLink" style="top:628px;left: 55px;">5</div>
-        <div class="deviceLink" style="top:628px;right: 340px;">5</div>
+        <div class="areaLink" style="top:628px;left: 55px;"></div>
+        <div class="deviceLink" style="top:628px;right: 340px;"></div>
     </div>
     <!-- 电-->
     <div style="position: relative;display: none" id="electric_div">
         <img class="firstpage" src="firstoage.png" />
         <!-- 1-->
         <div style="position: absolute;top:200px;left: 460px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+            <div id="e_1_SumCount" style="font-size:25px">58</div>
+            <div id="e_1_engergy">2356 16722</div>
+            <div id="e_1_hzl">50%</div>
+            <div id="e_1_gzl">10%</div>
         </div>
         <!-- 2-->
         <div style="position: absolute;top:370px;left: 410px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+            <div id="e_2_SumCount" style="font-size:25px">58</div>
+            <div id="e_2_engergy">2356 16722</div>
+            <div id="e_2_hzl">50%</div>
+            <div id="e_2_gzl">10%</div>
         </div>
         <!-- 3-->
         <div style="position: absolute;top:520px;left: 660px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+             <div id="e_3_SumCount" style="font-size:25px">58</div>
+            <div id="e_3_engergy">2356 16722</div>
+            <div id="e_3_hzl">50%</div>
+            <div id="e_3_gzl">10%</div>
         </div>
         <!-- 4-->
         <div style="position: absolute;top:370px;left: 865px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+            <div id="e_4_SumCount" style="font-size:25px">58</div>
+            <div id="e_4_engergy">2356 16722</div>
+            <div id="e_4_hzl">50%</div>
+            <div id="e_4_gzl">10%</div>
         </div>
         <!-- 5-->
         <div style="position: absolute;top:200px;left: 810px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+            <div id="e_5_SumCount" style="font-size:25px">58</div>
+            <div id="e_5_engergy">2356 16722</div>
+            <div id="e_5_hzl">50%</div>
+            <div id="e_5_gzl">10%</div>
         </div>
         <img class="main" src="electric.png" />
-        <div class="waterLink" style="top:648px;left: 275px;">5</div>
+        <div class="waterLink" style="top:648px;left: 275px;"></div>
     </div>
     <!-- 水 -->
     <div style="position: relative;display: none" id="water_div">
      <img class="firstpage" src="firstoage.png" />
         <!-- 1-->
         <div style="position: absolute;top:175px;left: 500px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+             <div id="w_1_SumCount" style="font-size:25px">58</div>
+            <div id="w_1_engergy">2356 16722</div>
+            <div id="w_1_hzl">50%</div>
+            <div id="w_1_gzl">10%</div>
         </div>
         <!-- 2-->
         <div style="position: absolute;top:370px;left: 410px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+            <div id="w_2_SumCount" style="font-size:25px">58</div>
+            <div id="w_2_engergy">2356 16722</div>
+            <div id="w_2_hzl">50%</div>
+            <div id="w_2_gzl">10%</div>
         </div>
         <!-- 3-->
         <div style="position: absolute;top:370px;left: 895px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+             <div id="w_3_SumCount" style="font-size:25px">58</div>
+            <div id="w_3_engergy">2356 16722</div>
+            <div id="w_3_hzl">50%</div>
+            <div id="w_3_gzl">10%</div>
         </div>
         <!-- 4-->
         <div style="position: absolute;top:170px;left: 810px;color: #91DEEC;">
-            <div style="font-size:25px">58</div>
-            <div>2356 16722</div>
-            <div>50%</div>
-            <div>10%</div>
+            <div id="w_4_SumCount" style="font-size:25px">58</div>
+            <div id="w_4_engergy">2356 16722</div>
+            <div id="w_4_hzl">50%</div>
+            <div id="w_4_gzl">10%</div>
         </div>
         <img class="main" src="water.png" />
         <div class="electricLink" style="top:648px;left: 155px;">5</div>
