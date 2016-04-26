@@ -23,14 +23,17 @@
     }
 
     .areaLink,
-    .deviceLink, .electricLink, .waterLink,.buildingLink,.cbuildingLink {
+    .deviceLink,
+    .electricLink,
+    .waterLink,
+    .buildingLink,
+    .cbuildingLink {
         position: absolute;
         width: 60px;
         height: 60px;
        /* background: red;*/
         cursor: pointer;
     }
-
     .firstpage{
        width: 45px;
        height: 45px;
@@ -39,6 +42,13 @@
        top:5px;
        cursor: pointer;
     }
+    .unit{
+        font-size: 6px;
+            }
+
+        #electric_div,#main_div,#water_div,#building_div,#cbuilding_div{
+            font-size: 16px;
+        }
     </style>
 </head>
 
@@ -46,10 +56,10 @@
     <!-- 主界面-->
     <div style="position: relative;" id="main_div">
         <div id="Data1"  class="main_data" style="top:350px;left: 160px; font-size: 32px;">1</div>
-        <div  id="Data2"  class="main_data" style="top:350px;left: 1100px ;font-size: 32px;">2</div>
-        <div   id="Area1"  class="main_data" style="top:630px;left: 140px">3</div>
+        <div id="Data2"  class="main_data" style="top:350px;left: 1100px ;font-size: 32px;">2</div>
+        <div id="Area1"  class="main_data" style="top:630px;left: 140px">3</div>
         <div id="Area2"  class="main_data" style="top:678px;left: 140px">4</div>
-        <div  id="Energy" class="main_data" style="top:670px;left: 890px">5</div>
+        <div id="Energy" class="main_data" style="top:670px;left: 890px">5</div>
         <img class="main" src="main.png" />
         <div class="areaLink" style="top:628px;left: 55px;"></div>
         <div class="deviceLink" style="top:628px;right: 340px;"></div>
@@ -127,37 +137,37 @@
             <div id="w_4_gzl">10%</div>
         </div>
         <img class="main" src="water.png" />
-        <div class="electricLink" style="top:648px;left: 155px;">5</div>
+        <div class="electricLink" style="top:648px;left: 155px;"></div>
     </div>
 
     <!-- 建筑 -->
     <div style="position: relative;display: none" id="building_div">
      <img class="firstpage" src="firstoage.png" />
          <div style="position: absolute;top:228px;left: 855px;color: #91DEEC;">
-            <div style="font-size:30px">1670</div>
-            <div style="font-size:16px;margin-top: 32px">2356 16722</div>
-            <div style="font-size:16px;margin-top: 8px">645 8633</div>
-            <div style="font-size:16px;margin-top: 8px">543 655</div>
-            <div style="font-size:30px;margin-top: 35px">234</div>
-            <div style="font-size:30px;margin-top: 20px">15557</div>
+            <div id="b_mj" style="font-size:30px">1670</div>
+            <div id="b_dss_dlj" style="font-size:16px;margin-top: 32px">2356 16722</div>
+            <div id="b_sss_slj" style="font-size:16px;margin-top: 8px">645 8633</div>
+            <div id="b_yss_ylj" style="font-size:16px;margin-top: 8px">543 655</div>
+            <div id="b_sbsl" style="font-size:30px;margin-top: 35px">234</div>
+            <div id="b_sjsl" style="font-size:30px;margin-top: 20px">15557</div>
         </div>
 
         <img class="main" src="building.png" />
-         <div class="cbuildingLink" style="top:658px;left: 296px;">5</div>
+         <div class="cbuildingLink" style="top:658px;left: 296px;"></div>
     </div>
     <!-- 写字楼 -->
     <div style="position: relative;display: none" id="cbuilding_div">
      <img class="firstpage" src="firstoage.png" />
       <div style="position: absolute;top:228px;left: 855px;color: #91DEEC;">
-            <div style="font-size:30px">1670</div>
-            <div style="font-size:16px;margin-top: 32px">2356 16722</div>
-            <div style="font-size:16px;margin-top: 8px">645 8633</div>
-            <div style="font-size:16px;margin-top: 8px">543 655</div>
-            <div style="font-size:30px;margin-top: 35px">234</div>
-            <div style="font-size:30px;margin-top: 20px">15557</div>
+            <div id="cb_mj" style="font-size:30px">1670</div>
+            <div id="cb_dss_dlj" style="font-size:16px;margin-top: 32px">2356 16722</div>
+            <div id="cb_sss_slj" style="font-size:16px;margin-top: 8px">645 8633</div>
+            <div id="cb_yss_ylj" style="font-size:16px;margin-top: 8px">543 655</div>
+            <div id="cb_sbsl" style="font-size:30px;margin-top: 35px">234</div>
+            <div id="cb_sjsl" style="font-size:30px;margin-top: 20px">15557</div>
         </div>
         <img class="main" src="cbuilding.png" />
-        <div class="buildingLink" style="top:658px;left: 180px;">5</div>
+        <div class="buildingLink" style="top:658px;left: 180px;"></div>
     </div>
     </div>
     <!-- js -->

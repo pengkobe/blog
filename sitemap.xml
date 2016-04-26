@@ -1,0 +1,14 @@
+<urlset xmlns=http://www.google.com/schemas/sitemap/0.9>
+        <url>
+        <loc>http://www.kobepeng.com</loc>
+        <lastmod>2016-01-28T04:20-08:00</lastmod>
+        <changefreq>always</changefreq>
+        <priority>1.0</priority>
+        </url>
+        <url>
+        <loc>http://www.kobepeng.com/p/*</loc>
+        <lastmod>2016-01-28T04:20-08:00<</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+        </url>
+ </urlset>
