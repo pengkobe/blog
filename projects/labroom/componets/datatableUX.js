@@ -221,7 +221,7 @@ author:kobepeng
                     }
                 }
             });
-        } table
+        }
 
         //全选/反选切换
         function generateSelectAll() {

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="../../public/common/js/lib/jquery-datatables/dataTables.tableTools.css"></script>
 <link rel="stylesheet" href="../../public/common/js/lib/jquery-datatables/jquery.dataTables.css"></script>
  <link rel="stylesheet" href="../../public/common/js/lib/bootstrap/css/bootstrap.min.css">
+ <link rel="stylesheet" href="http://cdn.bootcss.com/highlight.js/9.1.0/styles/atelier-cave-dark.min.css">
     <script type="text/javascript">
     seajs.config({
         base: '.',
@@ -39,6 +40,7 @@
             'calendar': 'jquery_plugins/calendar.js?123',
             'datatable': 'jquery_plugins/datatable',
 
+            'js_add_class': 'snippets/js_add_class',
 
             // nav
             'raphelchart': 'raphelchart.js',
@@ -91,7 +93,7 @@
             </div>
         </div>
 
-        <div id="daydayup" class="projectboard" style="display: none">
+        <div id="snippets" class="projectboard" style="display: none">
             <div class="menu" style="font-size: 12px; overflow: auto;">
             </div>
             <div class="page">
@@ -101,21 +103,37 @@
                 </div>
             </div>
         </div>
+
+        <div id="daydayup" class="projectboard" style="display: none">
+            <div class="page">
+                <div class="page-name" style="height: 30px">
+                </div>
+                <div class="page-content">
+                    这里将放置资料集。
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-     <script src="../../public/common/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/highlight.js/9.1.0/highlight.min.js"></script>
+    <script src="../../public/common/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../public/common/js/lib/jquery-datatables/jquery.dataTables.js"></script>
+    <script src="../../public/common/js/lib/jquery-datatables/dataTables.tableTools.js"></script>
+    <script src="../../public/common/js/lib/validator/jquery.validate.min.js"></script>
+    <script src="../../public/common/js/lib/validator/additional-methods.min.js"></script>
+
     <script src="componets/svgmap/res/big_area.js"></script>
     <script src="componets/svgmap/map.js"></script>
     <script src="common/helper.js"></script>
 
-    <script src="../../public/common/js/lib/jquery-datatables/jquery.dataTables.js"></script>
-    <script src="../../public/common/js/lib/jquery-datatables/dataTables.tableTools.js"></script>
-<script src="../../public/common/js/lib/validator/jquery.validate.min.js"></script>
-<script src="../../public/common/js/lib/validator/additional-methods.min.js"></script>
+<!-- 代码高亮 -->
+
+
 
     <script>
       // init
       seajs.use('labroom');
+      hljs.initHighlightingOnLoad();
     </script>
 </body>
 

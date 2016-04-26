@@ -2,4 +2,3 @@ node_modules/*
 backup/*
 *.log
 .DS_Stor
-sitemap.xml

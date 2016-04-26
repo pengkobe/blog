@@ -9,9 +9,9 @@
     var finishedload = false;
     var lockloading = false;
     var loadCount = 0;
-    // 一次加载10天
+    // 第一次加载前5天
     var lastdate = new Date();
-    lastdate.setDate(lastdate.getDate() - 0);
+    lastdate.setDate(lastdate.getDate() - 5);
     // ajax
     var xmlHttpReq = null;
 
@@ -41,7 +41,6 @@
                 } else {
                     this.appendChild(fragment);
                 }
-
                 nodes = null;
                 fragment = null;
             };
@@ -140,16 +139,16 @@
     var taskobj = {
         init: function() {
             helper.init();
-            this.loadData();
+            this.loadData(1);
             this.bindEvents();
         },
-        loadData: function() {
+        loadData: function(tag) {
             var that = this;
             var fullyear;
             var month;
             var day;
             var datestr;
-            if ((helper.getScrollTop() + helper.getClientHeight() == helper.getScrollHeight()) || helper.getScrollTop() == 0) {
+            if (tag || (helper.getScrollTop() + helper.getClientHeight() == helper.getScrollHeight()) || helper.getScrollTop() == 0) {
                 //加载完成后不再请求
                 if (!finishedload) {
                     // 锁住后不再请求
@@ -190,9 +189,9 @@
             var page = document.getElementsByClassName("page")[0];
             var task_ul = document.querySelector("#task_ul");
             window.onscroll = function() {
-                    that.loadData();
-                }
-                // 新增
+                that.loadData();
+            }
+            // 新增
             post_form = document.getElementById("post_new");
             helper.addEvent(post_form, 'submit', function(e) {
                 url = '/task/new';
@@ -365,7 +364,7 @@
                         };
                         xmlHttpReq.send();
                     }
-                }
+            }
                 // 更新
             document.getElementById("saveEdit").onclick = function(e) {
                     title = document.getElementById("editInput").value;
@@ -383,6 +382,11 @@
                                 tips_div.innerHTML = '更新成功.';
                                 document.getElementById(titleid).setAttribute("realTitle", title);
                                 document.getElementById(titleid).innerHTML = data._m_title;
+                                document.getElementById(titleid).parentNode.parentNode.className="";
+                                // 设置一点点动画效果
+                                setTimeout(function(){
+                                    document.getElementById(titleid).parentNode.parentNode.className="htmltransition";
+                                }, 20);
                             } else {
                                 tips_div.innerHTML = '更新失败.';
                             }
@@ -396,7 +400,7 @@
                         }
                     };
                     xmlHttpReq.send(encodeURI("title=" + title));
-                }
+            }
                 // 取消
             document.getElementById("cancelEdit").onclick = function(e) {
                 document.getElementById("BgDiv").style.display = "none";

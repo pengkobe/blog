@@ -177,7 +177,7 @@ blockquote p {
 
 article {
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     margin: 3% 20% 5% 15%;
     padding: 2% 5% 5% 5%;
     width: 55%;
@@ -250,12 +250,13 @@ H4 {
 code {
     font-size: 14px;
     font-family: inherit;
+    background: #f6f6f6;
 }
 
 nav {
     float: left;
     font-family: "Microsoft YaHei";
-    font-size: 1.1em;
+    font-size: 1em;
     text-transform: uppercase;
     width: 9em;
     text-align: left;
@@ -406,7 +407,6 @@ article a:hover {
     padding-left: 25px;
 }
 
-
 /*
   搜索框样式
 */
@@ -420,7 +420,7 @@ article a:hover {
 }
 
 .searchinput {
-    width: 150px;
+    width: 180px;
     height: 25px;
 }
 
@@ -432,7 +432,7 @@ article a:hover {
 .searchbutton {
     position: absolute;
     top: 0px;
-    left: 153px;
+    left: 183px;
     width: 25px;
     height: 30px;
     line-height: 30px;

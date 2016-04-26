@@ -6,9 +6,9 @@ define(function(require, exports, module) {
             { itemName: '图表', url: 'raphelchart' },
             { itemName: 'jquery插件', url: 'jquery_plugins' },
             { itemName: '案例学习', url: 'case_study' },
-            { itemName: '树形插件', url: 'raphelchartx' },
-            { itemName: '组织图', url: 'energyManage' },
-            { itemName: '代码片', url: 'staffManage(undo)' },
+            { itemName: '代码片', url: 'snippets' },
+            //{ itemName: '树形插件', url: 'raphelchartx' },
+            //{ itemName: '组织图', url: 'energyManage' },
             { itemName: '资料集', url: 'daydayup' },
         ];
 
@@ -43,10 +43,15 @@ define(function(require, exports, module) {
         });
 
     });
-
-    Path.map("#/case_study").to(function() {
+      Path.map("#/case_study").to(function() {
         seajs.use('case_study', function(o) {
             clickCallback('case_study');
+        });
+    });
+
+    Path.map("#/snippets").to(function() {
+        seajs.use('snippets', function(o) {
+            clickCallback('snippets');
         });
     });
 
@@ -67,7 +72,6 @@ define(function(require, exports, module) {
     Path.listen();
 
 });
-
 
 
 /* api
