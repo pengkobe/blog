@@ -373,6 +373,7 @@ article a:hover {
     padding: 10px;
     border: 1px solid #f8f8d5;
     font-family: "Microsoft Yahei";
+
 }
 
 #menuIndex a {
@@ -721,7 +722,7 @@ article a:hover {
 .now_page {
     background-color: #fff !important;
     cursor: text;
-    color: blue !important;
+    color: #4a75b5  !important;
 }
 
 
@@ -780,7 +781,6 @@ article a:hover {
 
 
 /*标签云*/
-
 #tagscloud {
     position: relative;
     margin: 20px auto 0px;
@@ -790,9 +790,8 @@ article a:hover {
 
 #tagscloud a {
     position: absolute;
-    padding: 3px 6px;
     top: 0px;
-    font-weight: bold;
+    font-size: 18px;
     text-decoration: none;
     left: 0px
 }
@@ -804,7 +803,6 @@ article a:hover {
 
 
 /* 上传 */
-
 #dropbox {
     margin-top: 50px;
     background: #f0f2f4;
@@ -905,5 +903,8 @@ article a:hover {
         /* Saf3+, Chrome */
         border-radius: 1em;
         border-width: 0.15em;
+    }
+    #menuIndex{
+          display: none;
     }
 }

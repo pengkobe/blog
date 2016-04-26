@@ -11,7 +11,7 @@
     var loadCount = 0;
     // 第一次加载前5天
     var lastdate = new Date();
-    lastdate.setDate(lastdate.getDate() - 5);
+    lastdate.setDate(lastdate.getDate() - 4);
     // ajax
     var xmlHttpReq = null;
 
