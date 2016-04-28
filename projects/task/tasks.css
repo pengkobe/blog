@@ -13,6 +13,34 @@ body { background:#EEE; }
   border-bottom: solid 1px #777;
   height: 35px;
 }
+/*倒计时*/
+#timer{
+  position: fixed;
+  left: 0px;
+  top:0px;
+  padding: 5px;
+  background: #333;
+  text-align: center;
+  direction: rtl;
+}
+#timer_day{
+  display: inline-block;
+  width: 60px;
+  font-size: 32px;
+  color: orange;
+}
+#timer_Hour{
+  display: inline-block;
+  width: 30px;
+  font-size: 22px;
+  color: green;
+}
+.timer-label{
+  display: inline-block;
+  color: #ccc;
+  font-size: 12px;
+}
+
 .htmltransition{
      animation-name:fadeInRight;/*动画属性名，也就是我们前面keyframes定义的动画名*/
      animation-duration: 1s;/*动画持续时间*/

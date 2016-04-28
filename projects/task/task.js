@@ -139,6 +139,7 @@
     var taskobj = {
         init: function() {
             helper.init();
+            this.dayCount();
             this.loadData(1);
             this.bindEvents();
         },
@@ -177,6 +178,17 @@
                     }
                 }
             }
+        },
+        // 倒计时
+        dayCount: function() {
+            var begin_date = new Date();
+            var end_date = new Date('2016/08/31 23:59');
+            var millisecond=end_date.getTime()-begin_date.getTime();
+            var days=Math.floor(millisecond/(24*3600*1000))
+            var leftsecond=millisecond%(24*3600*1000)
+            var hours=Math.floor(leftsecond/(3600*1000));
+            document.getElementById('timer_day').innerHTML=days;
+            document.getElementById('timer_Hour').innerHTML=hours;
         },
         bindEvents: function() {
             var title;

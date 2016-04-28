@@ -2,6 +2,7 @@
  * MIT License
  * @author kobepeng <http://www.kobepeng.com>
  * @datetime 2016-1-16 10:24:42
+ * based on Raphael.js
  */
 ;
 define(function(require, exports, module) {
