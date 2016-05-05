@@ -9,6 +9,8 @@
     var finishedload = false;
     var lockloading = false;
     var loadCount = 0;
+    var hasFilter = false;
+    var allContent = '';
     // 第一次加载前5天
     var lastdate = new Date();
     lastdate.setDate(lastdate.getDate() - 4);
@@ -142,14 +144,19 @@
             this.dayCount();
             this.loadData(1);
             this.bindEvents();
+            this.taskFilter();
         },
         loadData: function(tag) {
+            if(hasFilter){
+                return;
+            }
             var that = this;
             var fullyear;
             var month;
             var day;
             var datestr;
-            if (tag || (helper.getScrollTop() + helper.getClientHeight() == helper.getScrollHeight()) || helper.getScrollTop() == 0) {
+            // || helper.getScrollTop() == 0(使得滚动碰触上边界也能加载)
+            if (tag || (helper.getScrollTop() + helper.getClientHeight() == helper.getScrollHeight()) ) {
                 //加载完成后不再请求
                 if (!finishedload) {
                     // 锁住后不再请求
@@ -452,6 +459,51 @@
             // 使用模板引擎改装后只需要简单的几行代码
             var html = helper.taskTpl('task_tpl', data);
             document.getElementById("task_ul").appendHTML(html);
+        },
+        taskFilter:function(){
+            var filter_unfinished = document.getElementById("filter_unfinished");
+            var filter_all = document.getElementById("filter_all");
+            // 任务筛选
+           filter_unfinished.onclick = function(e) {
+                    this.className="active";
+                    filter_all.className="";
+                    if(!hasFilter){
+                        hasFilter = true;
+                    }else{
+                        return false;
+                    }
+                    //设置请求（没有真正打开，true：表示异步
+                    xmlHttpReq.open("get", '/task/unfinished', true);
+                    xmlHttpReq.onreadystatechange = function() {
+                                if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                                var data = eval(xmlHttpReq.responseText);
+                                if (data.length == 0) {
+                                    document.getElementById('loading_div').style.display = "block";
+                                    document.getElementById('loading_div').innerHTML = '没有记录.';
+                                    // 2s后解锁
+                                    setTimeout(function() {
+                                        document.getElementById('loading_div').style.display = "none";
+                                    }, 2000);
+                                    console.log('finishedload');
+                                    return;
+                                } else {
+                                    var html = helper.taskTpl('task_tpl', data);
+                                    allContent = document.getElementById("task_ul").innerHTML;
+                                    document.getElementById("task_ul").innerHTML= html;
+                                }
+                            }
+                        };
+                        xmlHttpReq.send();
+           }
+
+            filter_all.onclick = function(e) {
+                    this.className="active";
+                    filter_unfinished.className="";
+                    if(hasFilter){
+                        hasFilter = false;
+                        document.getElementById("task_ul").innerHTML= allContent;
+                    }
+           }
         }
     }
     taskobj.init();

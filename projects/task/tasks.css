@@ -75,6 +75,24 @@ a:hover { color:#FF3300; }
     margin-left:5px;
 }
 
+ul.task-filter{
+    position: absolute;
+    left: 50%;
+    top: 250px;
+    transform: translate(-50%,0%);
+    margin-left: -440px;
+    list-style: none;
+}
+ul.task-filter >li:hover {
+  color: blue;
+}
+ul.task-filter >li {
+  cursor: pointer;
+}
+ul.task-filter >li.active{
+  background: #aaa;
+}
+
 .time{
     font-size: 12px;
 }
@@ -204,6 +222,10 @@ a:hover { color:#FF3300; }
   .page {
     width: 90%;
   }
+  #timer{
+    right: 0px;
+    left: auto;
+  }
   h4{
     font-size: 16px;
   }
@@ -227,5 +249,14 @@ a:hover { color:#FF3300; }
   }
    .tasks ul li del{
      width: 90%;
+   }
+   ul.task-filter{
+    position:fixed;
+    bottom: 20px;
+    right: 0px;
+    left: auto;
+    top: auto;
+    margin-left: auto;
+    list-style: none;
    }
 }

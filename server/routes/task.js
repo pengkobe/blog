@@ -28,6 +28,18 @@ app.get('/all', function (req, res) {
   });
 });
 
+app.get('/unfinished', function (req, res) {
+   var haslogin = req.session.user? 1 :0;
+   Task.getByIsfinished( haslogin,false,function (err, tasks, total) {
+    if (err) {
+      tasks = [];
+      console.log(error);
+    }
+    res.json(tasks);
+  });
+});
+
+
 app.post('/five', function (req, res) {
    var haslogin = req.session.user? 1 :0;
    var lastdate = req.body.lastdate ? new Date(req.body.lastdate) : new Date('2016/01/01');
