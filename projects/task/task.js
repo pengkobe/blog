@@ -132,7 +132,26 @@
                 // 第一个参数指定参数名称,第二个参数为方法体，最后一个参数传数据
                 return new Function('tasks', code.replace(/[\r\t\n]/g, ''))(tasks);
             };
-        }
+        },
+        // 函数节流
+        throttle: function(method, context) {
+            clearTimeout(method.tId);
+            method.tId = setTimeout(function() {
+                method.call(context);
+            }, 120);
+        },
+        // 函数节流方式2,闭包,impress方式
+        // 调用方式如:window.onresize = throttle(myFunc, 100);
+        // throttle: function(fn, delay) {
+        //     var timer = null;
+        //     return function() {
+        //         var context = this,args = arguments;
+        //         clearTimeout(timer);
+        //         timer = setTimeout(function() {
+        //             fn.apply(context, args);
+        //         }, delay);
+        //     };
+        // }
     }
 
     // 任务页
@@ -189,9 +208,11 @@
             var page = document.getElementsByClassName("page")[0];
             var task_ul = document.querySelector("#task_ul");
             window.onscroll = function() {
-                that.loadData();
-            }
-            // 新增
+                    // 使用函数节流
+                    helper.throttle(that.loadData, that);
+                    // that.loadData();
+                }
+                // 新增
             post_form = document.getElementById("post_new");
             helper.addEvent(post_form, 'submit', function(e) {
                 url = '/task/new';
@@ -364,7 +385,7 @@
                         };
                         xmlHttpReq.send();
                     }
-            }
+                }
                 // 更新
             document.getElementById("saveEdit").onclick = function(e) {
                     title = document.getElementById("editInput").value;
@@ -382,10 +403,10 @@
                                 tips_div.innerHTML = '更新成功.';
                                 document.getElementById(titleid).setAttribute("realTitle", title);
                                 document.getElementById(titleid).innerHTML = data._m_title;
-                                document.getElementById(titleid).parentNode.parentNode.className="";
+                                document.getElementById(titleid).parentNode.parentNode.className = "";
                                 // 设置一点点动画效果
-                                setTimeout(function(){
-                                    document.getElementById(titleid).parentNode.parentNode.className="htmltransition";
+                                setTimeout(function() {
+                                    document.getElementById(titleid).parentNode.parentNode.className = "htmltransition";
                                 }, 20);
                             } else {
                                 tips_div.innerHTML = '更新失败.';
@@ -400,7 +421,7 @@
                         }
                     };
                     xmlHttpReq.send(encodeURI("title=" + title));
-            }
+                }
                 // 取消
             document.getElementById("cancelEdit").onclick = function(e) {
                 document.getElementById("BgDiv").style.display = "none";
