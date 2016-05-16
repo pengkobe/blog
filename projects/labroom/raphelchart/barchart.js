@@ -57,8 +57,8 @@ define(function(require, exports, module) {
                 max = Math.max.apply(Math, data),
                 // label高度
                 Y = (height - paddingBottom - paddingTop) / data.length;
-            // 是否显示标签
-            is_label_visible = false,
+                // 是否显示标签
+                is_label_visible = false,
                 // 标题
                 r.text(option.width / 2, 10, option.title).attr(title),
                 bar_label = r.text(option.width / 2, 10, "").attr(tooltip).hide(),
@@ -67,9 +67,9 @@ define(function(require, exports, module) {
                 // 底部 0
                 // t0 = r.text(paddingLeft-14, height-5, 0).attr(txt).toBack(),
                 blanket = r.set();
-            var barRanges = [];
-            var barBackup = [];
-            var indexline = r.rect(0, 0, 1, (height - paddingTop - 12)).attr({ fill: "#1E90FF", "stroke-width": 0, opacity: 0.6 }).hide();
+                var barRanges = [];
+                var barBackup = [];
+                var indexline = r.rect(0, 0, 1, (height - paddingTop - 12)).attr({ fill: "#1E90FF", "stroke-width": 0, opacity: 0.6 }).hide();
 
             //X 坐标轴 20
             r.path("M0," + (height - 12) + "," + (width - 10) + "," + (height - 12)).attr({ stroke: "#505050", "stroke-width": 0.5 });
@@ -204,5 +204,4 @@ define(function(require, exports, module) {
             }
         }
     }
-
 });

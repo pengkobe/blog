@@ -6,6 +6,29 @@ body {
     font-family: 微软雅黑;
 }
 
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width: 3px;
+    height: 5px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #111;
+    border-radius: 1px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #aaa;
+    -webkit-box-shadow: inset 0 0 6px #333;
+}
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: #555;
+    }
+
 .labroom-title {
     font-size: 18px;
     text-align: center;
@@ -162,6 +185,11 @@ body {
     padding-bottom: 10000px;
     margin-bottom: -10000px;
 }
+.page > hr{
+    margin-top: 0px;
+    border-color: #777;
+}
+
 
 
 

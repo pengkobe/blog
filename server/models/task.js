@@ -86,7 +86,7 @@ Task.getAll = function(haslogin,callback) {
          if (err) {
            return callback(err);
          }
-		 //解析 markdown 为 html
+		    //解析 markdown 为 html
           docs.forEach(function (doc) {
                doc._m_title = marked(doc.title);
           });
@@ -97,6 +97,44 @@ Task.getAll = function(haslogin,callback) {
     });
   });
 };
+
+Task.getByIsfinished = function(haslogin,isfinished,callback) {
+  var query={};
+  if(!haslogin){
+    query.isPrivate = 0;
+  }
+  query.finished = isfinished;
+  //打开数据库
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);
+    }
+    //读取 posts 集合
+    db.collection('tasks', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      }
+    collection.count(query, function (err, total) {
+        collection.find(query).sort({
+          createTime: -1,
+        }).toArray(function (err, docs) {
+         mongodb.close();
+         if (err) {
+           return callback(err);
+         }
+        //解析 markdown 为 html
+        docs.forEach(function (doc) {
+               doc._m_title =  marked(doc.title? doc.title:'no message');
+         });
+
+         callback(null, docs,total);
+       });
+      });
+    });
+  });
+};
+
 
 Task.update = function(_id, title, callback) {
   mongodb.open(function (err, db) {

@@ -13,6 +13,34 @@ body { background:#EEE; }
   border-bottom: solid 1px #777;
   height: 35px;
 }
+/*倒计时*/
+#timer{
+  position: fixed;
+  left: 0px;
+  top:0px;
+  padding: 5px;
+  background: #333;
+  text-align: center;
+  direction: rtl;
+}
+#timer_day{
+  display: inline-block;
+  width: 60px;
+  font-size: 32px;
+  color: orange;
+}
+#timer_Hour{
+  display: inline-block;
+  width: 30px;
+  font-size: 22px;
+  color: green;
+}
+.timer-label{
+  display: inline-block;
+  color: #ccc;
+  font-size: 12px;
+}
+
 .htmltransition{
      animation-name:fadeInRight;/*动画属性名，也就是我们前面keyframes定义的动画名*/
      animation-duration: 1s;/*动画持续时间*/
@@ -45,6 +73,24 @@ a:hover { color:#FF3300; }
     color:#e00;
     font-size:12px;
     margin-left:5px;
+}
+
+ul.task-filter{
+    position: absolute;
+    left: 50%;
+    top: 250px;
+    transform: translate(-50%,0%);
+    margin-left: -440px;
+    list-style: none;
+}
+ul.task-filter >li:hover {
+  color: blue;
+}
+ul.task-filter >li {
+  cursor: pointer;
+}
+ul.task-filter >li.active{
+  background: #aaa;
 }
 
 .time{
@@ -176,6 +222,10 @@ a:hover { color:#FF3300; }
   .page {
     width: 90%;
   }
+  #timer{
+    right: 0px;
+    left: auto;
+  }
   h4{
     font-size: 16px;
   }
@@ -199,5 +249,14 @@ a:hover { color:#FF3300; }
   }
    .tasks ul li del{
      width: 90%;
+   }
+   ul.task-filter{
+    position:fixed;
+    bottom: 20px;
+    right: 0px;
+    left: auto;
+    top: auto;
+    margin-left: auto;
+    list-style: none;
    }
 }

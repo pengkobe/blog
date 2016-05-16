@@ -37,13 +37,13 @@ define(function(require, exports, module) {
         clickCallback('raphelchartx');
     });
 
-     Path.map("#/jquery_plugins").to(function() {
+    Path.map("#/jquery_plugins").to(function() {
         seajs.use('jquery_plugins', function(o) {
-             clickCallback('jquery_plugins');
+            clickCallback('jquery_plugins');
         });
 
     });
-      Path.map("#/case_study").to(function() {
+    Path.map("#/case_study").to(function() {
         seajs.use('case_study', function(o) {
             clickCallback('case_study');
         });
@@ -61,7 +61,6 @@ define(function(require, exports, module) {
         });
     });
 
-
     Path.map("#/raphelchartx").to(function() {
         debugger;
     });
@@ -70,7 +69,6 @@ define(function(require, exports, module) {
     Path.rescue(notFound);
 
     Path.listen();
-
 });
 
 
@@ -94,5 +92,4 @@ Path.map("#/users/:user_id").to(function(){
                return false;
            }
        ]);
-
       Path.root("#/users"); */
