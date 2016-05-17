@@ -12,7 +12,8 @@ define(function(require, exports, module) {
 
     var data = [
         { level: 1, itemCode: 1, itemName: '抽奖转盘',  url: baseUrl + 'zhuanpan' },
-        { level: 1, itemCode: 1, itemName: 'web组件',  url: baseUrl + 'web_components' }
+        { level: 1, itemCode: 2, itemName: 'web组件',  url: baseUrl + 'web_components' },
+
     ];
     loadData(moduleName, id, data);
 });

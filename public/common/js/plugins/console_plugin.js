@@ -1,4 +1,5 @@
 // Avoid `console` errors in browsers that lack a console.
+// 防止不支持控制台的浏览器报错，(⊙o⊙)…kobepeng还真没听说过
 (function() {
     var method;
     var noop = function () {};

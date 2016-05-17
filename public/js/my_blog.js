@@ -47,7 +47,9 @@ var operation = {
             //ajax请求的url
             url: '/autocomplete',
             showdivId: 'autodiv',
-            select: function() {},
+            select: function() {
+                document.getElementById('searchartical').submit();
+            },
             style: {},
         };
         AutoComplete(pr);

@@ -120,7 +120,9 @@
                 var val = target.innerHTML;
                 self.autoElement.value = val;
                 self.closeDiv();
-                self.config.select.call(self, key, val);
+				setTimeout(function(){
+					 self.config.select.call(self, key, val);
+				}, 60);
             });
         },
         ////关闭下拉框

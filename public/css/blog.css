@@ -2,6 +2,9 @@
 body {
     background-color: #fff;
 }
+article p,article ol,article li{
+    line-height:38px;
+}
 
 img {
     max-width: 100%;
@@ -213,6 +216,9 @@ H1 {
 
 
 /* 首页文章列表标题 */
+h1,h2{
+   text-transform: uppercase;
+}
 
 h2 a {
     color: #444 !important;
@@ -223,7 +229,7 @@ h2 a {
 }
 
 h2 a:hover {
-    color: #f33 !important;
+    color: #2a6496 !important;
     text-decoration: none !important;
 }
 
@@ -238,6 +244,7 @@ H3 {
     width: 98%;
     line-height: 150%;
     color: #666666;
+    font-size: 24px;
 }
 
 H4 {
@@ -281,19 +288,28 @@ article a {
     color: #026ed2;
     text-decoration: none;
     border-bottom: 3px solid transparent;
+    font-weight: 600;
 }
 
 article a:hover {
-    text-decoration: underline;
+    color: #0079ec;
+    border-bottom:  3px solid #f1ece9;
 }
 
 .index-title {
-    padding: 8px;
-    position: relative;
+    /*padding: 8px;
     border: dashed 1px #d9d9d9;
-    background: rgba(220, 220, 220, .5)
+    background: rgba(220, 220, 220, .5)*/
+    font-size:32px;
+    margin: 30px 0px;
+    color:#262b30;
+    position: relative;
+   
 }
-
+article > h2:nth-child(3){
+    margin-top: 0px !important;
+}
+/*
 .index-title:before {
     content: '';
     border-left: 2px solid #aaa;
@@ -301,7 +317,7 @@ article a:hover {
     left: -2px;
     height: 100%;
     top: 0%;
-}
+}*/
 
 .index-info {
     margin-bottom: 5px;
