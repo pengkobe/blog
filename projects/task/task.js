@@ -138,7 +138,26 @@
                 // 第一个参数指定参数名称,第二个参数为方法体，最后一个参数传数据
                 return new Function('tasks', code.replace(/[\r\t\n]/g, ''))(tasks);
             };
-        }
+        },
+        // 函数节流
+        throttle: function (method, context) {
+            clearTimeout(method.tId);
+            method.tId = setTimeout(function () {
+                method.call(context);
+            }, 120);
+        },
+        // 函数节流方式2,闭包,impress方式
+        // 调用方式如:window.onresize = throttle(myFunc, 100);
+        // throttle: function(fn, delay) {
+        //     var timer = null;
+        //     return function() {
+        //         var context = this,args = arguments;
+        //         clearTimeout(timer);
+        //         timer = setTimeout(function() {
+        //             fn.apply(context, args);
+        //         }, delay);
+        //     };
+        // }
     }
 
     // 任务页
@@ -211,8 +230,11 @@
             var that = this;
             var page = document.getElementsByClassName("page")[0];
             var task_ul = document.querySelector("#task_ul");
+
             window.onscroll = function () {
-                that.loadData();
+                // 使用函数节流
+                helper.throttle(that.loadData, that);
+                // that.loadData();
             }
             // 新增
             post_form = document.getElementById("post_new");
@@ -234,7 +256,6 @@
                         var nowStr = years + "-" + months + "-" + days;
                         var html = helper.taskTpl('task_tpl', data.tasks);
                         if (newest == nowStr) {
-                            debugger;
                             var topElep = topEle.parentNode;
                             topElep.appendHTML(html, 'insertafter');
                         } else {
@@ -381,29 +402,30 @@
                     xmlHttpReq.send();
                 }
                 if (ele.name == 'delete') {
-                    var id = ele.getAttribute('titleid');
-                    url = '/task/' + id + '/delete';
-                    xmlHttpReq.open("get", url, true);
-                    xmlHttpReq.onreadystatechange = function () {
-                        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-                            var data = eval("(" + xmlHttpReq.responseText + ")");
-                            tips_div.style.display = "block";
-                            if (data.success == true) {
-                                tips_div.innerHTML = '已删除.';
-                                ele.parentNode.parentNode.removeChild(ele.parentNode);
-                            } else {
-                                tips_div.innerHTML = '删除失败.';
+                        var id = ele.getAttribute('titleid');
+                        url = '/task/' + id + '/delete';
+                        xmlHttpReq.open("get", url, true);
+                        xmlHttpReq.onreadystatechange = function() {
+                            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                                var data = eval("(" + xmlHttpReq.responseText + ")");
+                                tips_div.style.display = "block";
+                                if (data.success == true) {
+                                    tips_div.innerHTML = '已删除.';
+                                    ele.parentNode.parentNode.removeChild(ele.parentNode);
+                                } else {
+                                    tips_div.innerHTML = '删除失败.';
+                                }
+                                // 2s后解锁
+                                setTimeout(function() {
+                                    tips_div.style.display = "none";
+                                }, 2000);
+                                return;
                             }
-                            // 2s后解锁
-                            setTimeout(function () {
-                                tips_div.style.display = "none";
-                            }, 2000);
-                            return;
-                        }
-                    };
-                    xmlHttpReq.send();
-                }
-            }
+                        };
+                        xmlHttpReq.send();
+                    }
+
+            };
             // 更新
             document.getElementById("saveEdit").onclick = function (e) {
                 title = document.getElementById("editInput").value;
