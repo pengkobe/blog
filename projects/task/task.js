@@ -254,6 +254,9 @@
                         var days = now.getDate();
                         days = days > 9 ? days : '0' + days;
                         var nowStr = years + "-" + months + "-" + days;
+                        if (newest == nowStr) {
+                            lastDate = nowStr;
+                        }
                         var html = helper.taskTpl('task_tpl', data.tasks);
                         if (newest == nowStr) {
                             var topElep = topEle.parentNode;
@@ -402,28 +405,28 @@
                     xmlHttpReq.send();
                 }
                 if (ele.name == 'delete') {
-                        var id = ele.getAttribute('titleid');
-                        url = '/task/' + id + '/delete';
-                        xmlHttpReq.open("get", url, true);
-                        xmlHttpReq.onreadystatechange = function() {
-                            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-                                var data = eval("(" + xmlHttpReq.responseText + ")");
-                                tips_div.style.display = "block";
-                                if (data.success == true) {
-                                    tips_div.innerHTML = '已删除.';
-                                    ele.parentNode.parentNode.removeChild(ele.parentNode);
-                                } else {
-                                    tips_div.innerHTML = '删除失败.';
-                                }
-                                // 2s后解锁
-                                setTimeout(function() {
-                                    tips_div.style.display = "none";
-                                }, 2000);
-                                return;
+                    var id = ele.getAttribute('titleid');
+                    url = '/task/' + id + '/delete';
+                    xmlHttpReq.open("get", url, true);
+                    xmlHttpReq.onreadystatechange = function () {
+                        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                            var data = eval("(" + xmlHttpReq.responseText + ")");
+                            tips_div.style.display = "block";
+                            if (data.success == true) {
+                                tips_div.innerHTML = '已删除.';
+                                ele.parentNode.parentNode.removeChild(ele.parentNode);
+                            } else {
+                                tips_div.innerHTML = '删除失败.';
                             }
-                        };
-                        xmlHttpReq.send();
-                    }
+                            // 2s后解锁
+                            setTimeout(function () {
+                                tips_div.style.display = "none";
+                            }, 2000);
+                            return;
+                        }
+                    };
+                    xmlHttpReq.send();
+                }
 
             };
             // 更新
