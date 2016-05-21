@@ -5,7 +5,7 @@ https://github.com/nswbmw/N-blog.git
 
 ##  navigation	
 
-*   [dependency](#dependency)
+*  [dependency](#dependency)
 *	[install](#install)
 *	[features](#features)
 *	[structure](#structure)
@@ -44,15 +44,25 @@ my_blog/
 │   └── www 
 ├── package.json
 ├── public
-│   ├── html
+│   ├── common
+│   │   ├── css
+│   │   │   ├── lib
+│   │   │   ├── plugins
+│   │   ├── js
+│   │   │   ├── lib
+│   │   │   ├── plugins
 │   ├── css
 │   ├── js
-│   ├── font
-│   └── img
-├── project
-│   ├── nav.js 
-│   ├── labroom 
-│   └── movie_coment 
+│   ├── fonts
+│   └── img 
+├── project（will be moved from my_blog）
+│   ├── labroom
+│   ├── my_cv
+│   ├── task
+│   ├── [my_dashboard](https://github.com/pengkobe/my_dashboard)（todo）
+│   ├── [my_countdown](https://github.com/pengkobe/my_countdown)（todo）
+│   ├── thought（todo）
+│   └── movie_comment（todo）
 ├── test (todo)
 ├── webpack.config.js
 ├── humans.txt
@@ -66,7 +76,8 @@ git clone https://github.com/pengkobe/my_blog.git
 cd my_blog
 npm install
 cd server
-node  www
+# before you run this. you got to start mongodb.
+node www
 ```
 
 ## config
@@ -87,11 +98,11 @@ module.exports = {
 *	movie comments page
 *	finish thoughts record page 
 *	finish labroom page
-*   a chatting room
-*   build with webpack
-*   test case
+*  a chatting room
+*  build with webpack
+*  test case
 
            
 ## protocol
 
-Released under the MIT Licenses
+Released under the [MIT Licenses](http://spdx.org/licenses/MIT)
