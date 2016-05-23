@@ -32,10 +32,10 @@ function BindEvent(element, type, handler) {
 var uuid = GenerateUUID();
 
 // 只有 PV_RECEIVER 才会种植第三方 Cookie
-//var NONPV_RECEIVER = 'http://yipeng.info/monitor/nopv';
-//var PV_RECEIVER = 'http://yipeng.info/monitor/pv';
-var NONPV_RECEIVER = 'http://localhost:3000/monitor/nopv';
-var PV_RECEIVER = 'http://localhost:3000/monitor/pv';
+var NONPV_RECEIVER = 'http://yipeng.info/monitor/nopv';
+var PV_RECEIVER = 'http://yipeng.info/monitor/pv';
+//var NONPV_RECEIVER = 'http://localhost:3000/monitor/nopv';
+//var PV_RECEIVER = 'http://localhost:3000/monitor/pv';
 // 初始化一个 NXT_Monitor 内部类
 var NXT_Monitor = function (type, data) {
     this.type = type || 'UNKNOWN';
