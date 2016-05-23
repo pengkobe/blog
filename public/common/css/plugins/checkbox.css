@@ -225,6 +225,8 @@
      Toggle
 ---------------*/
 
+
+
 .ui.toggle.checkbox {
   min-height: 1.5rem;
 }
@@ -246,7 +248,9 @@
   padding-top: 0.15em;
 }
 
-/* Switch */
+/* Switch 
+元素相对父div进行绝对定位，有意思的是作者把border-radius设置为500rem;
+*/
 .ui.toggle.checkbox label:before {
   display: block;
   position: absolute;
@@ -263,8 +267,8 @@
   border-radius: 500rem;
 }
 
-/* Handle */
-.ui.toggle.checkbox .box:after,
+/* Handle
+*/
 .ui.toggle.checkbox label:after {
   background: #ffffff -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
   background: #ffffff linear-gradient(transparent, rgba(0, 0, 0, 0.05));
