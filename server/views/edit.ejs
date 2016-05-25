@@ -11,7 +11,7 @@
   <input type="time" name="time"  value="<%= post.createtime.time %>"/>
   <br />
   正文：<br />
-  <textarea name="post" rows="20" cols="100"><%= post.post %></textarea><br />
+  <textarea name="post" rows="20" cols="100" class="post_article"><%= post.post %></textarea><br />
   <div class="ui toggle checkbox">
     <%if(post.isprivate){%>
       <input type="checkbox" name="isprivate" checked>

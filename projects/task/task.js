@@ -240,6 +240,7 @@
             post_form = document.getElementById("post_new");
             helper.addEvent(post_form, 'submit', function (e) {
                 url = '/task/new';
+                var target = e.target;
                 xmlHttpReq.open("post", url, true);
                 xmlHttpReq.onreadystatechange = function () {
                     if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
@@ -268,6 +269,7 @@
                         tips_div.style.display = "block";
                         if (data.success == true) {
                             tips_div.innerHTML = '新增成功.';
+                            target.title.value ="";
                         } else {
                             tips_div.innerHTML = '新增失败.';
                         }
@@ -277,7 +279,7 @@
                         return;
                     }
                 };
-                var target = e.target;
+                
                 xmlHttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xmlHttpReq.send(encodeURI("title=" + target.title.value + "&isPrivate=" + target.isPrivate.checked));
                 e.preventDefault();

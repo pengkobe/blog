@@ -5,6 +5,9 @@ body {
 article p,article ol,article li{
     line-height:38px;
 }
+.post_article{
+    width: 100%;   
+}
 
 img {
     max-width: 100%;
