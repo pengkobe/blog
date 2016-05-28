@@ -7,25 +7,25 @@ app.get('/all', function (req, res) {
   res.json({ success: true });
 });
 
-app.get('/add', function (req, res) {
-  var cobj = JSON.parse(req.query.data);
+app.post('/add', require('body-parser').json(),  function (req, res) {
+  var cobj = req.body;
   var countdown = new Countdown({
     begintime: cobj.begintime,
     endtime: cobj.endtime,
     event: cobj.event,
     detail: cobj.detail,
     type: cobj.type,
-    level: cobj.level
+    level: cobj.level,
+    cycle: cobj.cycle
   });
-
   countdown.save(function (err, user) {
     if (err) {
+      console.log(err);
       //res.json({ success: false });
     }
   });
   res.json({ success: true });
 });
-
 
 
 app.get('/edit', function (req, res) {

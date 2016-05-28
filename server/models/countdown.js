@@ -7,12 +7,14 @@ function Countdown(c) {
   this.endtime = c.endtime;
   // 事件
   this.event = c.event;
+  // 类型 生日
+  this.type = c.type;
   // 详情
   this.detail = c.detail;
-  // 1:倒计时/0:顺计时
-  this.type = c.type;
   // 重要性评级 1-7,用于标色
   this.level = c.level;
+  // 循环周期(1234)(周月年一次)
+  this.cycle = c.cycle;
 };
 
 module.exports = Countdown;
@@ -26,7 +28,8 @@ Countdown.prototype.save = function (callback) {
     event: this.event,
     detail: this.detail,
     type: this.type,
-    level: this.level
+    level: this.level,
+    cycle: this.cycle
   };
   //打开数据库
   mongodb.open(function (err, db) {
