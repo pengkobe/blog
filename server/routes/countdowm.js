@@ -3,11 +3,24 @@ var app = express.Router();
 
 var Countdown = require('../models/countdown.js');
 
-app.get('/all', function (req, res) {
-  res.json({ success: true });
+app.post('/all', function (req, res) {
+  var haslogin = req.session.user ? 1 : 0;
+  var query = {};
+  if (!haslogin) {
+    query.isPrivate = false;
+  }
+
+  Countdown.getByCondition(query, function (err, countdowns, total) {
+    if (err) {
+      countdowns = [];
+      console.log(err);
+      res.json({ success: false });
+    }
+    res.json({success: true,data:countdowns});
+  });
 });
 
-app.post('/add', require('body-parser').json(),  function (req, res) {
+app.post('/add', function (req, res) {
   var cobj = req.body;
   var countdown = new Countdown({
     begintime: cobj.begintime,
@@ -16,7 +29,8 @@ app.post('/add', require('body-parser').json(),  function (req, res) {
     detail: cobj.detail,
     type: cobj.type,
     level: cobj.level,
-    cycle: cobj.cycle
+    cycle: cobj.cycle,
+    isPrivate: cobj.isPrivate? true:false
   });
   countdown.save(function (err, user) {
     if (err) {

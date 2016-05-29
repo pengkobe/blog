@@ -15,21 +15,24 @@ function Countdown(c) {
   this.level = c.level;
   // 循环周期(1234)(周月年一次)
   this.cycle = c.cycle;
+
+  this.isPrivate = c.isPrivate;
 };
 
 module.exports = Countdown;
 
-//存储用户信息
+//存储
 Countdown.prototype.save = function (callback) {
   //要存入数据库的用户信息文档
   var countdown = {
-    begintime:this.begintime,
+    begintime: this.begintime,
     endtime: this.endtime,
     event: this.event,
     detail: this.detail,
     type: this.type,
     level: this.level,
-    cycle: this.cycle
+    cycle: this.cycle,
+    isPrivate: this.isPrivate
   };
   //打开数据库
   mongodb.open(function (err, db) {
@@ -49,6 +52,33 @@ Countdown.prototype.save = function (callback) {
           return callback(err);
         }
         callback(null, doc[0]);//成功！err 为 null，并返回存储后信息
+      });
+    });
+  });
+};
+
+Countdown.getByCondition = function (condition, callback) {
+  //打开数据库
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);
+    }
+    //读取 posts 集合
+    db.collection('countdown', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      }
+      collection.count(condition, function (err, total) {
+        collection.find(condition).sort({
+          endtime: 1,
+        }).toArray(function (err, docs) {
+          mongodb.close();
+          if (err) {
+            return callback(err);
+          }
+          callback(null, docs, total);
+        });
       });
     });
   });
