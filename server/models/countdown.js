@@ -1,4 +1,5 @@
-var mongodb = require('./db');
+var mongodb = require('./db'),
+  ObjectID = require('mongodb').ObjectID;
 
 function Countdown(c) {
   // 开始时间
@@ -84,4 +85,27 @@ Countdown.getByCondition = function (condition, callback) {
   });
 };
 
-
+Countdown.remove = function (_id, callback) {
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);
+    }
+    db.collection('countdown', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      }
+      collection.remove({
+        "_id": new ObjectID(_id)
+      }, {
+          w: 1
+        }, function (err) {
+          mongodb.close();
+          if (err) {
+            return callback(err);
+          }
+          callback(null);
+        });
+    });
+  });
+};

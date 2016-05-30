@@ -6,8 +6,11 @@ var Countdown = require('../models/countdown.js');
 app.post('/all', function (req, res) {
   var haslogin = req.session.user ? 1 : 0;
   var query = {};
+  console.log('login:'+req.session.user);
   if (!haslogin) {
-    query.isPrivate = false;
+    //query.isPrivate = false;
+  }else{
+  //  query.isPrivate = true;
   }
 
   Countdown.getByCondition(query, function (err, countdowns, total) {
@@ -42,14 +45,19 @@ app.post('/add', function (req, res) {
 });
 
 
+app.get('/:_id/delete', function (req, res) {
+    console.log('rm' + req.params._id);
+    Countdown.remove(req.params._id, function (err) {
+      if (err) {
+        req.flash('error', err);
+        return res.redirect('back');
+      }
+      res.json({success:true});
+    });
+});
+
+
 app.get('/edit', function (req, res) {
   res.json({ success: true });
 });
-
-app.get('/delete', function (req, res) {
-  res.json({ success: true });
-});
-
-
-
 module.exports = app;

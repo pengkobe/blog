@@ -51,6 +51,9 @@ app.use(session({
     })
 }));
 
+// 访问服务器代码资源时，需要直接返回404
+// app.route('/:url(api|auth|components|app|bower_components|assets)/*')
+
 //设置跨域访问
 app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
