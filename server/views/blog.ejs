@@ -1,0 +1,27 @@
+<%- include header %>
+
+<style type="text/css">
+  p{margin: 0px;}
+</style>
+<% posts.forEach(function (post, index) { %>
+  <p><h2 class="index-title"><a  href="/p/<%= post._id %>"><%= post.title %></a></h2></p>
+  <p class="index-info">
+    日期：<%= post.createtime.minute %> |
+    标签：
+    <% post.tags.forEach(function (tag, index) { %>
+      <% if (tag) { %>
+        <a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
+      <% } %>
+    <% }) %>  |
+    阅读：<%= post.pv %>
+  </p>
+  <p><%- post.post %></p>
+<% }) %>
+<%- include paging %>
+
+<!-- weibo shiow -->
+<div class="weibo" >
+  <div class="close-weibo" ><span style="font-family:微软雅黑">x</span></div>
+</div>
+
+<%- include footer %>

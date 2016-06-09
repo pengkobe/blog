@@ -107,15 +107,18 @@ li.active{
 	background-color: rgba(110,110,110,.5);
 }
 .contact-info{
-	position:absolute;
-	bottom:0px;
 	list-style: none;
 	padding: 0px;
 }
 
-.contact-info>li{
-	padding: 5px 10px;
+.contact-info>span{
 	display: inline-block;
+	width: 32%;
+	text-align: center;
+	font-size: 12px;
+}
+.links-of-author-item a{
+	color: #aaa !important;
 }
 
 /*技能图谱*/

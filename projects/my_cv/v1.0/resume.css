@@ -47,7 +47,7 @@ a{
 	min-height:750px;
 }
 #secondary a{
-	color:#fff;
+	color:#aaa;
 }
 #primary{
 	background:#fff;
@@ -107,13 +107,11 @@ li.active{
 	background-color: rgba(110,110,110,.5);
 }
 .contact-info{
-	position:absolute;
-	bottom:0px;
 	list-style: none;
 	padding: 0px;
 }
 
-.contact-info>li{
+.contact-info>span{
 	padding: 5px 10px;
 	display: inline-block;
 }

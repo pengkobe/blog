@@ -20,6 +20,13 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 app.get('/', function (req, res) {
+    res.render('index', {
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
+});
+
+app.get('/blog', function (req, res) {
   //判断是否是第一页，并把请求的页数转换成 number 类型
   var page = req.query.p ? parseInt(req.query.p) : 1;
   var haslogin = req.session.user? 1 :0;
@@ -34,7 +41,7 @@ app.get('/', function (req, res) {
     if(total % 5 !==0){
       totalpage=totalpage+1;
     }
-    res.render('index', {
+    res.render('blog', {
       title: '主页',
       posts: posts,
       total:total,

@@ -2,11 +2,15 @@
 body {
     background-color: #fff;
 }
-article p,article ol,article li{
-    line-height:38px;
+
+article p,
+article ol,
+article li {
+    line-height: 38px;
 }
-.post_article{
-    width: 100%;   
+
+.post_article {
+    width: 100%;
 }
 
 img {
@@ -34,25 +38,25 @@ em:before {
     font-size: 14px;
 }
 
-
-
 blockquote {
-    background:#f9f9f9;
-    border-left:10px solid #ccc;
-    margin:1.5em 10px;
-    padding:.5em 10px;
-    quotes:"\201C""\201D""\2018""\2019";
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: .5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
 }
+
 blockquote:before {
-    color:#ccc;
-    content:open-quote;
-    font-size:4em;
-    line-height:.1em;
-    margin-right:.25em;
-    vertical-align:-.4em;
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: .1em;
+    margin-right: .25em;
+    vertical-align: -.4em;
 }
+
 blockquote p {
-    display:inline;
+    display: inline;
 }
 
 ::selection {
@@ -219,8 +223,10 @@ H1 {
 
 
 /* 首页文章列表标题 */
-h1,h2{
-   text-transform: uppercase;
+
+h1,
+h2 {
+    text-transform: uppercase;
 }
 
 h2 a {
@@ -296,22 +302,24 @@ article a {
 
 article a:hover {
     color: #0079ec;
-    border-bottom:  3px solid #f1ece9;
+    border-bottom: 3px solid #f1ece9;
 }
 
 .index-title {
     /*padding: 8px;
     border: dashed 1px #d9d9d9;
     background: rgba(220, 220, 220, .5)*/
-    font-size:32px;
+    font-size: 32px;
     margin: 30px 0px;
-    color:#262b30;
+    color: #262b30;
     position: relative;
-   
 }
-article > h2:nth-child(3){
+
+article > h2:nth-child(3) {
     margin-top: 0px !important;
 }
+
+
 /*
 .index-title:before {
     content: '';
@@ -381,6 +389,7 @@ article > h2:nth-child(3){
 
 
 /* 文章目录导航 */
+
 #menuIndex {
     position: fixed;
     color: #2a6496;
@@ -391,7 +400,6 @@ article > h2:nth-child(3){
     padding: 10px;
     border: 1px solid #f8f8d5;
     font-family: "Microsoft Yahei";
-
 }
 
 #menuIndex a {
@@ -426,9 +434,11 @@ article > h2:nth-child(3){
     padding-left: 25px;
 }
 
+
 /*
   搜索框样式
 */
+
 .searchform {
     display: inline-block;
     float: right;
@@ -534,6 +544,7 @@ article > h2:nth-child(3){
 
 
 /* 弹出框 */
+
 .alertInfo {
     position: fixed;
     right: -9999px;
@@ -616,21 +627,20 @@ article > h2:nth-child(3){
 }
 
 .lab-link {
-    background: #33FF99;
+    border: solid 1px #33FF99;
 }
 
 .thought-link {
-    background: #6699CC;
+     border: solid 1px #6699CC;
 }
 
 .movie-link {
-    background: #ccc;
+     border: solid 1px #ccc;
 }
 
 .task-link {
-    background: white;
+     border: solid 1px #33FF99;
 }
-
 
 /* 换肤链接 */
 
@@ -737,7 +747,7 @@ article > h2:nth-child(3){
 .now_page {
     background-color: #fff !important;
     cursor: text;
-    color: #4a75b5  !important;
+    color: #4a75b5 !important;
 }
 
 
@@ -758,6 +768,7 @@ article > h2:nth-child(3){
 
 
 /*kobepeng友情提示：效果模仿自:http://www.jq22.com/demo/css3xt-150601224745/*/
+
 .link-person::before,
 .link-person::after {
     position: absolute;
@@ -795,6 +806,7 @@ article > h2:nth-child(3){
 
 
 /*标签云*/
+
 #tagscloud {
     position: relative;
     margin: 20px auto 0px;
@@ -817,15 +829,18 @@ article > h2:nth-child(3){
 
 
 /* 上传 */
+
 #dropbox {
     margin-top: 50px;
     background: #f0f2f4;
     transition: background .15s ease, border .15s ease;
     position: relative;
     height: 200px;
-    min-width:300px;
-    min-height:100px;
-    border:3px dashed silver;"
+    min-width: 300px;
+    min-height: 100px;
+    border: 3px dashed silver;
+    "
+
 }
 
 .modal-dropzone-img {
@@ -872,19 +887,20 @@ article > h2:nth-child(3){
     font-size: 16px;
 }
 
-input[type="file"]{
-   -webkit-appearance: none;
-   text-align: left;
-   -webkit-rtl-ordering:  left;
+input[type="file"] {
+    -webkit-appearance: none;
+    text-align: left;
+    -webkit-rtl-ordering: left;
 }
-input[type="file"]::-webkit-file-upload-button{
-   -webkit-appearance: none;
-   float: right;
-   margin: 0 0 0 10px;
-   border: 1px solid #aaaaaa;
-   border-radius: 4px;
-   background-image: -webkit-gradient(linear, left bottom, left top, from(#d2d0d0), to(#f0f0f0));
-   background-image: -moz-linear-gradient(90deg, #d2d0d0 0%, #f0f0f0 100%);
+
+input[type="file"]::-webkit-file-upload-button {
+    -webkit-appearance: none;
+    float: right;
+    margin: 0 0 0 10px;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#d2d0d0), to(#f0f0f0));
+    background-image: -moz-linear-gradient(90deg, #d2d0d0 0%, #f0f0f0 100%);
 }
 
 
@@ -933,7 +949,20 @@ input[type="file"]::-webkit-file-upload-button{
         border-radius: 1em;
         border-width: 0.15em;
     }
-    #menuIndex{
-          display: none;
+    #menuIndex {
+        display: none;
+    }
+    article > h2:nth-child(3) {
+        margin-top: 15px !important;
+    }
+    .cycle-outer{
+        transform: scale(0.5);
+        margin-top:0px !important;
+    }
+    article{
+        font-size: 14px;
+    }
+    .index-title{
+        font-size: 24px;
     }
 }
