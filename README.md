@@ -26,8 +26,8 @@ i use these framework or Midware you may concern:
 3. multer  
 4. webpack(doing)  
 5. socket.io(to do)  
-how it looks? just click it:  
-http://new.kobepeng.com
+how it looks? just click this:  
+http://yipeng.info
 
 
 ## structure

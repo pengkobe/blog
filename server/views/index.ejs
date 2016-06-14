@@ -1,27 +1,89 @@
-<%- include header %>
-
-<style type="text/css">
-  p{margin: 0px;}
-</style>
-<% posts.forEach(function (post, index) { %>
-  <p><h2 class="index-title"><a  href="/p/<%= post._id %>"><%= post.title %></a></h2></p>
-  <p class="index-info">
-    日期：<%= post.createtime.minute %> |
-    标签：
-    <% post.tags.forEach(function (tag, index) { %>
-      <% if (tag) { %>
-        <a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
-      <% } %>
-    <% }) %>  |
-    阅读：<%= post.pv %>
-  </p>
-  <p><%- post.post %></p>
-<% }) %>
-<%- include paging %>
-
-<!-- weibo shiow -->
-<div class="weibo" >
-  <div class="close-weibo" ><span style="font-family:微软雅黑">x</span></div>
-</div>
-
-<%- include footer %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kobepeng</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="icon" href="" type="image/x-icon">
+        <style>
+            html, body {
+                overflow: hidden;
+                margin: 0;
+            }
+            body {
+                font-family: 'Open Sans', 'Helvetica Neue', 'Hiragino Sans GB', 'LiHei Pro', Arial, sans-serif;
+                color: #333;
+            }
+            #wrapper {
+                position: absolute;
+                left: 0;
+                width: 320px;
+                text-align: center;
+                top: 50%;
+                left: 50%;
+                margin-left: -160px;
+                margin-top: -160px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+            h1 {
+                font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+                font-weight: 700;
+                font-size: 30px;
+                letter-spacing: 9px;
+                text-transform: uppercase;
+                margin: 12px 0;
+                left: 4px;
+            }
+            h2 {
+                color: #999;
+                font-weight: normal;
+                font-size: 15px;
+                letter-spacing: .12em;
+                margin-bottom: 30px;
+                left: 3px;
+            }
+            h1, h2 {
+                position: relative;
+            }
+            p {
+                font-size: 14px;
+                line-height: 2em;
+                margin: 0;
+                letter-spacing: 2px;
+            }
+            canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+            a {
+                color: #999;
+                text-decoration: none;
+                transition: color .2s ease;
+            }
+            a:hover {
+                color: #f33;
+            }
+            .headimg{
+                width: 20%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Yi peng</h1>
+            <img src="../../public/img/battery-half.png" class="headimg"/>
+            <h2>专前端 &amp; 做全栈&nbsp;</h2>
+            <p><a href="/blog" target="_blank">博客</a></p>
+            <p><a href="http://weibo.com/kobepeng1" target="_blank">微博</a></p>
+            <p><a href="https://github.com/pengkobe" target="_blank">Github</a></p>
+            <p><a href="https://twitter.com/kobepeng2" target="_blank">Twitter</a></p>
+        </div>
+    </body>
+</html>
