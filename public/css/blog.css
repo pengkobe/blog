@@ -133,6 +133,9 @@ blockquote p {
 
 .archive li {
     list-style: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .archive h3 {
@@ -620,11 +623,11 @@ article > h2:nth-child(3){
 }
 
 .thought-link {
-    background: #6699CC;
+    background: yellow;
 }
 
 .movie-link {
-    background: #ccc;
+    background: #6699CC;
 }
 
 .task-link {
