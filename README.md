@@ -1,6 +1,6 @@
 # [kobepeng's site](new.kobepeng.com)
 a light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
-if you curious about how to build this. you can go there:  
+if you curious about how to build this. you can go there:   
 https://github.com/nswbmw/N-blog.git
 
 ##  navigation	
@@ -20,11 +20,11 @@ https://github.com/nswbmw/N-blog.git
 *   redis(to do)
 
 ## feature
-i use these framework or Midware you may concern:  
+I use these framework or Midware you may concern:  
 1. express  
 2. ejs  
 3. multer  
-4. webpack(doing)  
+4. ~~webpack(Abandoned)~~
 5. socket.io(to do)  
 how it looks? just click this:  
 http://yipeng.info
@@ -81,8 +81,8 @@ node www
 ```
 
 ## config
-edit settings.js at /blogroot/server  
-mine for example:
+settings.js is in server  
+my config for example:
 ```
 module.exports = { 
    cookieSecret: 'myblog', 
@@ -94,12 +94,19 @@ module.exports = {
 
 ```
 
-## todo
-*	movie comments page
-*	finish thoughts record page 
-*	finish labroom page
+## finished
+*	countdown
+*	task
+*	labroom page
 *  a chatting room
-*  build with webpack
+*  ~~build with webpack(Abandoned)~~
+*  test case
+
+## todo
+*	~~movie comments page(Abandoned)~~
+*	~~build with webpack(Abandoned)~~
+*	finish thoughts record page 
+*  a chatting room
 *  test case
 
            
