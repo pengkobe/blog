@@ -2,7 +2,7 @@ var mongodb = require('./db'),
   marked = require('marked'),
   ObjectID = require('mongodb').ObjectID,
   formatTime = require('../../public/common/js/plugins/format_time');
-  
+
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -72,7 +72,6 @@ Task.getAll = function (haslogin, callback) {
     if (err) {
       return callback(err);
     }
-    //读取 posts 集合
     db.collection('tasks', function (err, collection) {
       if (err) {
         mongodb.close();
@@ -110,7 +109,6 @@ Task.getByIsfinished = function (haslogin, isfinished, callback) {
     if (err) {
       return callback(err);
     }
-    //读取 posts 集合
     db.collection('tasks', function (err, collection) {
       if (err) {
         mongodb.close();
@@ -171,7 +169,6 @@ Task.finish = function (_id, callback) {
     if (err) {
       return callback(err);
     }
-    //读取 posts 集合
     db.collection('tasks', function (err, collection) {
       if (err) {
         mongodb.close();
@@ -198,7 +195,6 @@ Task.recover = function (_id, callback) {
     if (err) {
       return callback(err);
     }
-    //读取 posts 集合
     db.collection('tasks', function (err, collection) {
       if (err) {
         mongodb.close();
@@ -246,7 +242,7 @@ Task.remove = function (_id, callback) {
   });
 };
 
-//一次获取5篇文章
+//一次获取5天(废弃)
 Task.getFiveDay = function (lastdate, haslogin, callback) {
   var nowdate = new Date();
   nowdate.setTime(lastdate.getTime());
@@ -293,3 +289,43 @@ Task.getFiveDay = function (lastdate, haslogin, callback) {
   });
 };
 
+
+//一次获取20条
+Task.getTasksByNum = function (num, page, haslogin, callback) {
+  //打开数据库
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);
+    }
+    db.collection('tasks', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      }
+      var query = {};
+      if (!haslogin) {
+        query.isPrivate = 0;
+      }
+      var conditions = {};
+      conditions.skip = (page - 1) * num;
+      conditions.limit = num;
+
+      collection.count(query, function (err, total) {
+        collection.find(query,conditions).sort({
+          createTime: -1
+        }).toArray(function (err, docs) {
+          mongodb.close();
+          if (err) {
+            return callback(err);
+          }
+          //解析 markdown 为 html
+          docs.forEach(function (doc) {
+            var title_str = doc.title ? doc.title : 'no message';
+            doc._m_title = marked(title_str);
+          });
+          callback(null, docs, total);
+        });
+      });
+    });
+  });
+};

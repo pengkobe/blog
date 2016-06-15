@@ -39,12 +39,27 @@ app.get('/unfinished', function (req, res) {
   });
 });
 
-
+// (废弃)
 app.post('/five', function (req, res) {
    var haslogin = req.session.user? 1 :0;
    var lastdate = req.body.lastdate ? new Date(req.body.lastdate) : new Date('2016/01/01');
 
    Task.getFiveDay(lastdate, haslogin,function (err, tasks, total) {
+    if (err) {
+      tasks = [];
+      console.log(error);
+    }
+
+    res.json(tasks);
+  });
+});
+
+// 分页加载
+app.post('/getbynum', function (req, res) {
+   var haslogin = req.session.user? 1 :0;
+   var page = req.body.page;
+   var num = req.body.num;
+   Task.getTasksByNum(num,page,haslogin,function (err, tasks, total) {
     if (err) {
       tasks = [];
       console.log(error);
@@ -74,8 +89,6 @@ app.post('/new', function (req, res) {
       return res.redirect('/');
     }
      res.json({success:true,tasks:[doc]});
-    //req.flash('success', '发布成功!');
-    //res.redirect('/task/all');
   });
 });
 

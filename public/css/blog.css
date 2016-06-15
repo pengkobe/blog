@@ -6,7 +6,7 @@ body {
 article p,
 article ol,
 article li {
-    line-height: 38px;
+    line-height: 240%;
 }
 
 .post_article {
@@ -202,7 +202,7 @@ article {
     font-size: 14px;
     color: #4a75b5;
     display: block;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .copyright-article {
@@ -218,7 +218,7 @@ H1 {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
     padding: 5px;
     border-bottom: 2px LightGrey solid;
-    width: 98%;
+    width: 100%;
     line-height: 150%;
     color: #666666;
     margin: 0px;
@@ -236,8 +236,9 @@ h2 a {
     color: #444 !important;
     text-decoration: none;
     transition: color 0.2s ease, border-color 0.2s ease;
-    font-family: Michroma, 'Segoe UI Light', 'Segoe UI', 'Segoe UI WP', 'Microsoft Jhenghei', '微软雅黑', sans-serif, Times;
+    /*font-family: Michroma, 'Segoe UI Light', 'Segoe UI', 'Segoe UI WP', 'Microsoft Jhenghei', '微软雅黑', sans-serif, Times;*/
     /*font-family: Palatino, Garamond, Times, Georgia, serif;*/
+    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
 }
 
 h2 a:hover {
@@ -280,6 +281,7 @@ nav {
     width: 9em;
     text-align: left;
     margin-top: 3%;
+    border: 1px solid #ddd;
 }
 
 nav a {
@@ -312,10 +314,11 @@ article a:hover {
     /*padding: 8px;
     border: dashed 1px #d9d9d9;
     background: rgba(220, 220, 220, .5)*/
-    font-size: 32px;
-    margin: 30px 0px;
+    font-size: 30px;
+    margin: 15px 0px;
     color: #262b30;
     position: relative;
+    font-weight: bold;
 }
 
 article > h2:nth-child(3) {
@@ -392,7 +395,6 @@ article > h2:nth-child(3) {
 
 
 /* 文章目录导航 */
-
 #menuIndex {
     position: fixed;
     color: #2a6496;
@@ -437,17 +439,16 @@ article > h2:nth-child(3) {
     padding-left: 25px;
 }
 
-
 /*
   搜索框样式
 */
-
 .searchform {
     display: inline-block;
-    float: right;
-    margin-right: 3%;
-    position: relative;
-    z-index: 10
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 10;
+
 }
 
 .searchinput {
@@ -573,7 +574,7 @@ article > h2:nth-child(3) {
 
 .weibo {
     position: absolute;
-    top: 120px;
+    top: 100px;
     right: 5px;
     width: 220px;
     height: 350px;
@@ -587,7 +588,7 @@ article > h2:nth-child(3) {
     /*文字垂直居中*/
     line-height: 15px;
     overflow: hidden;
-    background: #111;
+    background: #777;
     float: right;
     cursor: pointer;
     text-align: center;

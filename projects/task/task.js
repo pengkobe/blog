@@ -13,8 +13,8 @@
     var allContent = '';
     var newestDate;
     // 第一次加载前5天
-    var lastdate = new Date();
-    lastdate.setDate(lastdate.getDate() - 4);
+    //var lastdate = new Date();
+    //lastdate.setDate(lastdate.getDate() - 4);
     // ajax
     var xmlHttpReq = null;
 
@@ -194,18 +194,14 @@
                             console.log('lock released!');
                         }, 2000);
                         //设置请求（没有真正打开，true：表示异步
-                        xmlHttpReq.open("post", "/task/five", true);
+                        xmlHttpReq.open("post", "/task/getbynum", true);
                         xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                         xmlHttpReq.onreadystatechange = function () {
                             that.ajaxState(xmlHttpReq);
                         };
                         //提交请求
-                        fullyear = lastdate.getFullYear();
-                        month = lastdate.getMonth() + 1;
-                        day = lastdate.getDate();
-                        datestr = fullyear + "/" + (month < 10 ? '0' + month : month) + "/" + (day < 10 ? '0' + day : day);
                         console.log('send...');
-                        xmlHttpReq.send(encodeURI("lastdate=" + datestr));
+                        xmlHttpReq.send(encodeURI("num="+12+"&page=" + taskpage));
                     }
                 }
             }
@@ -227,15 +223,13 @@
             var post_form;
             var url;
             var tips_div = document.getElementById('tips_div');
-            // 滚动事件
+            
             var that = this;
             var page = document.getElementsByClassName("page")[0];
             var task_ul = document.querySelector("#task_ul");
-
             window.onscroll = function () {
                 // 使用函数节流
                 helper.throttle(that.loadData, that);
-                // that.loadData();
             }
             // 新增
             post_form = document.getElementById("post_new");
@@ -497,7 +491,8 @@
                     return;
                 } else {
                     that.loadlines(data);
-                    lastdate.setDate(lastdate.getDate() - 5);
+                     taskpage++;
+                    //lastdate.setDate(lastdate.getDate() - 5);
                 }
             }
         },
