@@ -1,33 +1,31 @@
 # [kobepeng's site](new.kobepeng.com)
 a light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
-if you curious about how to build this. you can go there:  
-https://github.com/nswbmw/N-blog.git
+if you curious about how to build this. you can go there: https://github.com/nswbmw/N-blog.git
 
 ##  navigation	
 
 *  [dependency](#dependency)
-*	[install](#install)
-*	[features](#features)
-*	[structure](#structure)
-*	[config](#config)
-*	[todo](#todo)
-*	[protocol](#protocol)
+*  [install](#install)
+*  [features](#features)
+*  [structure](#structure)
+*  [config](#config)
+*  [todo](#todo)
+*  [finished](#finished)
+*  [protocol](#protocol)
 
 
 ## dependency
 *   nodejs
 *   mongodb
-*   redis(to do)
 
 ## feature
-i use these framework or Midware you may concern:  
+I use these framework or Midware you may concern:  
 1. express  
 2. ejs  
 3. multer  
-4. webpack(doing)  
+4. ~~webpack(Abandoned)~~  
 5. socket.io(to do)  
-how it looks? just click this:  
-http://yipeng.info
+how it looks? just click:  http://yipeng.info
 
 
 ## structure
@@ -81,8 +79,7 @@ node www
 ```
 
 ## config
-edit settings.js at /blogroot/server  
-mine for example:
+settings.js is in server. my config for example:
 ```
 module.exports = { 
    cookieSecret: 'myblog', 
@@ -94,13 +91,18 @@ module.exports = {
 
 ```
 
+## finished
+* countdown
+* task
+* labroom page
+
 ## todo
-*	movie comments page
-*	finish thoughts record page 
-*	finish labroom page
-*  a chatting room
-*  build with webpack
-*  test case
+* finish thoughts record page 
+* a chatting room
+* use redis
+* test case
+* movie comments page
+* ~~build with webpack(Abandoned)~~
 
            
 ## protocol
