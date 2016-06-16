@@ -35,13 +35,14 @@ app.post('/add', function (req, res) {
     cycle: cobj.cycle,
     isPrivate: cobj.isPrivate? true:false
   });
-  countdown.save(function (err, user) {
+  countdown.save(function (err, model) {
     if (err) {
       console.log(err);
-      //res.json({ success: false });
+      res.json({ success: false });
+    }else{
+      res.json(model);
     }
   });
-  res.json({ success: true });
 });
 
 

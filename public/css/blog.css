@@ -398,12 +398,12 @@ article > h2:nth-child(3) {
 #menuIndex {
     position: fixed;
     color: #2a6496;
-    top: 150px;
+    top: 100px;
     right: 15px;
     width: 200px;
     overflow: auto;
     padding: 10px;
-    border: 1px solid #f8f8d5;
+    border: 1px solid #ddd;
     font-family: "Microsoft Yahei";
 }
 
@@ -680,7 +680,6 @@ article > h2:nth-child(3) {
 
 
 /*分页nav*/
-
 .pagination-right {
     text-align: right;
 }
