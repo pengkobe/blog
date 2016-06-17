@@ -1,3 +1,4 @@
+/* 此文件已被废弃 */
 module.exports = {
     entry: "./public/js/myblog.js",
     output: {
