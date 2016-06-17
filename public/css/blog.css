@@ -635,19 +635,11 @@ article > h2:nth-child(3) {
 }
 
 .thought-link {
-<<<<<<< HEAD
     background: yellow;
 }
 
 .movie-link {
-    background: #6699CC;
-=======
      border: solid 1px #6699CC;
-}
-
-.movie-link {
-     border: solid 1px #ccc;
->>>>>>> 9738d0f81faee5dd5887ceafb73d7516f1807b42
 }
 
 .task-link {
@@ -941,6 +933,7 @@ input[type="file"]::-webkit-file-upload-button {
         display: inline-flex;
         margin-top: 1%;
         font-size: 1em;
+        margin-top:40px;
     }
     article {
         width: 96%;
