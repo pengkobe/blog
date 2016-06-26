@@ -769,45 +769,6 @@ article > h2:nth-child(3) {
     margin: 10px 15px;
 }
 
-
-/*kobepeng友情提示：效果模仿自:http://www.jq22.com/demo/css3xt-150601224745/*/
-
-.link-person::before,
-.link-person::after {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    content: '';
-    z-index: -1;
-    margin: -5%;
-    border-color: #ccc;
-    box-shadow: inset 0 0 0 1px;
-    animation: clipMe 8s linear infinite;
-}
-
-.link-person::before {
-    animation-delay: -4s;
-}
-
-@keyframes clipMe {
-    0%,
-    100% {
-        clip: rect(0px, 220px, 2px, 0px);
-    }
-    25% {
-        clip: rect(0px, 2px, 220px, 0px);
-    }
-    50% {
-        clip: rect(218.0px, 220px, 220px, 0px);
-    }
-    75% {
-        clip: rect(0px, 220.0px, 220.0px, 218px);
-    }
-}
-
-
 /*标签云*/
 
 #tagscloud {
