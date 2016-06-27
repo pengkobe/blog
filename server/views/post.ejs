@@ -25,8 +25,8 @@
   window.onload=function(){
     var doc = document;
     var nowtime = new Date();
-    var hour = aaa.getHours();
-    var second = aaa.getSeconds()
+    var hour = nowtime.getHours();
+    var second = nowtime.getSeconds()
     doc.getElementsByName('date')[0].valueAsDate = nowtime;
     doc.getElementsByName('time')[0].value = hour+":"+second;
   }
