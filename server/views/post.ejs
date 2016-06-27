@@ -21,11 +21,14 @@
 </form>
 
 <script>
-// 自动填写日期框
-window.onload=function(){
-  var doc = document;
-  doc.getElementsByName('date')[0].valueAsDate = new Date();
-  doc.getElementsByName('time')[0].value = '13:51';
-}
+  // 自动填写日期框
+  window.onload=function(){
+    var doc = document;
+    var nowtime = new Date();
+    var hour = aaa.getHours();
+    var second = aaa.getSeconds()
+    doc.getElementsByName('date')[0].valueAsDate = nowtime;
+    doc.getElementsByName('time')[0].value = hour+":"+second;
+  }
 </script>
 <%- include footer %>
