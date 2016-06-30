@@ -26,7 +26,7 @@
     var doc = document;
     var nowtime = new Date();
     var hour = nowtime.getHours();
-    var second = nowtime.getSeconds()
+    var second = nowtime.getMinutes();
     doc.getElementsByName('date')[0].valueAsDate = nowtime;
     doc.getElementsByName('time')[0].value = hour+":"+second;
   }

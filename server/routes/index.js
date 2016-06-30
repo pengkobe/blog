@@ -97,7 +97,7 @@ app.post('/reg', function (req, res) {
       }
       req.session.user = user;
       req.flash('success', '注册成功!');
-      res.redirect('/');
+      res.redirect('/blog');
     });
   });
 });
@@ -131,7 +131,7 @@ app.post('/login', function (req, res) {
     //用户名密码都匹配后，将用户信息存入 session
     req.session.user = user;
     req.flash('success', '登陆成功!');
-    res.redirect('/');//登陆成功后跳转到主页
+    res.redirect('/blog');//登陆成功后跳转到主页
   });
 });
 
@@ -168,7 +168,7 @@ app.get('/logout', function (req, res) {
   req.session.user = null;
   req.flash('success', '登出成功!');
   // 登出成功后跳转到主页
-  res.redirect('/');
+  res.redirect('/blog');
 });
 
 app.get('/upload', checkLogin);
@@ -193,7 +193,7 @@ app.get('/archive', function (req, res) {
   Post.getArchive(haslogin, function (err, posts) {
     if (err) {
       req.flash('error', err);
-      return res.redirect('/');
+      return res.redirect('/blog');
     }
     res.render('archive', {
       title: '存档',
@@ -209,7 +209,7 @@ app.get('/tags', function (req, res) {
   Post.getTags(function (err, posts) {
     if (err) {
       req.flash('error', err);
-      return res.redirect('/');
+      return res.redirect('/blog');
     }
     res.render('tags', {
       title: '标签',
@@ -225,7 +225,7 @@ app.get('/tags/:tag', function (req, res) {
   Post.getTag(req.params.tag, function (err, posts) {
     if (err) {
       req.flash('error', err);
-      return res.redirect('/');
+      return res.redirect('/blog');
     }
     res.render('tag', {
       title: 'TAG:' + req.params.tag,
@@ -276,7 +276,7 @@ app.get('/p/:_id', function (req, res) {
   Post.getOne(req.params._id, function (err, post) {
     if (err) {
       req.flash('error', err);
-      res.redirect('/');
+      res.redirect('/blog');
       return;
     }
     res.render('article', {
@@ -334,7 +334,7 @@ app.get('/remove/:_id', function (req, res) {
       return res.redirect('back');
     }
     req.flash('success', '删除成功!');
-    res.redirect('/');
+    res.redirect('/blog');
   });
 });
 
@@ -348,6 +348,7 @@ app.get('/about', function (req, res) {
   });
 });
 
+/// === 其它模块 ===
 // app.get('/labroom', function (req, res) {
 //     res.render('labroom', {
 //       title: '实验室',
@@ -374,7 +375,6 @@ app.get('/about', function (req, res) {
 //       error: req.flash('error').toString()
 //     });
 // });
-
 
 function checkLogin(req, res, next) {
   if (!req.session.user) {
