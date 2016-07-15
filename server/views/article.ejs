@@ -1,4 +1,11 @@
 <%- include header %>
+<!--局部样式-->
+<style type="text/css">
+  strong{
+    font-size:20px;
+    font-family:cursive;
+  }
+</style>
 <p>
   <% if (user) { %>
     <span><a class="edit" href="/edit/<%= post._id %>">编辑</a></span>
