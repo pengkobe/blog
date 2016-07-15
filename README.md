@@ -105,6 +105,6 @@ module.exports = {
 * ~~build with webpack(Abandoned)~~
 
            
-## protocol
+## licence
 
 Released under the [MIT Licenses](http://spdx.org/licenses/MIT)
