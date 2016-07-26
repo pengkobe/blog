@@ -399,6 +399,7 @@ article > h2:nth-child(3) {
     position: fixed;
     color: #2a6496;
     top: 100px;
+    bottom: 10px;
     right: 15px;
     width: 200px;
     overflow: auto;
