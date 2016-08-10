@@ -1,3 +1,3 @@
-Sitemap: http://www.kobepeng.com/sitemap.xml
+Sitemap: http://yipeng.info/sitemap.xml
 User-agent:*
 Disallow:/server
