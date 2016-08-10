@@ -40,7 +40,7 @@ app.post('/add', function (req, res) {
       console.log(err);
       res.json({ success: false });
     }else{
-      res.json(model);
+      res.json({success: true,data:model});
     }
   });
 });

@@ -52,7 +52,7 @@ Countdown.prototype.save = function (callback) {
         if (err) {
           return callback(err);
         }
-        callback(null, doc);//成功！err 为 null，并返回存储后信息
+        callback(null, countdown);//成功！err 为 null，并返回存储后信息
       });
     });
   });
