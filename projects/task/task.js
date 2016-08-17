@@ -475,7 +475,7 @@
             if (req.readyState == 4 && req.status == 200) {
                 var data = eval(xmlHttpReq.responseText);
                 if (data.length == 0) {
-                    // 若这5天没有记录，则往前再刷25天看看。
+                    // 若这5天没有记录，则往前刷看看。
                     if (loadCount < 5) {
                         loadCount++;
                     } else {
@@ -496,10 +496,9 @@
                 }
             }
         },
-        // 这里使用传统的拼字符串形式构建［待改成模板引擎的方式］
+        // 使用模板引擎改装后只需要简单的几行代码
         loadlines: function (data) {
             lastDate = '0';
-            // 使用模板引擎改装后只需要简单的几行代码
             var html = helper.taskTpl('task_tpl', data);
             document.getElementById("task_ul").appendHTML(html);
         },
