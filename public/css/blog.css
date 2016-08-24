@@ -269,6 +269,7 @@ H4 {
 
 code {
     font-size: 14px;
+    line-height: 1.5;
     font-family: inherit;
     background: #f6f6f6 !important;
 }
@@ -768,6 +769,9 @@ article > h2:nth-child(3) {
     display: inline-block;
     position: relative;
     margin: 10px 15px;
+}
+.link-person a{
+    display: block;
 }
 
 /*标签云*/
