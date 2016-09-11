@@ -1,141 +1,280 @@
 /*resume page styles*/
+
 @chartset "utf-8";
-body{
+@font-face {
+	font-family: "Roboto Light";
+	src: url("./font/Roboto-Light.eot?") format("eot"), url("./font/Roboto-Light.woff") format("woff"), url("./font/Roboto-Light.ttf") format("truetype"), url("./font/Roboto-Light.svg#Roboto-Light") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:'HanHei SC';
+	font-style:normal;
+	font-weight:300;
+	src:local('â˜ºï¸Ž'), url("./font/HanHei-SC-thin.woff") format("woff"), url("./font/HanHei-SC-thin.ttf") format("truetype");
+	/* Copyright Â© 2015 Apple Inc. All rights reserved. */
+}
+
+@font-face {
+	font-family:'HanHei SC 300';
+	src:url("./font/HanHei-SC-thin.eot");
+	/* Copyright Â© 2015 Apple Inc. All rights reserved. */
+}
+
+@font-face {
+	font-family:'HanHei SC';
+	font-style:normal;
+	font-weight:600;
+	src:local('â˜ºï¸Ž'), url("./font/HanHei-SC-semibold.woff") format("woff"), url("./font/HanHei-SC-semibold.ttf") format("truetype");
+	/* Copyright Â© 2015 Apple Inc. All rights reserved. */
+}
+
+
+@font-face {
+	font-family:'HanHei SC';
+	font-style:normal;
+	font-weight:400;
+	src:url("./font/HanHei-SC-text.eot");
+	src:local('â˜ºï¸Ž'), url("./font/HanHei-SC-text.woff") format("woff"), url("./font/HanHei-SC-text.ttf") format("truetype");
+	/* Copyright Â© 2015 Apple Inc. All rights reserved. */
+}
+
+
+
+body {
 	background-color: #618dad;
-	color:#544943;
+	font-family: "Roboto Light","HanHei SC",微软雅黑;
+	color: #544943;
 }
-a{
-	text-decoration:none !important;
-	outline:none !important;
+
+a {
+	text-decoration: none !important;
+	outline: none !important;
 }
-#page{
-	max-width:1200px;
-	position:relative;
-	margin:0 auto;
-	background:#fff;
+
+#page {
+	max-width: 1200px;
+	position: relative;
+	margin: 0 auto;
+	background: #fff;
 }
-#page:before{
-	content:'';
-	display:block;
-	position:absolute;
-	height:100%;
-	width:300px;
-	background:#333;
-}
+
 /*这里需要做屏幕适配*/
-.container{
-	width:1200px;
-	margin-right:auto;
-	margin-left:auto;
-	padding-left:15px;
-	padding-right:15px;
-	box-sizing:border-box;
-}
-#page>.container>.row{
-	display:-webkit-box;
-	display:-webkit-flex;
-	display:-ms-flexbox;
-	display:flex;
-}
-.row{
-	margin-left:-15px;
-	margin-right:-15px;
-}
-#secondary{
-	position:relative;
-	color:rgba(255,255,255,0.5);
-	padding:0px;
-	min-height:750px;
-}
-#secondary a{
-	color:#fff;
-}
-#primary{
-	background:#fff;
-	padding:0px;
-}
-.col-3{
-	width:25%;
-	float:left;
-}
-.col-4{
-	width:33.333333%;
-	float:left;
+
+.container {
+	width: 1200px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	box-sizing: border-box;
 }
 
-.col-9{
-	width:75%;
-	float:left;
+
+.row {
+	margin-left: -15px;
+	margin-right: -15px;
 }
 
-#headinfo .hgroup{
-	border-bottom:1px solid rgba(255,255,255,0.1);
+#secondary {
+	position: fixed;
+	background: #333;
+	color: rgba(255, 255, 255, 0.5);
+	padding: 0px;
+	width:250px;
+	height: 750px;
 }
-#headinfo .me-title{
-	font-family:Amatic SC;
-	line-height:50px;
-	font-size:40px;
-	margin:0;
-	padding:30px 0;
-	text-align:center;
-	text-transform:uppercase;
+
+#secondary a {
+	color: #fff;
 }
-#headinfo .me-description{
-	font-size:12px;
-	margin:-15px 0 30px;
-	line-height:20px;
-	text-align:center;
+
+.social-icon{
+	width:16px;
+}
+.links-of-author{
+	margin-bottom: 8px;
+}
+.sumary-num{
+	display: block;
+	font-size: 27px;
+	line-height: 60px;
+}
+#primary {
+	background: #fff;
+	padding: 0px;
+}
+
+.catagory-title{
+	background: #eee;
+}
+
+.col-3 {
+	width: 25%;
+	float: left;
+}
+
+.col-4 {
+	width: 33.333333%;
+	float: left;
+}
+
+.col-9 {
+	width: 75%;
+	float: left;
+	margin-left: 250px;
+}
+
+#headinfo .hgroup {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#headinfo .me-title {
+	font-family: Amatic SC;
+	line-height: 50px;
+	font-size: 40px;
+	margin: 0;
+	padding: 30px 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#headinfo .me-description {
+	font-size: 12px;
+	margin: -15px 0 30px;
+	line-height: 20px;
+	text-align: center;
 }
 
 .info-block {
-	text-align:center;
-	border-bottom:1px solid rgba(255,255,255,0.1);
+	font-size: 12px;
+	text-align: center;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.info-block  span{
-	font-size:12px;
-}
-.info-nav{
-	padding: 0px;
+
+.info-nav {
+	padding: 10px 0px;
 	margin-top: 0px;
 }
-.info-nav > li{
+
+.info-nav > li {
 	cursor: pointer;
 	list-style: none;
 	padding: 10px 50px;
-	border-bottom:1px solid rgba(255,255,255,0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-li.active{
-	background-color: rgba(110,110,110,.5);
+
+li.active {
+	background-color: rgba(110, 110, 110, .5);
 }
-.contact-info{
+
+.contact-info {
 	list-style: none;
 	padding: 0px;
 }
 
-.contact-info>span{
+.contact-info>span {
 	display: inline-block;
 	width: 32%;
 	text-align: center;
 	font-size: 12px;
 }
-.links-of-author-item a{
+
+.links-of-author-item a {
 	color: #aaa !important;
 }
 
+
 /*技能图谱*/
+
 .skills {}
 
-	/* éžIE  .non-ie*/
-	 .skill {position:relative;float:left;margin-right:10px;height:120px;}
-	.skill .skill-bar {display:block;border:2px solid #bc8f8f;height:80px;width:80px;border-radius:42px;padding:1px;-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);
-		  -ms-transform: rotate(-90deg);transform: rotate(-90deg);}
-	.skill .skill-bar b {display:block;height:80px;width:80px;overflow:hidden;}
-	.skill .skill-bar b b {display:block;background-color: green;height:80px;width:80px;border-radius:40px;position:relative;}
-	.skill .skill-lv {color:#fff;font-size:14px;position:absolute;top:40px;left:0;width:86px;text-align:center;z-index:10;font-weight:bold;}
-	.skill .skill-title {position:absolute;top:90px;left:0;width:86px;text-align:center;font-size:14px;}
 
-	/* IE8- */
-	.ie .skill {position:relative;}
-	.ie .skill-bar {display:block;border:0 none;height:20px;width:200px;padding:0;background-color:#efefef;}
-	.ie .skill-bar b {display:block;height:20px;background-color:#bbb;}
-	.ie .skill .skill-lv {position:absolute;top:18px;left:5px;color:#fff;}
+/* éžIE  .non-ie*/
+
+.skill {
+	position: relative;
+	float: left;
+	margin-right: 10px;
+	height: 120px;
+}
+
+.skill .skill-bar {
+	display: block;
+	border: 2px solid #bc8f8f;
+	height: 80px;
+	width: 80px;
+	border-radius: 42px;
+	padding: 1px;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+
+.skill .skill-bar b {
+	display: block;
+	height: 80px;
+	width: 80px;
+	overflow: hidden;
+}
+
+.skill .skill-bar b b {
+	display: block;
+	background-color: green;
+	height: 80px;
+	width: 80px;
+	border-radius: 40px;
+	position: relative;
+}
+
+.skill .skill-lv {
+	color: #fff;
+	font-size: 14px;
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 86px;
+	text-align: center;
+	z-index: 10;
+	font-weight: bold;
+}
+
+.skill .skill-title {
+	position: absolute;
+	top: 90px;
+	left: 0;
+	width: 86px;
+	text-align: center;
+	font-size: 14px;
+}
+
+
+/* IE8- */
+
+.ie .skill {
+	position: relative;
+}
+
+.ie .skill-bar {
+	display: block;
+	border: 0 none;
+	height: 20px;
+	width: 200px;
+	padding: 0;
+	background-color: #efefef;
+}
+
+.ie .skill-bar b {
+	display: block;
+	height: 20px;
+	background-color: #bbb;
+}
+
+.ie .skill .skill-lv {
+	position: absolute;
+	top: 18px;
+	left: 5px;
+	color: #fff;
+}
