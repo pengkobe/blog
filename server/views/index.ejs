@@ -110,7 +110,7 @@
         <p><a href="https://twitter.com/kobepeng2">Twitter</a></p>
     </div>
 
-    <script>
+    <script type="text/javascript">
 (function () {
     var w = window.innerWidth;
     var h = window.innerHeight;
@@ -172,9 +172,7 @@
     // 圆圈
     var circleArr = [];
     function initCircle() {
-        //初始化30个圆形对象,放到数组中
-        for (var i = 0; i < 30; i++) {
-            var obj = new Circle();
+        for (var i = 0; i < 15; i++) {
             obj.draw();
             obj.move();
             circleArr.push(obj);
@@ -203,7 +201,6 @@
                 var C = 1 / l * 7 - 0.009;
                 var alpha = C > 0.03 ? 0.03 : C;
                 ctx.strokeStyle = 'rgba(0,0,0,' + alpha + ')';
-                console.log(l);
                 ctx.beginPath();
                 ctx.lineWidth = 2;
                 ctx.moveTo(dxdy[i].dx, dxdy[i].dy);
