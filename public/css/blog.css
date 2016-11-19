@@ -39,8 +39,8 @@ em:before {
 }
 
 blockquote {
-    background: #f9f9f9;
-    border-left: 10px solid #ccc;
+    background: #eaeae4;
+    border-left: 3px solid #2b8fb4;
     margin: 1.5em 10px;
     padding: .5em 10px;
     quotes: "\201C""\201D""\2018""\2019";
@@ -238,7 +238,8 @@ h2 a {
     transition: color 0.2s ease, border-color 0.2s ease;
     /*font-family: Michroma, 'Segoe UI Light', 'Segoe UI', 'Segoe UI WP', 'Microsoft Jhenghei', '微软雅黑', sans-serif, Times;*/
     /*font-family: Palatino, Garamond, Times, Georgia, serif;*/
-    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif
+    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-weight: 100;
 }
 
 h2 a:hover {
@@ -289,7 +290,7 @@ nav a {
     display: block;
     text-decoration: none;
     padding: .7em 1em;
-    color: #2a6496;
+    color: #2b8fb4;
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -808,8 +809,6 @@ article > h2:nth-child(3) {
     min-width: 300px;
     min-height: 100px;
     border: 3px dashed silver;
-    "
-
 }
 
 .modal-dropzone-img {
