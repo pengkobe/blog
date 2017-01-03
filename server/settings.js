@@ -1,7 +1,7 @@
-module.exports = { 
-  cookieSecret: 'myblog', 
-  db: 'blog', 
+module.exports = {
+  cookieSecret: 'myblog',
+  db: 'blog',
   host: 'localhost',
-  port: 27017,
-  dbUrl:'mongodb://localhost/blog'
-}; 
+  port: port,
+  dbUrl:'mongodb://username:pwd@localhost:port/blog?authMode=scram-sha1'
+};

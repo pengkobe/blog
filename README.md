@@ -1,8 +1,8 @@
 # [kobepeng's site](new.kobepeng.com)
-a light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
+> a light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
 if you curious about how to build this. you can go there: https://github.com/nswbmw/N-blog.git
 
-##  navigation	
+## Navigation	
 
 *  [dependency](#dependency)
 *  [install](#install)
@@ -14,11 +14,11 @@ if you curious about how to build this. you can go there: https://github.com/nsw
 *  [protocol](#protocol)
 
 
-## dependency
+## Dependency
 *   nodejs
 *   mongodb
 
-## feature
+## Feature
 I use these framework or Midware you may concern:  
 1. express  
 2. ejs  
@@ -28,7 +28,7 @@ I use these framework or Midware you may concern:
 how it looks? just click:  http://yipeng.info
 
 
-## structure
+## Structure
 ```
 my_blog/
 ├── LICENSE.txt
@@ -68,7 +68,7 @@ my_blog/
 └── sitemap.js
 ```
 
-## install
+## Install
 ```
 git clone https://github.com/pengkobe/my_blog.git
 cd my_blog
@@ -78,7 +78,7 @@ cd server
 node www
 ```
 
-## config
+## Config
 settings.js is in server. my config for example:
 ```
 module.exports = { 
@@ -91,12 +91,12 @@ module.exports = {
 
 ```
 
-## finished
+## Finished
 * countdown
 * task
 * labroom page
 
-## todo
+## Todo
 * finish thoughts record page 
 * a chatting room
 * use redis
@@ -105,6 +105,6 @@ module.exports = {
 * ~~build with webpack(Abandoned)~~
 
            
-## licence
+## License
 
 Released under the [MIT Licenses](http://spdx.org/licenses/MIT)
