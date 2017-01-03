@@ -6,7 +6,7 @@ body {
 article p,
 article ol,
 article li {
-    line-height: 240%;
+    line-height: 180%;
 }
 
 .post_article {
@@ -41,11 +41,11 @@ em:before {
 blockquote {
     background: #eaeae4;
     border-left: 3px solid #2b8fb4;
-    margin: 1.5em 10px;
-    padding: .5em 10px;
+    margin: 0;
+    padding: .25em 5px;
     quotes: "\201C""\201D""\2018""\2019";
 }
-
+/*
 blockquote:before {
     color: #ccc;
     content: open-quote;
@@ -53,7 +53,7 @@ blockquote:before {
     line-height: .1em;
     margin-right: .25em;
     vertical-align: -.4em;
-}
+}*/
 
 blockquote p {
     display: inline;
@@ -198,6 +198,10 @@ article {
     border: 1px solid LightGrey;
 }
 
+article strong{
+    font-size: 16px;
+}
+
 .seemore {
     font-size: 14px;
     color: #4a75b5;
@@ -254,10 +258,10 @@ H3 {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
     margin-top: 35px;
     margin-bottom: 15px;
-    border-bottom: 1px LightGrey solid;
+    border-bottom: 1px #aaa solid;
     width: 98%;
     line-height: 150%;
-    color: #666666;
+    color: #333;
     font-size: 24px;
 }
 
