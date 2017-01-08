@@ -56,7 +56,7 @@ var operation = {
     },
     insertWeibo: function() {
         var htmlStr = '<iframe width="220" height="350" class="share_self"';
-        htmlStr += 'frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php';
+        htmlStr += 'frameborder="0" scrolling="no" src="https://widget.weibo.com/weiboshow/index.php';
         htmlStr += '?language=&width=200&height=350&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1';
         htmlStr += '&noborder=1&isWeibo=1&isFans=0&uid=2656201077&verifier=1b82284c&dpc=1"></iframe>';
         if (!isMobile.any() && ($(window).width() > 992) && !$(".share_self").size()) {
