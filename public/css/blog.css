@@ -3,6 +3,10 @@ body {
     background-color: #fff;
 }
 
+header{
+    overflow: hidden;
+}
+
 article p,
 article ol,
 article li {
@@ -191,9 +195,9 @@ blockquote p {
 article {
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 16px;
-    margin: 3% 20% 5% 15%;
-    padding: 2% 5% 5% 5%;
-    width: 55%;
+    margin: 3% 20% 5% 8%;
+    padding: 2% 2% 5% 2%;
+    width: 66%;
     line-height: 150%;
     border: 1px solid LightGrey;
 }
@@ -284,10 +288,8 @@ nav {
     font-family: "Microsoft YaHei";
     font-size: 1em;
     text-transform: uppercase;
-    width: 9em;
     text-align: left;
     margin-top: 3%;
-    border: 1px solid #ddd;
 }
 
 nav a {

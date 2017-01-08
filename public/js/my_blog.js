@@ -140,7 +140,7 @@ var operation = {
 
         $.removeCookie("visitor");
         duoshuoName && $.ajax({
-            url: "http://" + duoshuoName + ".duoshuo.com/api/threads/listPosts.jsonp?thread_key=/&require=visitor",
+            url: "https://" + duoshuoName + ".duoshuo.com/api/threads/listPosts.jsonp?thread_key=/&require=visitor",
             dataType: "jsonp",
             timeout: 5000,
             success: function(data) {

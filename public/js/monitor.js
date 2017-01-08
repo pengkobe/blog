@@ -32,8 +32,8 @@ function BindEvent(element, type, handler) {
 var uuid = GenerateUUID();
 
 // 只有 PV_RECEIVER 才会种植第三方 Cookie
-var NONPV_RECEIVER = 'http://yipeng.info/monitor/nopv';
-var PV_RECEIVER = 'http://yipeng.info/monitor/pv';
+var NONPV_RECEIVER = 'https://yipeng.info/monitor/nopv';
+var PV_RECEIVER = 'https://yipeng.info/monitor/pv';
 //var NONPV_RECEIVER = 'http://localhost:3000/monitor/nopv';
 //var PV_RECEIVER = 'http://localhost:3000/monitor/pv';
 // 初始化一个 NXT_Monitor 内部类
@@ -75,7 +75,7 @@ NXT_Monitor.prototype.bind = function () {
 
 // send 方法定义 .send(type, args...)
 NXT_Monitor.prototype.send = function () {
-  
+
     // 与当前的 params 合并
     var sububt = this.bind.apply(this, arguments);
     // 取出参数
