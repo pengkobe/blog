@@ -4,28 +4,26 @@ if you curious about how to build this. you can go there: https://github.com/nsw
 
 ## Navigation	
 
-*  [dependency](#dependency)
-*  [install](#install)
-*  [features](#features)
-*  [structure](#structure)
-*  [config](#config)
-*  [todo](#todo)
-*  [finished](#finished)
-*  [protocol](#protocol)
+*  [dependency](#Dependency)
+*  [install](#Install)
+*  [features](#Features)
+*  [structure](#Structure)
+*  [config](#Config)
+*  [todo](#Todo)
+*  [Subprojects](#Subprojects)
+*  [license](#License)
 
 
 ## Dependency
-*   nodejs
-*   mongodb
+* node
+* mongodb
 
 ## Feature
-I use these framework or Midware you may concern:  
+this project use these frameworks or midwares you may concern:  
 1. express  
 2. ejs  
 3. multer  
-4. ~~webpack(Abandoned)~~  
-5. socket.io(to do)  
-how it looks? just click:  http://yipeng.info
+how it looks? just click:  https://yipeng.info
 
 
 ## Structure
@@ -69,42 +67,42 @@ my_blog/
 ```
 
 ## Install
-```
+```bash
 git clone https://github.com/pengkobe/my_blog.git
-cd my_blog
+cd blog
 npm install
 cd server
-# before you run this. you got to start mongodb.
+# notice : you got to start mongodb first.
 node www
 ```
 
 ## Config
-settings.js is in server. my config for example:
-```
+mongodb config is in settings.js under server/. for your data safety. 
+you must have some security authentication strategy :
+```javascript
 module.exports = { 
-   cookieSecret: 'myblog', 
+   cookieSecret: 'secret', 
    db: 'blog', 
-   host: 'localhost',
-   port: 27017,
-   dbUrl:'mongodb://localhost/blog'
+   host: 'locahostlhost',
+   port: port,
+   dbUrl:'mongodb:username:pwd//localhost:port/blog?your_options'
 }; 
 
 ```
 
-## Finished
+## Subprojects
 * countdown
 * task
 * labroom page
 
 ## Todo
-* finish thoughts record page 
-* a chatting room
+* twitter page 
 * use redis
-* test case
-* movie comments page
+* ~~a chatting room~~
+* ~~test case~~
+* ~~movie comments page~~
 * ~~build with webpack(Abandoned)~~
 
            
 ## License
-
 Released under the [MIT Licenses](http://spdx.org/licenses/MIT)
