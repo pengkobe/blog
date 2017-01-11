@@ -206,6 +206,7 @@ app.get('/archive', function (req, res) {
 });
 
 app.get('/tags', function (req, res) {
+
   Post.getTags(function (err, posts) {
     if (err) {
       req.flash('error', err);
@@ -222,7 +223,8 @@ app.get('/tags', function (req, res) {
 });
 
 app.get('/tags/:tag', function (req, res) {
-  Post.getTag(req.params.tag, function (err, posts) {
+  var haslogin = req.session.user ? 1 : 0;
+  Post.getTag(haslogin, req.params.tag, function (err, posts) {
     if (err) {
       req.flash('error', err);
       return res.redirect('/blog');
@@ -247,7 +249,8 @@ app.get('/links', function (req, res) {
 });
 
 app.get('/search', function (req, res) {
-  Post.search(req.query.keyword, function (err, posts) {
+  var haslogin = req.session.user ? 1 : 0;
+  Post.search(haslogin,req.query.keyword, function (err, posts) {
     if (err) {
       req.flash('error', err);
       // return res.redirect('/');
@@ -273,7 +276,8 @@ app.get('/autocomplete', function (req, res) {
 });
 
 app.get('/p/:_id', function (req, res) {
-  Post.getOne(req.params._id, function (err, post) {
+  var haslogin = req.session.user ? 1 : 0;
+  Post.getOne(haslogin,req.params._id, function (err, post) {
     if (err) {
       req.flash('error', err);
       res.redirect('/blog');
@@ -348,33 +352,6 @@ app.get('/about', function (req, res) {
   });
 });
 
-/// === 其它模块 ===
-// app.get('/labroom', function (req, res) {
-//     res.render('labroom', {
-//       title: '实验室',
-//       user: req.session.user,
-//       success: req.flash('success').toString(),
-//       error: req.flash('error').toString()
-//     });
-// });
-
-// app.get('/thoughts', function (req, res) {
-//     res.render('thoughts', {
-//       title: '随想录',
-//       user: req.session.user,
-//       success: req.flash('success').toString(),
-//       error: req.flash('error').toString()
-//     });
-// });
-
-// app.get('/movie-comments', function (req, res) {
-//     res.render('movie-comments', {
-//       title: '我的影评',
-//       user: req.session.user,
-//       success: req.flash('success').toString(),
-//       error: req.flash('error').toString()
-//     });
-// });
 
 function checkLogin(req, res, next) {
   if (!req.session.user) {

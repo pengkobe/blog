@@ -1,6 +1,6 @@
 var mongodb = require('./db'),
-    marked = require('marked'),
-    ObjectID = require('mongodb').ObjectID;
+  marked = require('marked'),
+  ObjectID = require('mongodb').ObjectID;
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -13,7 +13,7 @@ marked.setOptions({
   smartypants: false
 });
 
-function Post(name, head, title, tags, isprivate,post,createtime) {
+function Post(name, head, title, tags, isprivate, post, createtime) {
   this.name = name;
   this.head = head;
   this.title = title;
@@ -27,37 +27,37 @@ function Post(name, head, title, tags, isprivate,post,createtime) {
 module.exports = Post;
 
 //存储一篇文章及其相关信息
-Post.prototype.save = function(callback) {
+Post.prototype.save = function (callback) {
   var datenow = new Date();
 
   var createDate = new Date(this.createtime);
   var fullyear = createDate.getFullYear();
-  var month =  createDate.getMonth() +1;
-  var day =  createDate.getDate();
-  var hour =  createDate.getHours();
-  var minute =  createDate.getMinutes();
+  var month = createDate.getMonth() + 1;
+  var day = createDate.getDate();
+  var hour = createDate.getHours();
+  var minute = createDate.getMinutes();
   //存储各种时间格式，方便以后扩展
   var createtime = {
-      date: createDate,
-      time:  (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute),
-      year : fullyear,
-      month : fullyear + "-" + month,
-      day : fullyear+ "-" + (month< 10 ? '0' + month: month) + "-" + (day< 10 ? '0' + day : day),
-      minute : fullyear + "-" + month+ "-" + day + " " + 
-      (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute)
+    date: createDate,
+    time: (hour < 10 ? '0' + hour : hour) + ":" + (minute < 10 ? '0' + minute : minute),
+    year: fullyear,
+    month: fullyear + "-" + month,
+    day: fullyear + "-" + (month < 10 ? '0' + month : month) + "-" + (day < 10 ? '0' + day : day),
+    minute: fullyear + "-" + month + "-" + day + " " +
+    (hour < 10 ? '0' + hour : hour) + ":" + (minute < 10 ? '0' + minute : minute)
   }
   //要存入数据库的文档
   var post = {
-      name: this.name,
-      head: this.head,
-      createtime: createtime,
-      lastupdatetime: datenow,
-      title:this.title,
-      tags: this.tags,
-      post: this.post,
-      comments: [],
-      isprivate: this.isprivate,
-      pv: 0
+    name: this.name,
+    head: this.head,
+    createtime: createtime,
+    lastupdatetime: datenow,
+    title: this.title,
+    tags: this.tags,
+    post: this.post,
+    comments: [],
+    isprivate: this.isprivate,
+    pv: 0
   };
   //打开数据库
   mongodb.open(function (err, db) {
@@ -85,7 +85,7 @@ Post.prototype.save = function(callback) {
 };
 
 //一次获取5、10篇文章
-Post.getTen = function(name, page,haslogin, callback) {
+Post.getTen = function (name, page, haslogin, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -102,14 +102,14 @@ Post.getTen = function(name, page,haslogin, callback) {
         query.name = name;
       }
 
-      if(!haslogin){
-          query.isprivate = 0;
+      if (!haslogin) {
+        query.isprivate = 0;
       }
       //使用 count 返回特定查询的文档数 total
       collection.count(query, function (err, total) {
         //根据 query 对象查询，并跳过前 (page-1)*5 个结果，返回之后的 5 个结果
         collection.find(query, {
-          skip: (page - 1)*5,
+          skip: (page - 1) * 5,
           limit: 5
         }).sort({
           createtime: -1
@@ -120,14 +120,14 @@ Post.getTen = function(name, page,haslogin, callback) {
           }
           //解析 markdown 为 html
           docs.forEach(function (doc) {
-            var index=0;
+            var index = 0;
             index = doc.post.indexOf("<!-- more -->");
-            if(index !== -1){
-               doc.post = marked(doc.post.slice(0,index)) +'<a class="seemore" href="/p/'+doc._id+'">more...</a>';
-            }else{
-               doc.post = marked(doc.post);
+            if (index !== -1) {
+              doc.post = marked(doc.post.slice(0, index)) + '<a class="seemore" href="/p/' + doc._id + '">more...</a>';
+            } else {
+              doc.post = marked(doc.post);
             }
-          });  
+          });
           callback(null, docs, total);
         });
       });
@@ -136,7 +136,11 @@ Post.getTen = function(name, page,haslogin, callback) {
 };
 
 //获取一篇文章
-Post.getOne = function(_id, callback) {
+Post.getOne = function (haslogin, _id, callback) {
+  var query = {};
+  if (!haslogin) {
+    query.isprivate = 0;
+  }
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -149,9 +153,8 @@ Post.getOne = function(_id, callback) {
         return callback(err);
       }
       //根据用户名、发表日期及文章名进行查询
-      collection.findOne({
-        "_id": new ObjectID(_id)
-      }, function (err, doc) {
+      query["_id"] = new ObjectID(_id);
+      collection.findOne(query, function (err, doc) {
         if (err) {
           mongodb.close();
           return callback(err);
@@ -161,19 +164,21 @@ Post.getOne = function(_id, callback) {
           collection.update({
             "_id": new ObjectID(_id)
           }, {
-            $inc: {"pv": 1}
-          }, function (err) {
-            mongodb.close();
-            if (err) {
-              return callback(err);
-            }
-          });
+              $inc: { "pv": 1 }
+            }, function (err) {
+              mongodb.close();
+              if (err) {
+                return callback(err);
+              }
+            });
           //移除<!-- more --> && 解析 markdown 为 html 
-          doc.post = marked(doc.post.replace("<!-- more -->",""));
+          doc.post = marked(doc.post.replace("<!-- more -->", ""));
           doc.comments.forEach(function (comment) {
             comment.content = marked(comment.content);
           });
           callback(null, doc);//返回查询的一篇文章
+        }else{
+          callback("文章不存在或没有权限访问！");
         }
       });
     });
@@ -181,7 +186,7 @@ Post.getOne = function(_id, callback) {
 };
 
 //返回原始发表的内容（markdown 格式）
-Post.edit = function(_id, callback) {
+Post.edit = function (_id, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -208,21 +213,21 @@ Post.edit = function(_id, callback) {
 };
 
 //更新一篇文章及其相关信息
-Post.update = function(_id, title,tags,post, createDate,isprivate,callback) {
+Post.update = function (_id, title, tags, post, createDate, isprivate, callback) {
   var createDate = new Date(createDate);
   var fullyear = createDate.getFullYear();
-  var month =  createDate.getMonth() +1;
-  var day =  createDate.getDate();
-  var hour =  createDate.getHours();
-  var minute =  createDate.getMinutes();
+  var month = createDate.getMonth() + 1;
+  var day = createDate.getDate();
+  var hour = createDate.getHours();
+  var minute = createDate.getMinutes();
   var createtime = {
-      date: createDate,
-      time:  (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute),
-      year : fullyear,
-      month : fullyear + "-" + month,
-      day : fullyear+ "-" + (month< 10 ? '0' + month: month) + "-" + (day< 10 ? '0' + day : day),
-      minute : fullyear + "-" + month+ "-" + day + " " + 
-      (hour< 10 ? '0' + hour: hour) + ":" + (minute< 10 ? '0' + minute : minute)
+    date: createDate,
+    time: (hour < 10 ? '0' + hour : hour) + ":" + (minute < 10 ? '0' + minute : minute),
+    year: fullyear,
+    month: fullyear + "-" + month,
+    day: fullyear + "-" + (month < 10 ? '0' + month : month) + "-" + (day < 10 ? '0' + day : day),
+    minute: fullyear + "-" + month + "-" + day + " " +
+    (hour < 10 ? '0' + hour : hour) + ":" + (minute < 10 ? '0' + minute : minute)
   }
   //打开数据库
   mongodb.open(function (err, db) {
@@ -239,20 +244,20 @@ Post.update = function(_id, title,tags,post, createDate,isprivate,callback) {
       collection.update({
         "_id": new ObjectID(_id)
       }, {
-        $set: {title:title,tags:tags,post: post,createtime:createtime,isprivate:isprivate}
-      }, function (err) {
-        mongodb.close();
-        if (err) {
-          return callback(err);
-        }
-        callback(null);
-      });
+          $set: { title: title, tags: tags, post: post, createtime: createtime, isprivate: isprivate }
+        }, function (err) {
+          mongodb.close();
+          if (err) {
+            return callback(err);
+          }
+          callback(null);
+        });
     });
   });
 };
 
 //删除一篇文章
-Post.remove = function(_id, callback) {
+Post.remove = function (_id, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -267,24 +272,24 @@ Post.remove = function(_id, callback) {
       collection.remove({
         "_id": new ObjectID(_id)
       }, {
-        w: 1
-      }, function (err) {
-        mongodb.close();
-        if (err) {
-          return callback(err);
-        }
-        callback(null);
-      });
+          w: 1
+        }, function (err) {
+          mongodb.close();
+          if (err) {
+            return callback(err);
+          }
+          callback(null);
+        });
 
     });
   });
 };
 
 //返回所有文章存档信息
-Post.getArchive = function(haslogin,callback) {
+Post.getArchive = function (haslogin, callback) {
   //打开数据库
-  var query={};
-  if(!haslogin){
+  var query = {};
+  if (!haslogin) {
     query.isprivate = 0;
   }
   mongodb.open(function (err, db) {
@@ -317,8 +322,8 @@ Post.getArchive = function(haslogin,callback) {
 };
 
 //返回所有标签
-Post.getTags = function(callback) {
-  //打开数据库
+Post.getTags = function (callback) {
+
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
@@ -342,7 +347,11 @@ Post.getTags = function(callback) {
 };
 
 //返回含有特定标签的所有文章
-Post.getTag = function(tag, callback) {
+Post.getTag = function (haslogin, tag, callback) {
+  var query = {};
+  if (!haslogin) {
+    query.isprivate = 0;
+  }
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
@@ -354,9 +363,8 @@ Post.getTag = function(tag, callback) {
       }
       //查询所有 tags 数组内包含 tag 的文档
       //并返回只含有 name、createtime、title 组成的数组
-      collection.find({
-        "tags": tag
-      }, {
+      query.tags = tag
+      collection.find(query, {
         "name": 1,
         "createtime": 1,
         "title": 1
@@ -374,7 +382,11 @@ Post.getTag = function(tag, callback) {
 };
 
 //返回通过标题关键字查询的所有文章信息
-Post.search = function(keyword, callback) {
+Post.search = function (haslogin, keyword, callback) {
+  var query = {};
+  if (!haslogin) {
+    query.isprivate = 0;
+  }
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
@@ -385,9 +397,8 @@ Post.search = function(keyword, callback) {
         return callback(err);
       }
       var pattern = new RegExp(keyword, "i");
-      collection.find({
-        "title": pattern
-      }, {
+      query.title = pattern;
+      collection.find(query, {
         "name": 1,
         "createtime": 1,
         "title": 1
@@ -396,7 +407,7 @@ Post.search = function(keyword, callback) {
       }).toArray(function (err, docs) {
         mongodb.close();
         if (err) {
-         return callback(err);
+          return callback(err);
         }
         callback(null, docs);
       });
