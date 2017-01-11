@@ -266,7 +266,8 @@ app.get('/search', function (req, res) {
 });
 app.get('/autocomplete', function (req, res) {
   console.log(req.query.keyword);
-  Post.search(req.query.keyword, function (err, posts) {
+  var haslogin = req.session.user ? 1 : 0;
+  Post.search(haslogin,req.query.keyword, function (err, posts) {
     if (err) {
       req.flash('error', err);
       // return res.redirect('/');
