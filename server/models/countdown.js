@@ -42,13 +42,13 @@ Countdown.prototype.save = function (callback) {
     }
     db.collection('countdown', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.insert(countdown, {
         safe: true
       }, function (err, doc) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -67,14 +67,14 @@ Countdown.getByCondition = function (condition, callback) {
     //读取 posts 集合
     db.collection('countdown', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.count(condition, function (err, total) {
         collection.find(condition).sort({
           endtime: 1,
         }).toArray(function (err, docs) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -92,7 +92,7 @@ Countdown.remove = function (_id, callback) {
     }
     db.collection('countdown', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.remove({
@@ -100,7 +100,7 @@ Countdown.remove = function (_id, callback) {
       }, {
           w: 1
         }, function (err) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }

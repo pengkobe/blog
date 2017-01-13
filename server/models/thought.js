@@ -29,14 +29,14 @@ Thought.prototype.save = function(callback) {
     //读取 thoughts 集合
     db.collection('thoughts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);//错误，返回 err 信息
       }
       //将用户数据插入 thoughts 集合
       collection.insert(thought, {
         safe: true
       }, function (err, thought) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -59,7 +59,7 @@ Thought.getAll = function(haslogin,callback) {
     //读取 posts 集合
     db.collection('thoughts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
     collection.count(query, function (err, total) {
@@ -67,7 +67,7 @@ Thought.getAll = function(haslogin,callback) {
           createTime: -1,
           finished:1
         }).toArray(function (err, docs) {
-         mongodb.close();
+         db.close();
          if (err) {
            return callback(err);
          }
@@ -85,7 +85,7 @@ Thought.update = function(_id, title, callback) {
     }
     db.collection('thoughts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.update({
@@ -93,7 +93,7 @@ Thought.update = function(_id, title, callback) {
       }, {
         $set: {title:title,lastUpdate:new Date()}
       }, function (err) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -113,7 +113,7 @@ Thought.finish = function(_id, callback) {
     //读取 posts 集合
     db.collection('thoughts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //更新文章内容
@@ -122,7 +122,7 @@ Thought.finish = function(_id, callback) {
       }, {
         $set: {finished:true,finishTime:finishtime}
       }, function (err) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -140,7 +140,7 @@ Thought.recover = function(_id, callback) {
     //读取 posts 集合
     db.collection('thoughts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //更新文章内容
@@ -149,7 +149,7 @@ Thought.recover = function(_id, callback) {
       }, {
         $set: {finished:false,finishTime:{}}
       }, function (err) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -166,7 +166,7 @@ Thought.remove = function(_id, callback) {
     }
     db.collection('thoughts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.remove({
@@ -174,7 +174,7 @@ Thought.remove = function(_id, callback) {
       }, {
         w: 1
       }, function (err) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -200,7 +200,7 @@ Thought.getFiveDay = function(lastdate,haslogin, callback) {
     //读取 posts 集合
     db.collection('thoughts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       var query = {};
@@ -216,7 +216,7 @@ Thought.getFiveDay = function(lastdate,haslogin, callback) {
         collection.find(query).sort({
           createTime: -1
         }).toArray(function (err, docs) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }

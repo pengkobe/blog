@@ -67,14 +67,14 @@ Post.prototype.save = function (callback) {
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //将文档插入 posts 集合
       collection.insert(post, {
         safe: true
       }, function (err) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);//失败！返回 err
         }
@@ -94,7 +94,7 @@ Post.getTen = function (name, page, haslogin, callback) {
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       var query = {};
@@ -114,7 +114,7 @@ Post.getTen = function (name, page, haslogin, callback) {
         }).sort({
           createtime: -1
         }).toArray(function (err, docs) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -149,14 +149,14 @@ Post.getOne = function (haslogin, _id, callback) {
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //根据用户名、发表日期及文章名进行查询
       query["_id"] = new ObjectID(_id);
       collection.findOne(query, function (err, doc) {
         if (err) {
-          mongodb.close();
+          db.close();
           return callback(err);
         }
         if (doc) {
@@ -166,7 +166,7 @@ Post.getOne = function (haslogin, _id, callback) {
           }, {
               $inc: { "pv": 1 }
             }, function (err) {
-              mongodb.close();
+              db.close();
               if (err) {
                 return callback(err);
               }
@@ -195,14 +195,14 @@ Post.edit = function (_id, callback) {
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //根据用户名、发表日期及文章名进行查询
       collection.findOne({
         "_id": new ObjectID(_id)
       }, function (err, doc) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -237,7 +237,7 @@ Post.update = function (_id, title, tags, post, createDate, isprivate, callback)
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //更新文章内容
@@ -246,7 +246,7 @@ Post.update = function (_id, title, tags, post, createDate, isprivate, callback)
       }, {
           $set: { title: title, tags: tags, post: post, createtime: createtime, isprivate: isprivate }
         }, function (err) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -266,7 +266,7 @@ Post.remove = function (_id, callback) {
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.remove({
@@ -274,7 +274,7 @@ Post.remove = function (_id, callback) {
       }, {
           w: 1
         }, function (err) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -299,7 +299,7 @@ Post.getArchive = function (haslogin, callback) {
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //返回只包含 name、time、title 属性的文档组成的存档数组
@@ -311,7 +311,7 @@ Post.getArchive = function (haslogin, callback) {
       }).sort({
         createtime: -1
       }).toArray(function (err, docs) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -331,12 +331,12 @@ Post.getTags = function (callback) {
     //读取 posts 集合
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //distinct 用来找出给定键的所有不同值
       collection.distinct("tags", function (err, docs) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -358,7 +358,7 @@ Post.getTag = function (haslogin, tag, callback) {
     }
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //查询所有 tags 数组内包含 tag 的文档
@@ -371,7 +371,7 @@ Post.getTag = function (haslogin, tag, callback) {
       }).sort({
         createtime: -1
       }).toArray(function (err, docs) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -393,7 +393,7 @@ Post.search = function (haslogin, keyword, callback) {
     }
     db.collection('posts', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       var pattern = new RegExp(keyword, "i");
@@ -405,7 +405,7 @@ Post.search = function (haslogin, keyword, callback) {
       }).sort({
         createtime: -1
       }).toArray(function (err, docs) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }

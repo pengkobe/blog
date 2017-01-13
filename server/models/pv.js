@@ -31,13 +31,13 @@ PV.prototype.save = function (callback) {
     }
     db.collection('pv', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.insert(pv, {
         safe: true
       }, function (err, pv) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }

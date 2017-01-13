@@ -44,14 +44,14 @@ Task.prototype.save = function (callback) {
     //读取 tasks 集合
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);//错误，返回 err 信息
       }
       //将用户数据插入 tasks 集合
       collection.insert(task, {
         safe: true
       }, function (err, doc) {
-        mongodb.close();
+        db.close();
         if (err) {
           return callback(err);
         }
@@ -74,7 +74,7 @@ Task.getAll = function (haslogin, callback) {
     }
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.count(query, function (err, total) {
@@ -82,7 +82,7 @@ Task.getAll = function (haslogin, callback) {
           createTime: -1,
           finished: 1
         }).toArray(function (err, docs) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -111,14 +111,14 @@ Task.getByIsfinished = function (haslogin, isfinished, callback) {
     }
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.count(query, function (err, total) {
         collection.find(query).sort({
           createTime: -1,
         }).toArray(function (err, docs) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -142,7 +142,7 @@ Task.update = function (_id, title, callback) {
     }
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.update({
@@ -150,7 +150,7 @@ Task.update = function (_id, title, callback) {
       }, {
           $set: { title: title, lastUpdate: new Date() }
         }, function (err) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -171,7 +171,7 @@ Task.finish = function (_id, callback) {
     }
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //更新文章内容
@@ -180,7 +180,7 @@ Task.finish = function (_id, callback) {
       }, {
           $set: { finished: true, finishTime: finishtime }
         }, function (err) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -197,7 +197,7 @@ Task.recover = function (_id, callback) {
     }
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       //更新文章内容
@@ -206,7 +206,7 @@ Task.recover = function (_id, callback) {
       }, {
           $set: { finished: false, finishTime: {} }
         }, function (err) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -223,7 +223,7 @@ Task.remove = function (_id, callback) {
     }
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       collection.remove({
@@ -231,7 +231,7 @@ Task.remove = function (_id, callback) {
       }, {
           w: 1
         }, function (err) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -257,7 +257,7 @@ Task.getFiveDay = function (lastdate, haslogin, callback) {
     //读取 posts 集合
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       var query = {};
@@ -273,7 +273,7 @@ Task.getFiveDay = function (lastdate, haslogin, callback) {
         collection.find(query).sort({
           createTime: -1
         }).toArray(function (err, docs) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
@@ -299,7 +299,7 @@ Task.getTasksByNum = function (num, page, haslogin, callback) {
     }
     db.collection('tasks', function (err, collection) {
       if (err) {
-        mongodb.close();
+        db.close();
         return callback(err);
       }
       var query = {};
@@ -314,7 +314,7 @@ Task.getTasksByNum = function (num, page, haslogin, callback) {
         collection.find(query,conditions).sort({
           createTime: -1
         }).toArray(function (err, docs) {
-          mongodb.close();
+          db.close();
           if (err) {
             return callback(err);
           }
