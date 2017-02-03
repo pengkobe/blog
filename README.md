@@ -2,18 +2,6 @@
 > a light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
 if you curious about how to build this. you can go there: https://github.com/nswbmw/N-blog.git
 
-## Navigation	
-
-*  [dependency](#Dependency)
-*  [install](#Install)
-*  [features](#Features)
-*  [structure](#Structure)
-*  [config](#Config)
-*  [todo](#Todo)
-*  [Subprojects](#Subprojects)
-*  [license](#License)
-
-
 ## Dependency
 * node
 * mongodb
