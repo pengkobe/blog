@@ -18,8 +18,7 @@ define(function (require, exports, module) {
         { level: 2, itemCode: 5, itemName: 'js_mini_jquery', pCode: 1, url: baseUrl + 'js_mini_jquery' },
         { level: 2, itemCode: 6, itemName: 'js_lib_ajax', pCode: 1, url: baseUrl + 'js_lib_ajax' },
         { level: 2, itemCode: 7, itemName: 'js_position_element', pCode: 1, url: baseUrl + 'js_position_element' },
-
-
+        { level: 2, itemCode: 8, itemName: 'node_upload_file', pCode: 1, url: baseUrl + 'node_upload_file' },
     ];
     loadData(moduleName, id, data);
 });
