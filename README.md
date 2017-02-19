@@ -7,7 +7,7 @@ if you curious about how to build this. you can go there: https://github.com/nsw
 * mongodb
 
 ## Feature
-this project use these frameworks or midwares you may concern:  
+this project use these frameworks or middlewares you may concern:  
 1. express  
 2. ejs  
 3. multer  
