@@ -1,10 +1,11 @@
-# [kobepeng's site](new.kobepeng.com)
+# [yipeng.info](https://yipeng.info)
 > a light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
 if you curious about how to build this. you can go there: https://github.com/nswbmw/N-blog.git
 
 ## Dependency
 * node
 * mongodb
+* redis(todo)
 
 ## Feature
 this project use these frameworks or middlewares you may concern:  
@@ -17,8 +18,6 @@ how it looks? just click:  https://yipeng.info
 ## Structure
 ```
 my_blog/
-├── LICENSE.txt
-├── README.md
 ├── app.js (for Express)
 ├── server
 │   ├── model 
@@ -26,7 +25,6 @@ my_blog/
 │   ├── view  
 │   ├── settings.js 
 │   └── www 
-├── package.json
 ├── public
 │   ├── common
 │   │   ├── css
@@ -39,18 +37,13 @@ my_blog/
 │   ├── js
 │   ├── fonts
 │   └── img 
-├── project（will be moved from my_blog）
-│   ├── labroom
-│   ├── my_cv
-│   ├── task
-│   ├── [my_dashboard](https://github.com/pengkobe/my_dashboard)（todo）
-│   ├── [my_countdown](https://github.com/pengkobe/my_countdown)（todo）
-│   ├── thought（todo）
-│   └── movie_comment（todo）
 ├── test (todo)
-├── webpack.config.js
+├── package.json
 ├── humans.txt
 ├── commit
+├── LICENSE.txt
+├── README.md
+├── robots.txt
 └── sitemap.js
 ```
 
@@ -78,18 +71,16 @@ module.exports = {
 
 ```
 
-## Subprojects
-* countdown
-* task
-* labroom page
+## Subproject
+* [countdown](http://countdown.yipeng.info)
+* [task](http://task.yipeng.info)
+* [labroom](http://labroom.yipeng.info)
+* [crawler](http://crawler.yipeng.info) 
 
 ## Todo
-* twitter page 
 * use redis
-* ~~a chatting room~~
+* a chatting room
 * ~~test case~~
-* ~~movie comments page~~
-* ~~build with webpack(Abandoned)~~
 
            
 ## License
