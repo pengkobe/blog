@@ -13,12 +13,8 @@ var errorLog = fs.createWriteStream('error.log', { flags: 'a' });
 
 // 博客
 var index_routes = require('./server/routes/index');
-// 任务
-var task_routes = require('./server/routes/task');
 // 监控
 var monitor_routes = require('./server/routes/monitor');
-// 倒计时
-var countdown = require('./server/routes/countdowm');
 
 var settings = require('./server/settings');
 var flash = require('connect-flash');
@@ -66,9 +62,7 @@ app.all('*', function (req, res, next) {
 
 
 app.use('/', index_routes);
-app.use('/task', task_routes);
 app.use('/monitor', monitor_routes);
-app.use('/countdown', countdown);
 
 app.use(function (err, req, res, next) {
     var meta = '[' + new Date() + '] ' + req.url + '\n';

@@ -2,6 +2,6 @@ module.exports = {
   cookieSecret: 'myblog',
   db: 'blog',
   host: 'localhost',
-  port: port,
-  dbUrl:'mongodb://username:pwd@localhost:port/blog?authMode=scram-sha1'
+  port: 27017,
+  dbUrl:'mongodb://localhost/blog'
 };
