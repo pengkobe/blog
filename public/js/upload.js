@@ -1,5 +1,5 @@
 /*
-author:kobepeng
+author:yipeng
 create at:2016-02-22
 ps:将js放在html后面
 */
