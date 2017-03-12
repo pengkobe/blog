@@ -890,7 +890,7 @@ input[type="file"]::-webkit-file-upload-button {
     }
     .ui.breadcrumb {
         position: absolute;
-        width: 50%;
+        width: 100%;
         left: 50%;
         top: 0px;
         text-transform: translate(-50%, 0%);

@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '.'), { maxAge: 86400000 }));
 
-// session mongodb
+// session 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 app.use(session({
@@ -47,7 +47,7 @@ app.use(session({
     })
 }));
 
-// 访问服务器代码资源时，需要直接返回404
+// 访问服务器代码资源时，直接返回404
 // app.route('/:url(api|auth|components|app|bower_components|assets)/*')
 
 //设置跨域访问
