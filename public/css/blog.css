@@ -205,6 +205,9 @@ article {
 article strong{
     font-size: 20px;
 }
+.index-page article strong{
+    font-size: 16px;
+}
 
 .seemore {
     font-size: 14px;
