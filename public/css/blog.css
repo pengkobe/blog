@@ -203,7 +203,7 @@ article {
 }
 
 article strong{
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .seemore {
@@ -262,18 +262,24 @@ H3 {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
     margin-top: 35px;
     margin-bottom: 15px;
-    border-bottom: 1px #aaa solid;
+    border-bottom: 1px #ccc solid;
     width: 98%;
     line-height: 150%;
-    color: #333;
-    font-size: 24px;
+    color: #111;
+    font-size: 26px;
 }
 
 H4 {
     margin-top: 20px;
-    color: #222;
+    color: #666;
     font-family: normal;
     font-family: 微软雅黑;
+}
+
+.h4 > a {
+    color: #555;
+    margin-left: 5px;
+    font-size: 12px;
 }
 
 code {
