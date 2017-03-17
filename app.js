@@ -72,9 +72,10 @@ app.use(function (err, req, res, next) {
 
 /// 404
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    // var err = new Error('Not Found');
+    // err.status = 404;
+    // next(err);
+     res.render('404', {});
 });
 
 /// 如果为开发环境，则打印错误堆栈
