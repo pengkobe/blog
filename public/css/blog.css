@@ -263,7 +263,7 @@ h2 a:hover {
 /* ### 作为段落的标题 */
 
 H3 {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    font-family: "Microsoft JhengHei","Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
     margin-top: 35px;
     margin-bottom: 15px;
     border-bottom: 1px #ccc solid;
@@ -289,7 +289,7 @@ H4 {
 code {
     font-size: 14px;
     line-height: 1.5;
-    font-family: inherit;
+    font-family: "Microsoft JhengHei";
     background: #f6f6f6 !important;
 }
 
