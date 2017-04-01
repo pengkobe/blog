@@ -193,7 +193,7 @@ blockquote p {
 }
 
 article {
-    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family: "lucida grande", "lucida sans unicode","Microsoft JhengHei", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 16px;
     margin: 3% 20% 5% 8%;
     padding: 2% 2% 5% 2%;
@@ -203,6 +203,7 @@ article {
 }
 
 article strong{
+    font-family: "Lucida Grande", "Microsoft JhengHei", "Microsoft YaHei";
     font-size: 20px;
 }
 .index-page p strong{
@@ -310,7 +311,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #f33;
+    background-color: #2196F3;
     color: #f9f9f9;
     -webkit-transition: color .1s linear, background-color 0.8s ease;
 }
