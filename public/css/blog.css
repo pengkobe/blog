@@ -250,7 +250,7 @@ h2 a {
     transition: color 0.2s ease, border-color 0.2s ease;
     /*font-family: Michroma, 'Segoe UI Light', 'Segoe UI', 'Segoe UI WP', 'Microsoft Jhenghei', '微软雅黑', sans-serif, Times;*/
     /*font-family: Palatino, Garamond, Times, Georgia, serif;*/
-    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, serif,"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-weight: 100;
 }
 
