@@ -653,6 +653,10 @@ article > h2:nth-child(3) {
     border: solid 1px #33FF99;
 }
 
+.fanqie-link{
+      border: solid 1px chartreuse;
+}
+
 .thought-link {
     background: yellow;
 }
