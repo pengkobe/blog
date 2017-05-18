@@ -193,7 +193,7 @@ blockquote p {
 }
 
 article {
-    font-family: "lucida grande", "lucida sans unicode","Microsoft JhengHei", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family: "lucida grande", "lucida sans unicode","Microsoft JhengHei",serif, lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 16px;
     margin: 3% 20% 5% 8%;
     padding: 2% 2% 5% 2%;
@@ -203,7 +203,7 @@ article {
 }
 
 article strong{
-    font-family: "Lucida Grande", "Microsoft JhengHei", "Microsoft YaHei";
+    font-family: "Lucida Grande", "Microsoft JhengHei",serif, "Microsoft YaHei";
     font-size: 20px;
 }
 .index-page p strong{
@@ -250,7 +250,7 @@ h2 a {
     transition: color 0.2s ease, border-color 0.2s ease;
     /*font-family: Michroma, 'Segoe UI Light', 'Segoe UI', 'Segoe UI WP', 'Microsoft Jhenghei', '微软雅黑', sans-serif, Times;*/
     /*font-family: Palatino, Garamond, Times, Georgia, serif;*/
-    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, serif,"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-weight: 100;
 }
 
@@ -263,7 +263,7 @@ h2 a:hover {
 /* ### 作为段落的标题 */
 
 H3 {
-    font-family: "Microsoft JhengHei","Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    font-family: "Microsoft JhengHei",serif,"Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
     margin-top: 35px;
     margin-bottom: 15px;
     border-bottom: 1px #ccc solid;
