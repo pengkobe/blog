@@ -32,11 +32,11 @@
 
 
 <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="<%= post._id %>"  data-name="kobepeng"
-  data-title="<%= post.title %>" data-url="www.kobepeng.com/p/<%= post._id %>"></div>
+  <!--<div class="ds-thread" data-thread-key="<%= post._id %>"  data-name="kobepeng"
+  data-title="<%= post.title %>" data-url="www.kobepeng.com/p/<%= post._id %>"></div>-->
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
+<!--<script type="text/javascript">
 var duoshuoQuery = {short_name:"kobepeng"};
   (function() {
     var ds = document.createElement('script');
@@ -46,7 +46,17 @@ var duoshuoQuery = {short_name:"kobepeng"};
     (document.getElementsByTagName('head')[0] 
      || document.getElementsByTagName('body')[0]).appendChild(ds);
   })();
-  </script>
+  </script>-->
 <!-- 多说公共JS代码 end -->
+
+<!--高速版-->
+<div id="SOHUCS" sid="<%= post._id %>"></div>
+<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+appid: 'cyt4QzAGa',
+conf: 'prod_c1d5ac6c7244da4273821bda9f38ee9d'
+});
+</script>
 
 <%- include footer %>
