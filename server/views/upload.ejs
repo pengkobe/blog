@@ -1,37 +1,31 @@
 <%- include header %>
-试试控件上传：
-<form method='post' action='/upload' enctype='multipart/form-data' >
+  <h2>试试控件上传：  </h2>
+  <form method='post' action='/upload' enctype='multipart/form-data' style="text-align:center">
 
-  <input type="file" name='photos'/><br>
+    <a href="javascript:;" class="file">     <input type="file" name='photos'/>   </a><br>
+    <a href="javascript:;" class="file">     <input type="file" name='photos'/>   </a><br>
+    <a href="javascript:;" class="file">     <input type="file" name='photos'/>   </a><br>
+    <a href="javascript:;" class="file">     <input type="file" name='photos'/>   </a><br>
+    <a href="javascript:;" class="file">     <input type="file" name='photos'/>   </a><br>
 
-  <input type="file" name='photos'/><br>
+    <input class="submit" type="submit" />
+  </form>
 
-  <input type="file" name='photos'/><br>
+  <!-- 拖拽上传 -->
 
-  <a href="javascript:;" class="file">
-  <input type="file" name='photos'/><br>
-  </a>
+  <div name="image" id="dropbox">
+    试试拖拽上传：
+    <div class="modal-dropzone-img"></div>
+    <p><b>拖到这里</b> 上传文件 (限值 2MiB)</p>
+  </div>
+  <!-- 进度条   <input class="modal-input-file user-input" type="file" name="file" accept="image/*" value="">-->
+  <div id="progressNumber">
+  </div>
 
-  <input type="file" name='photos'/><br>
+  <!-- 预览 -->
+  <div id="preview" style="width:100px;height:100px">
+  </div>
 
-  <input class="submit" type="submit" />
-</form>
+  <script src="/public/js/upload.js"></script>
 
-<!-- 拖拽上传 -->
-
-<div name="image" id="dropbox" >
-试试拖拽上传：
-<div class="modal-dropzone-img"></div>
-<p><b>拖到这里</b> 上传文件 (限值 2MiB)</p>
-</div> 
-<!-- 进度条   <input class="modal-input-file user-input" type="file" name="file" accept="image/*" value="">-->
-<div id="progressNumber" >
-</div>
-
-<!-- 预览 -->
-<div id="preview" style="width:100px;height:100px">
-</div>
-
-<script src="/public/js/upload.js"></script>
-
-<%- include footer %>
+  <%- include footer %>
