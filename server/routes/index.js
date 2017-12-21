@@ -92,7 +92,7 @@ app.post('/reg', function (req, res) {
     //如果不存在则新增用户
     newUser.save(function (err, user) {
       if (err) {
-        req.flash('error', err);
+        req.flash('error', JSON.stringify(err));
         return res.redirect('/reg');
       }
       req.session.user = user;
@@ -147,6 +147,10 @@ app.get('/post', function (req, res) {
 
 app.post('/post', checkLogin);
 app.post('/post', function (req, res) {
+  if(!req.body.title || req.body.title.trim()==="" ){
+    req.flash('error', "标题不能为空！");
+    return res.redirect('/blog');
+  }
   var currentUser = req.session.user,
     createtime = req.body.date + " " + req.body.time,
     tags = [req.body.tag1, req.body.tag2, req.body.tag3],
