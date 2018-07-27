@@ -2,7 +2,10 @@
 <html>
 
 <head>
-    <title>yipeng的个人网站 </title>
+    <title>yipeng的个人网站</title>
+    <meta name="author" content="yipeng" />
+    <meta name="keywords" content="kobepeng,yipeng,技术生活博客" />
+    <meta name="description" content="yipeng的博客，欢迎访问交流。" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <!--<link rel="icon" href="" type="image/x-icon">-->
@@ -12,12 +15,12 @@
             overflow: hidden;
             margin: 0;
         }
-        
+
         body {
             font-family: 'Open Sans', 'Helvetica Neue', 'Hiragino Sans GB', 'LiHei Pro', Arial, sans-serif;
             color: #333;
         }
-        
+
         #wrapper {
             position: absolute;
             left: 0;
@@ -31,7 +34,7 @@
             -moz-user-select: none;
             user-select: none;
         }
-        
+
         h1 {
             font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
             font-weight: 700;
@@ -41,7 +44,7 @@
             margin: 12px 0;
             left: 4px;
         }
-        
+
         h2 {
             color: #999;
             font-weight: normal;
@@ -50,40 +53,41 @@
             margin-bottom: 30px;
             left: 3px;
         }
-        
+
         h1,
         h2 {
             position: relative;
         }
-        
+
         p {
             font-size: 14px;
             line-height: 2em;
             margin: 0;
             letter-spacing: 2px;
         }
-        
+
         a {
             color: #999;
             text-decoration: none;
             transition: color .2s ease;
         }
-        
+
         a:hover {
             color: #f33;
         }
-        
+
         .headimg {
             width: 20%;
         }
-        
+
         .zhihu-login-effect-block {
             position: absolute;
             top: 0px;
             left: 0px;
             z-index: -1;
         }
-        #footer{
+
+        #footer {
             bottom: 0px;
             position: absolute;
             text-align: center;
@@ -100,121 +104,132 @@
         <h1>Yi peng</h1>
         <img src="../../public/img/battery-half.png" class="headimg" />
         <h2>专前端 &amp; 做全栈&nbsp;</h2>
-        <p><a href="/blog">博客</a></p>
-        <p><a href="http://weibo.com/kobepeng1">微博</a></p>
-        <p><a href="https://github.com/pengkobe">Github</a></p>
-        <p><a href="https://twitter.com/kobepeng2">Twitter</a></p>
+        <p>
+            <a href="/blog">博客</a>
+        </p>
+        <p>
+            <a href="http://weibo.com/kobepeng1">微博</a>
+        </p>
+        <p>
+            <a href="https://github.com/pengkobe">Github</a>
+        </p>
+        <p>
+            <a href="https://stackoverflow.com/users/6807549/yi-peng">Stackoverflow</a>
+        </p>
+        <p>
+            <a href="https://twitter.com/kobepeng2">Twitter</a>
+        </p>
     </div>
     <div id="footer">
-        <a href="http://www.miitbeian.gov.cn" target="_blank" >粤ICP备14081691号</a>
+        <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备14081691号</a>
     </div>
 
     <script type="text/javascript">
-(function () {
-    var w = window.innerWidth;
-    var h = window.innerHeight;
+        (function () {
+            var w = window.innerWidth;
+            var h = window.innerHeight;
 
-    var canvas = document.getElementById("zhihu_login_effect");
-    var ctx = canvas.getContext("2d");
+            var canvas = document.getElementById("zhihu_login_effect");
+            var ctx = canvas.getContext("2d");
 
-    canvas.width = w;
-    canvas.height = h;
+            canvas.width = w;
+            canvas.height = h;
 
-    function generateRandom(min, max) {
-        return parseInt((max - min) * Math.random() + min + 1)
-    }
-
- 
-    function Circle() {
-        this.radius = generateRandom(4, 12);
-        this.diam = this.radius * 2;
-
-        // position
-        var x = generateRandom(0, canvas.width - this.radius);
-        this.xPos = x < this.radius ? this.radius : x;
-        var y = generateRandom(0, canvas.height - this.radius);
-        this.yPos = y < this.radius ? this.radius : y
-
-        var speed = generateRandom(2, 4) / 10
-        this.speedX = generateRandom(0, 4) > 2 ? speed : -speed;
-        this.speedY = generateRandom(0, 4) > 2 ? speed : -speed;
-
-        this.color = "rgba(0,0,0," + 0.05 + ")";
-    }
- 
-    Circle.prototype.draw = function () {
-        //绘制函数
-        ctx.fillStyle = this.color;
-        ctx.beginPath()
-        ctx.arc(this.xPos, this.yPos, this.radius, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-    }
-
-    Circle.prototype.move = function () {
-
-        this.xPos += this.speedX;
-        if (this.xPos > canvas.width - this.radius) {
-            this.xPos = this.radius
-        } else if (this.xPos < this.radius) {
-            this.xPos = canvas.width - this.radius
-        }
-
-        this.yPos += this.speedY;
-        if (this.yPos > canvas.height - this.radius) {
-            this.yPos = this.radius
-        } else if (this.yPos < this.radius) {
-            this.yPos = canvas.height - this.radius
-        }
-
-    }
-    // 圆圈
-    var circleArr = [];
-    function initCircle() {
-        for (var i = 0; i < 15; i++) {
-            var obj = new Circle();
-            obj.draw();
-            obj.move();
-            circleArr.push(obj);
-        }
-    }
-    initCircle();
-    var dxdy = []
-    function circleMove() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // 重绘
-        for (var i = 0; i < circleArr.length; i++) {
-            var circle = circleArr[i];
-            circle.draw();
-            circle.move();
-
-            dxdy[i] = {
-                dx: circle.xPos,
-                dy: circle.yPos
-            };
-            var dx = dxdy[i].dx;
-            var dy = dxdy[i].dy;
-            for (var j = 0; j < i; j++) {
-                var sx = dxdy[j].dx;
-                var sy = dxdy[j].dy;
-                var l = Math.sqrt((dx - sx) * (dx - sx) + (dy - sy) * (dy - sy));
-                var C = 1 / l * 7 - 0.009;
-                var alpha = C > 0.03 ? 0.03 : C;
-                ctx.strokeStyle = 'rgba(0,0,0,' + alpha + ')';
-                ctx.beginPath();
-                ctx.lineWidth = 2;
-                ctx.moveTo(dxdy[i].dx, dxdy[i].dy);
-                ctx.lineTo(dxdy[j].dx, dxdy[j].dy);
-                ctx.closePath();
-                ctx.stroke();
+            function generateRandom(min, max) {
+                return parseInt((max - min) * Math.random() + min + 1)
             }
-        }
-        window.requestAnimationFrame(circleMove);
-    }
-    circleMove();
-})();
-        </script>
-        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261414872'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261414872' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+            function Circle() {
+                this.radius = generateRandom(4, 12);
+                this.diam = this.radius * 2;
+
+                // position
+                var x = generateRandom(0, canvas.width - this.radius);
+                this.xPos = x < this.radius ? this.radius : x;
+                var y = generateRandom(0, canvas.height - this.radius);
+                this.yPos = y < this.radius ? this.radius : y
+
+                var speed = generateRandom(2, 4) / 10
+                this.speedX = generateRandom(0, 4) > 2 ? speed : -speed;
+                this.speedY = generateRandom(0, 4) > 2 ? speed : -speed;
+
+                this.color = "rgba(0,0,0," + 0.05 + ")";
+            }
+
+            Circle.prototype.draw = function () {
+                //绘制函数
+                ctx.fillStyle = this.color;
+                ctx.beginPath()
+                ctx.arc(this.xPos, this.yPos, this.radius, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            Circle.prototype.move = function () {
+
+                this.xPos += this.speedX;
+                if (this.xPos > canvas.width - this.radius) {
+                    this.xPos = this.radius
+                } else if (this.xPos < this.radius) {
+                    this.xPos = canvas.width - this.radius
+                }
+
+                this.yPos += this.speedY;
+                if (this.yPos > canvas.height - this.radius) {
+                    this.yPos = this.radius
+                } else if (this.yPos < this.radius) {
+                    this.yPos = canvas.height - this.radius
+                }
+
+            }
+            // 圆圈
+            var circleArr = [];
+            function initCircle() {
+                for (var i = 0; i < 15; i++) {
+                    var obj = new Circle();
+                    obj.draw();
+                    obj.move();
+                    circleArr.push(obj);
+                }
+            }
+            initCircle();
+            var dxdy = []
+            function circleMove() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // 重绘
+                for (var i = 0; i < circleArr.length; i++) {
+                    var circle = circleArr[i];
+                    circle.draw();
+                    circle.move();
+
+                    dxdy[i] = {
+                        dx: circle.xPos,
+                        dy: circle.yPos
+                    };
+                    var dx = dxdy[i].dx;
+                    var dy = dxdy[i].dy;
+                    for (var j = 0; j < i; j++) {
+                        var sx = dxdy[j].dx;
+                        var sy = dxdy[j].dy;
+                        var l = Math.sqrt((dx - sx) * (dx - sx) + (dy - sy) * (dy - sy));
+                        var C = 1 / l * 7 - 0.009;
+                        var alpha = C > 0.03 ? 0.03 : C;
+                        ctx.strokeStyle = 'rgba(0,0,0,' + alpha + ')';
+                        ctx.beginPath();
+                        ctx.lineWidth = 2;
+                        ctx.moveTo(dxdy[i].dx, dxdy[i].dy);
+                        ctx.lineTo(dxdy[j].dx, dxdy[j].dy);
+                        ctx.closePath();
+                        ctx.stroke();
+                    }
+                }
+                window.requestAnimationFrame(circleMove);
+            }
+            circleMove();
+        })();
+    </script>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1261414872'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261414872' type='text/javascript'%3E%3C/script%3E"));</script>
 </body>
 
 </html>
