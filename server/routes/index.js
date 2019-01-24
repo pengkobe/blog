@@ -12,7 +12,7 @@ var storage = multer.diskStorage({
     cb(null, '../public/img');
   },
   filename: function (req, file, cb) {
-    //file.fieldname
+    // file.fieldname
     cb(null, file.originalname);
   }
 });
@@ -27,11 +27,20 @@ app.get('/', function (req, res) {
 });
 
 app.get('/blog', function (req, res) {
-  //判断是否是第一页，并把请求的页数转换成 number 类型
-  var page = req.query.p ? parseInt(req.query.p) : 1;
+  // 判断是否是第一页，并把请求的页数转换成 number 类型
+  var pageNum = 1;
+  if (req.query.p) {
+    pageNum = parseInt(req.query.p, 10);
+    if (pageNum >= 1) {
+      pageNum = pageNum ? pageNum : 1;
+    }else{
+      pageNum = 1;
+    }
+  }
+  var page = pageNum;
   var haslogin = req.session.user ? 1 : 0;
 
-  //查询并返回第 page 页的 5 篇文章
+  // 查询并返回第 page 页的 5 篇文章
   Post.getTen(null, page, haslogin, function (err, posts, total) {
     if (err) {
       posts = [];
@@ -73,9 +82,9 @@ app.post('/reg', function (req, res) {
     password_re = req.body['password-repeat'];
   if (password_re != password) {
     req.flash('error', '两次输入的密码不一致!');
-    return res.redirect('/reg');//返回主册页
+    return res.redirect('/reg');// 返回主册页
   }
-  //生成密码的 md5 值
+  // 生成密码的 md5 值
   var md5 = crypto.createHash('md5'),
     password = md5.update(req.body.password).digest('hex');
   var newUser = new User({
@@ -83,13 +92,13 @@ app.post('/reg', function (req, res) {
     password: password,
     email: req.body.email
   });
-  //检查用户名是否已存在
+  // 检查用户名是否已存在
   User.get(newUser.name, function (err, user) {
     if (user) {
       req.flash('error', '用户已存在!');
       return res.redirect('/reg');
     }
-    //如果不存在则新增用户
+    // 如果不存在则新增用户
     newUser.save(function (err, user) {
       if (err) {
         req.flash('error', JSON.stringify(err));
@@ -114,24 +123,24 @@ app.get('/login', function (req, res) {
 
 app.post('/login', checkNotLogin);
 app.post('/login', function (req, res) {
-  //生成密码的 md5 值
+  // 生成密码的 md5 值
   var md5 = crypto.createHash('md5'),
     password = md5.update(req.body.password).digest('hex');
-  //检查用户是否存在
+  // 检查用户是否存在
   User.get(req.body.name, function (err, user) {
     if (!user) {
       req.flash('error', '用户不存在!');
-      return res.redirect('/login');//用户不存在则跳转到登录页
+      return res.redirect('/login');// 用户不存在则跳转到登录页
     }
-    //检查密码是否一致
+    // 检查密码是否一致
     if (user.password != password) {
       req.flash('error', '密码错误!');
-      return res.redirect('/login');//密码错误则跳转到登录页
+      return res.redirect('/login');// 密码错误则跳转到登录页
     }
-    //用户名密码都匹配后，将用户信息存入 session
+    // 用户名密码都匹配后，将用户信息存入 session
     req.session.user = user;
     req.flash('success', '登陆成功!');
-    res.redirect('/blog');//登陆成功后跳转到主页
+    res.redirect('/blog');// 登陆成功后跳转到主页
   });
 });
 
@@ -147,7 +156,7 @@ app.get('/post', function (req, res) {
 
 app.post('/post', checkLogin);
 app.post('/post', function (req, res) {
-  if(!req.body.title || req.body.title.trim()==="" ){
+  if (!req.body.title || req.body.title.trim() === "") {
     req.flash('error', "标题不能为空！");
     return res.redirect('/blog');
   }
@@ -254,7 +263,7 @@ app.get('/links', function (req, res) {
 
 app.get('/search', function (req, res) {
   var haslogin = req.session.user ? 1 : 0;
-  Post.search(haslogin,req.query.keyword, function (err, posts) {
+  Post.search(haslogin, req.query.keyword, function (err, posts) {
     if (err) {
       req.flash('error', err);
       // return res.redirect('/');
@@ -271,7 +280,7 @@ app.get('/search', function (req, res) {
 app.get('/autocomplete', function (req, res) {
   console.log(req.query.keyword);
   var haslogin = req.session.user ? 1 : 0;
-  Post.search(haslogin,req.query.keyword, function (err, posts) {
+  Post.search(haslogin, req.query.keyword, function (err, posts) {
     if (err) {
       req.flash('error', err);
       // return res.redirect('/');
@@ -282,7 +291,7 @@ app.get('/autocomplete', function (req, res) {
 
 app.get('/p/:_id', function (req, res) {
   var haslogin = req.session.user ? 1 : 0;
-  Post.getOne(haslogin,req.params._id, function (err, post) {
+  Post.getOne(haslogin, req.params._id, function (err, post) {
     if (err) {
       req.flash('error', err);
       res.redirect('/blog');

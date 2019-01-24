@@ -280,7 +280,6 @@ Post.remove = function (_id, callback) {
           }
           callback(null);
         });
-
     });
   });
 };
@@ -323,7 +322,6 @@ Post.getArchive = function (haslogin, callback) {
 
 //返回所有标签
 Post.getTags = function (callback) {
-
   mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
