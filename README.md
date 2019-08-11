@@ -1,30 +1,33 @@
 # [yipeng.info](https://yipeng.info)
-> a light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
+
+> A light weight blog based on nodejs&&mongodb. this blog mainly built for myself.
 if you curious about how to build this. you can go there: https://github.com/nswbmw/N-blog.git
 
 ## Dependency
-* node
-* mongodb
-* redis(todo)
+
+* Mongodb
 
 ## Feature
-this project use these frameworks or middlewares you may concern:  
-1. express  
-2. ejs  
-3. multer  
-how it looks? just click:  https://yipeng.info
 
+this project use these frameworks or middlewares:  
 
-## Structure
+1. Express
+2. EJS
+3. Multer
+
+how it looks? here to see:  https://yipeng.info
+
+## Code Structure
+
 ```
 my_blog/
 ├── app.js (for Express)
 ├── server
-│   ├── model 
-│   ├── route 
-│   ├── view  
-│   ├── settings.js 
-│   └── www 
+│   ├── model
+│   ├── route
+│   ├── view
+│   ├── settings.js
+│   └── www
 ├── public
 │   ├── common
 │   │   ├── css
@@ -36,7 +39,7 @@ my_blog/
 │   ├── css
 │   ├── js
 │   ├── fonts
-│   └── img 
+│   └── img
 ├── test (todo)
 ├── package.json
 ├── humans.txt
@@ -48,21 +51,24 @@ my_blog/
 ```
 
 ## Install
+
 ```bash
 git clone https://github.com/pengkobe/my_blog.git
 cd blog
 npm install
 cd server
-# notice : you got to start mongodb first.
+# you need to start mongodb first.
 node www
 ```
 
-## Config
+## Configuration
+
 mongodb config is in settings.js under server/. for your data safety. 
 you must have some security authentication strategy :
+
 ```javascript
 module.exports = { 
-   cookieSecret: 'secret', 
+   cookieSecret: 'cookie_secret', 
    db: 'blog', 
    host: 'locahostlhost',
    port: port,
@@ -72,16 +78,12 @@ module.exports = {
 ```
 
 ## Subproject
+
 * [countdown](http://countdown.yipeng.info)
 * [task](http://task.yipeng.info)
 * [labroom](http://labroom.yipeng.info)
 * [crawler](http://crawler.yipeng.info) 
 
-## Todo
-* use redis
-* a chatting room
-* ~~test case~~
-
-           
 ## License
+
 Released under the [MIT Licenses](http://spdx.org/licenses/MIT)
