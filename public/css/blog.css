@@ -18,7 +18,7 @@ article li {
 }
 
 img {
-    max-width: 100%;
+    max-width: 600px;
 }
 
 em {
@@ -924,6 +924,9 @@ input[type="file"]::-webkit-file-upload-button {
         width: 96%;
         margin: 2% 2%;
         padding: 0px;
+    }
+    img {
+        max-width: 100%;
     }
     .weibo {
         display: none;
