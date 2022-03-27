@@ -3,28 +3,28 @@ var duoshuoName = "";
 
 // 移动设备侦测
 var isMobile = {
-    Android: function() {
+    Android: function () {
         return navigator.userAgent.match(/Android/i);
     },
-    BlackBerry: function() {
+    BlackBerry: function () {
         return navigator.userAgent.match(/BlackBerry/i);
     },
-    iOS: function() {
+    iOS: function () {
         return navigator.userAgent.match(/iPhone|iPad|iPod/i);
     },
-    Opera: function() {
+    Opera: function () {
         return navigator.userAgent.match(/Opera Mini/i);
     },
-    Windows: function() {
+    Windows: function () {
         return navigator.userAgent.match(/IEMobile/i);
     },
-    any: function() {
+    any: function () {
         return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
     }
 };
 
 var operation = {
-    init: function() {
+    init: function () {
         if (title == '主页') {
             this.insertWeibo();
         }
@@ -34,27 +34,27 @@ var operation = {
         // 文章导航
         this.menuIndex($('article'));
     },
-    //实现搜索框自动提示(注意data属性不要配置)
-    autoComplete: function() {
-        var pr = { 
+    // 实现搜索框自动提示(注意data属性不要配置)
+    autoComplete: function () {
+        var pr = {
             id: 'searchdiv',
-            //ajax请求的参数
+            // ajax请求的参数
             paraName: 'keyword',
             // 显示的文字的属性名
             textFiled: 'title',
             // 获取value的属性名
             valueFiled: 'title',
-            //ajax请求的url
+            // ajax请求的url
             url: '/autocomplete',
             showdivId: 'autodiv',
-            select: function() {
+            select: function () {
                 document.getElementById('searchartical').submit();
             },
             style: {},
         };
         AutoComplete(pr);
     },
-    insertWeibo: function() {
+    insertWeibo: function () {
         var htmlStr = '<iframe width="220" height="350" class="share_self"';
         htmlStr += 'frameborder="0" scrolling="no" src="https://widget.weibo.com/weiboshow/index.php';
         htmlStr += '?language=&width=200&height=350&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1';
@@ -67,10 +67,10 @@ var operation = {
         }
     },
     // 回到顶部
-    toTop: function() {
+    toTop: function () {
         var $toTop = $(".gotop");
         $toTop.fadeOut();
-        $(window).on("scroll", function() {
+        $(window).on("scroll", function () {
             // 加上滚动条的高度;
             var scrollHeight = document.body.scrollHeight && document.body.clientWidth && window.screen.width;
             var height = $(window).height();
@@ -82,7 +82,7 @@ var operation = {
             }
         });
 
-        $toTop.on("click", function(evt) {
+        $toTop.on("click", function (evt) {
             var $obj = $("body,html");
             $obj.animate({
                 scrollTop: 0
@@ -90,7 +90,7 @@ var operation = {
             evt.preventDefault();
         });
     },
-    alertMsg: function(msg) {
+    alertMsg: function (msg) {
         if (!msg) return;
         var $msg = $(".alertInfo").size() ? $(".alertInfo") : $("<div class='alertInfo'></div>").appendTo($("body"));
         $msg = $($msg);
@@ -99,19 +99,19 @@ var operation = {
         }, 800);
         // 3s后消失
         clearTimeout(window._alert_timer);
-        window._alert_timer = setTimeout(function() {
+        window._alert_timer = setTimeout(function () {
             $msg.animate({ right: -9999 }, 800);
         }, 3000);
     },
     // 显示欢迎信息[多说]
-    welcome: function() {
+    welcome: function () {
         var self = this,
             visitor;
 
         function getNamefailed() {
             var histories = {},
                 userinfo = {};
-            try { histories = JSON.parse($.cookie("visitor_history")); } catch (e) {}
+            try { histories = JSON.parse($.cookie("visitor_history")); } catch (e) { }
             for (var key in histories) {
                 userinfo = {
                     name: key,
@@ -143,7 +143,7 @@ var operation = {
             url: "https://" + duoshuoName + ".duoshuo.com/api/threads/listPosts.jsonp?thread_key=/&require=visitor",
             dataType: "jsonp",
             timeout: 5000,
-            success: function(data) {
+            success: function (data) {
                 if (!(data && data.visitor && data.visitor.name && data.visitor.avatar_url)) {
                     getNamefailed();
                     return;
@@ -173,15 +173,15 @@ var operation = {
                         expires: 100,
                         path: "/"
                     });
-                } catch (e) {}
+                } catch (e) { }
             },
-            error: function() {
+            error: function () {
                 getNamefailed();
             }
         });
     },
     cookieHelper: {
-        SetCookie: function(name, value) {
+        SetCookie: function (name, value) {
             var argv = arguments;
             var argc = arguments.length;
             var expires = (2 < argc) ? argv[2] : null;
@@ -190,7 +190,7 @@ var operation = {
             var secure = (5 < argc) ? argv[5] : false;
             document.cookie = name + "=" + escape(value) + ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) + ((path == null) ? "" : ("; path=" + path)) + ((domain == null) ? "" : ("; domain=" + domain)) + ((secure == true) ? "; secure" : "");
         },
-        GetCookie: function(Name) {
+        GetCookie: function (Name) {
             var search = Name + "=";
             var returnvalue = "";
             if (document.cookie.length > 0) {
@@ -207,7 +207,7 @@ var operation = {
         }
     },
     // 目录导航树
-    menuIndex: function($obj) {
+    menuIndex: function ($obj) {
         if (!/\/p\//.test(window.location.href)) {
             return;
         }
@@ -218,7 +218,7 @@ var operation = {
                 tmpl = '<ul>',
                 h3index = 0;
 
-            $.each($('h3,h4', $obj), function(index, item) {
+            $.each($('h3,h4', $obj), function (index, item) {
                 if (item.tagName.toLowerCase() == 'h3') {
                     var h3item = {};
                     h3item.name = $(item).text();
@@ -251,14 +251,14 @@ var operation = {
             tmpl += '</ul>';
 
             $('body').append('<div id="menuIndex"></div>');
-            $('#menuIndex').append($(tmpl)).delegate('a', 'click', function(e) {
+            $('#menuIndex').append($(tmpl)).delegate('a', 'click', function (e) {
                 e.preventDefault();
                 var scrollNum = $(this).attr('data-top') || $('#' + $(this).attr('data-id')).offset().top;
                 $('body, html').animate({ scrollTop: scrollNum - 30 }, 400, 'swing');
             });
-            $(window).load(function() {
+            $(window).load(function () {
                 var scrollTop = [];
-                $.each($('#menuIndex li a'), function(index, item) {
+                $.each($('#menuIndex li a'), function (index, item) {
                     if (!$(item).attr('data-top')) {
                         var top = $('#' + $(item).attr('data-id')).offset().top;
                         scrollTop.push(top);
@@ -266,9 +266,9 @@ var operation = {
                     }
                 });
 
-                var waitForFinalEvent = (function() {
+                var waitForFinalEvent = (function () {
                     var timers = {};
-                    return function(callback, ms, uniqueId) {
+                    return function (callback, ms, uniqueId) {
                         if (!uniqueId) {
                             uniqueId = "Don't call this twice without a uniqueId";
                         }
@@ -278,8 +278,8 @@ var operation = {
                         timers[uniqueId] = setTimeout(callback, ms);
                     };
                 })();
-                $(window).scroll(function() {
-                    waitForFinalEvent(function() {
+                $(window).scroll(function () {
+                    waitForFinalEvent(function () {
                         var nowTop = $(window).scrollTop(),
                             index, length = scrollTop.length;
                         if (nowTop + 60 > scrollTop[length - 1]) {
@@ -305,20 +305,20 @@ var operation = {
 }
 
 
-$(function() {
+$(function () {
     operation.init();
     // 显示欢迎消息
     duoshuoName = $(".ds-thread").attr("data-name");
     window.duoshuoQuery = { short_name: duoshuoName };
     if (window.duoshuoQuery.short_name) {
-        $.getScript((document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js', function() {
+        $.getScript((document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js', function () {
             operation.welcome();
         });
     } else {
         operation.welcome();
     }
 
-    $(".close-weibo").on('click', function() {
+    $(".close-weibo").on('click', function () {
         $(this).parent().hide();
     });
     // 设置皮肤
@@ -326,11 +326,11 @@ $(function() {
     if (skin == "white") {
         document.body.style.background = "white";
     }
-    $(".white").on('click', function() {
+    $(".white").on('click', function () {
         document.body.style.background = "white";
         operation.cookieHelper.SetCookie('skin', 'white');
     });
-    $(".yellow").on('click', function() {
+    $(".yellow").on('click', function () {
         document.body.style.background = "#f5f5d5";
         operation.cookieHelper.SetCookie('skin', 'yellow');
     });

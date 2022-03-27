@@ -34,7 +34,7 @@ my_blog/
 │   │   │   ├── lib
 │   │   │   ├── plugins
 │   │   ├── js
-│   │   │   ├── lib
+│   │   │   ├── vendors
 │   │   │   ├── plugins
 │   ├── css
 │   ├── js

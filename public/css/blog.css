@@ -47,7 +47,7 @@ blockquote {
     border-left: 3px solid #2b8fb4;
     margin: 0;
     padding: .25em 5px;
-    quotes: "\201C""\201D""\2018""\2019";
+    quotes: "\201C","\201D","\2018","\2019";
 }
 /*
 blockquote:before {
@@ -261,7 +261,6 @@ h2 a:hover {
 
 
 /* ### 作为段落的标题 */
-
 H3 {
     font-family: "Microsoft JhengHei",serif,"Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
     margin-top: 35px;
@@ -329,9 +328,6 @@ article a:hover {
 }
 
 .index-title {
-    /*padding: 8px;
-    border: dashed 1px #d9d9d9;
-    background: rgba(220, 220, 220, .5)*/
     font-size: 30px;
     margin: 15px 0px;
     color: #262b30;
@@ -342,17 +338,6 @@ article a:hover {
 article > h2:nth-child(3) {
     margin-top: 0px !important;
 }
-
-
-/*
-.index-title:before {
-    content: '';
-    border-left: 2px solid #aaa;
-    position: absolute;
-    left: -2px;
-    height: 100%;
-    top: 0%;
-}*/
 
 .index-info {
     margin-bottom: 5px;
@@ -861,7 +846,8 @@ article > h2:nth-child(3) {
     content: '';
     transition: all .15s ease;
     background-image: url('../../img/img-upload.svg?v=88d0cb836f89'), none;
-    background-position: -130px -90px width: 53px;
+    background-position: -130px -90px;
+    width: 53px;
     height: 61px;
     top: -66px;
     left: 18px;

@@ -1,6 +1,6 @@
 // 略有改装
 // 参考自:http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html
-; define(function (require, exports, module)
+; define(function (require, exports, module){
     var barretTpl = function(str, data) {
         // 获取存储模板的元素
         var element = document.getElementById(str);
@@ -12,6 +12,7 @@
             // 直接是字符串
             return tplEngine(str, data);
         }
+        
         function tplEngine(tpl, data) {
             var reg = /<%([^%>]+)?%>/g,
             regOut = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
@@ -29,7 +30,6 @@
             }
             add(tpl.substr(cursor, tpl.length - cursor));
             code += 'return r.join("");';
-            //debugger;
             return new Function(code.replace(/[\r\t\n]/g, '')).apply(data);
         };
     };

@@ -1,5 +1,9 @@
 </article>
 
+<script>
+	var title='<%=title%>';
+</script>
+
 <!-- 回顶部 -->
 <div class="tools-wrapper" tabindex="0" aria-hidden="true">
 	<a class="gotop icon" href="#" title="回到顶部" style="display: block;">↑</a>
@@ -7,30 +11,26 @@
 
 <!-- 脚注 -->
 <div class="website-info">
-	<span>Copyright &copy;2013-2017 </span> |
-	<a href="http://www.miitbeian.gov.cn" target="_blank" >粤ICP备14081691号</a> |
+	<span>Copyright ©2013-<%- new Date().getFullYear()%></span> |
+	<a href="http://www.beian.gov.cn/" target="_blank">粤ICP备14081691号</a> |
 	<a href="/">yipeng</a>手工打造 | <a href="/about#contact">联系方式</a>
 </div>
 
-<!-- 代码高亮 -->
-<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.1.0/styles/vs.min.css">
-<script src="//cdn.jsdelivr.net/highlight.js/9.1.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 <!-- jquery -->
-<script src="//cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
-<!-- cdn 失效时用得上
-	<script src="/public/js/vendor/jquery-1.12.2.min.js"></script>
--->
+<script src="https://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
 <script src="/public/common/js/plugins/jquery_cookies.js"></script>
 
-<script>
-	var title='<%=title%>';
-</script>
+<!-- 代码高亮 -->
+<link rel="stylesheet" href="/public/common/js/vendors/highlightjs/v.min.css">
+<script type="text/javascript" src="/public/common/js/vendors/highlightjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>  
+
 <!-- 博客代码 -->
-<script src="/public/common/js/plugins/auto_complete.js"></script>
-<script src="/public/js/blog.js"></script>
-<script src="/public/js/monitor.js?1"></script>
+<script type="text/javascript" src="/public/common/js/plugins/auto_complete.js"></script>
+<script type="text/javascript" src="/public/js/blog.js"></script>
+<script type="text/javascript" src="/public/js/monitor.js?1"></script>
+
+<!-- cnzz -->
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261414872'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261414872' type='text/javascript'%3E%3C/script%3E"));</script>
 </body>
 </html>

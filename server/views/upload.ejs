@@ -1,6 +1,13 @@
 <%- include header %>
+
+  <style>
+    .img-preview{
+      max-width: 200px;
+      flex: 1;
+    }
+  </style>
   <h2>试试控件上传：  </h2>
-  <form method='post' action='/upload' enctype='multipart/form-data' style="text-align:center">
+  <form method='post' action='/upload' enctype='multipart/form-data' style="text-align:left">
 
     <a href="javascript:;" class="file">     <input type="file" name='photos'/>   </a><br>
     <a href="javascript:;" class="file">     <input type="file" name='photos'/>   </a><br>
@@ -12,18 +19,18 @@
   </form>
 
   <!-- 拖拽上传 -->
-
+  <hr/>
+  <h2>试试拖拽上传：  </h2>
   <div name="image" id="dropbox">
-    试试拖拽上传：
     <div class="modal-dropzone-img"></div>
     <p><b>拖到这里</b> 上传文件 (限值 2MiB)</p>
   </div>
-  <!-- 进度条   <input class="modal-input-file user-input" type="file" name="file" accept="image/*" value="">-->
+  <!-- 进度条 -->
   <div id="progressNumber">
   </div>
 
   <!-- 预览 -->
-  <div id="preview" style="width:100px;height:100px">
+  <div id="preview" style="display: flex;flex-grow: 1;flex-wrap: wrap;">
   </div>
 
   <script src="/public/js/upload.js"></script>
